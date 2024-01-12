@@ -13,7 +13,8 @@
     "plugin:import/typescript"
   ],
   "rules": {
-    "@typescript-eslint/ban-ts-comment": "warn"
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "import/no-unresolved": "warn"
   },
   "parser": "@typescript-eslint/parser"
 }

@@ -1,7 +1,6 @@
 import { defineConfig } from "unocss";
-import UnoCSSDefaultPreset from "@unocss/preset-uno";
+import UnoCSSWindPreset from "@unocss/preset-wind";
 
 export default defineConfig({
-  presets: [UnoCSSDefaultPreset()],
-  
+  presets: [UnoCSSWindPreset()],
 });
