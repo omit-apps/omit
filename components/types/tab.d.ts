@@ -26,3 +26,7 @@ declare interface TabOptionPropsType {
   title: string;
   key: string;
 }
+
+declare interface TabContainerPropsType {
+  children: React.ReactElement;
+}

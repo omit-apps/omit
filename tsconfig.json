@@ -16,5 +16,5 @@
       "client/*": ["./client/*"]
     }
   },
-  "include": ["client", "components"]
+  "include": ["client", "components", "core"]
 }

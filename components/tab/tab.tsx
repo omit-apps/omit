@@ -10,7 +10,7 @@ export default function Tab(props: TabPropsType): React.ReactElement {
   }, [activeTab]);
 
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className="h-full flex-1 flex flex-col">
       {/* Tab Header */}
       <div className="flex-1">{component}</div>
       <div className="flex">
