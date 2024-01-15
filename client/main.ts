@@ -10,9 +10,11 @@ if (require("electron-squirrel-startup")) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    title: "数据抓取",
-    width: 800,
-    height: 600,
+    title: "Any Design - 原型直接生成App",
+    width: 1440,
+    height: 900,
+    darkTheme: true,
+    autoHideMenuBar: true,
     webPreferences: {
       // preload: path.join(__dirname, "preload.js"),
       contextIsolation: false,
