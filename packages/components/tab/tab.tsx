@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TabHeader from "./tab-header";
 
-export default function Tab(props: TabPropsType): React.ReactElement {
+export function Tab(props: TabPropsType): React.ReactElement {
   const [activeTab, setActiveTab] = useState(props.tabList[0].key);
   const [component, setComponent] = useState(props.tabList[0].component);
 
@@ -25,3 +25,5 @@ export default function Tab(props: TabPropsType): React.ReactElement {
     </div>
   );
 }
+
+export { TabContainer } from "./tab-container";

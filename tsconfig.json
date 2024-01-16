@@ -16,5 +16,5 @@
       "client/*": ["./client/*"]
     }
   },
-  "include": ["client", "components", "core"]
+  "include": ["packages/client", "packages/components", "packages/core", "packages/client/.vite/build", "forge.config.ts", ".vite/build"]
 }

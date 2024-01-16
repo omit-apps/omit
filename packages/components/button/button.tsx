@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style/button.scss";
 
-export default function Button(props: ButtonProps): React.ReactElement {
+export function Button(props: ButtonProps): React.ReactElement {
   const [active, setActive] = useState(false);
 
   const clickEventHanlder = () => {

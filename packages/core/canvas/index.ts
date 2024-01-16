@@ -1,4 +1,3 @@
-import Konva from "konva";
 import { Canvas } from "./canvas";
 
 export function createContainer(

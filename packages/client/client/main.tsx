@@ -1,9 +1,9 @@
 import * as React from "react";
 import { ReactElement } from "react";
+import { Tab, Option } from "@any-disign/component";
+
 import Sidebar from "../components/sidebar/sidebar";
 import Header from "../components/header/header";
-import Tab from "../../components/tab/tab";
-import Option from "../../components/option/option";
 import FileContainer from "../components/container/file-container";
 
 function Main(): ReactElement {

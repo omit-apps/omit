@@ -14,6 +14,7 @@ export class Canvas {
     this.config = config;
     this.init();
     this.mountEvent();
+    this.opreationEvent();
   }
 
   init() {
@@ -24,7 +25,6 @@ export class Canvas {
       container: this.container,
       width: cW,
       height: cH,
-      draggable: true,
       scale: { x: 1, y: 1 },
     });
 
@@ -49,6 +49,10 @@ export class Canvas {
     this.stage = stage;
     this.layer = layer;
     this.bgRect = bgRect;
+  }
+
+  opreationEvent() {
+    // TODO: 操作相关
   }
 
   mountEvent() {

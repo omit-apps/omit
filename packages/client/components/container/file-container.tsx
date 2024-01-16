@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import TabContainer from "../../../components/tab/tab-container";
-import { createContainer } from "../../../core/canvas";
+import { TabContainer } from "@any-disign/component";
+import { createContainer } from "@any-disign/core";
 
 export default function FileContainer(): React.ReactElement {
   useEffect(() => {
