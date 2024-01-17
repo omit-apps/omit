@@ -1,5 +1,5 @@
 import Konva from "konva";
-import { registerKeyboard } from "../keyboard";
+import { registerKeyboard, removeKeyboard } from "../keyboard";
 import { KeyCode, KeyboardBlcok } from "../keyboard/keyboard";
 
 export class Canvas {
@@ -8,6 +8,9 @@ export class Canvas {
   stage: Konva.Stage;
   layer: Konva.Layer;
   bgRect: Konva.Rect;
+
+  // 快捷键
+  moveKeyRef: KeyboardBlcok;
 
   constructor(container: HTMLDivElement, config?: CreateConfig) {
     if (!container) throw new Error("container is null");
@@ -54,35 +57,36 @@ export class Canvas {
   }
 
   opreationEvent() {
-    registerKeyboard(
-      new KeyboardBlcok(
-        [KeyCode.Space],
-        () => {
-          // document.body.style.cursor = "pointer";
-          this.changeCanvasDraggableStatus(true);
-        },
-        () => {
-          this.changeCanvasDraggableStatus(false);
-        }
-      )
+    this.moveKeyRef = new KeyboardBlcok(
+      [KeyCode.Space],
+      () => {
+        document.body.style.cursor = "pointer";
+        this.changeCanvasDraggableStatus(true);
+      },
+      () => {
+        document.body.style.cursor = "default";
+        this.changeCanvasDraggableStatus(false);
+      }
     );
+    registerKeyboard(this.moveKeyRef);
   }
 
   changeCanvasDraggableStatus(status: boolean) {
+    if (this.stage.draggable() === status) return;
     this.stage.draggable(status);
   }
 
   draggableEvent() {
     this.stage.addEventListener("dragstart", (e) => {
-      console.log(e);
+      // console.log(e);
     });
 
     this.stage.addEventListener("dragmove", (e) => {
-      console.log(e);
+      // console.log(e);
     });
 
     this.stage.addEventListener("dragend", (e) => {
-      console.log(e);
+      // console.log(e);
     });
   }
 
@@ -109,5 +113,13 @@ export class Canvas {
         y: pos.y - mouseMoveTo.y * currentScale,
       });
     });
+  }
+
+  /**
+   * 销毁画布
+   */
+  destroy() {
+    removeKeyboard(this.moveKeyRef);
+    this.stage.destroy();
   }
 }

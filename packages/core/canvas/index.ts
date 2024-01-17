@@ -1,5 +1,7 @@
 import { Canvas } from "./canvas";
 
+export { type Canvas } from "./canvas";
+
 export function createContainer(
   container: HTMLDivElement,
   config?: CreateConfig

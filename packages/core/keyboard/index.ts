@@ -5,7 +5,9 @@ export { KeyboardBlcok, KeyCode } from "./keyboard";
 export type KeyEvent = KeyboardEvent | MouseEvent;
 
 // 键盘映射列表
-const keyRefList: KeyboardBlcok[] = [];
+let keyRefList: KeyboardBlcok[] = [];
+
+let executeKeyBoard: KeyboardBlcok | null = null;
 
 /**
  * 注册按键信息
@@ -15,13 +17,21 @@ export function registerKeyboard(keyboard: KeyboardBlcok) {
   keyRefList.push(keyboard);
 }
 
+export function removeKeyboard(keyboard: KeyboardBlcok) {
+  checkKeyPress(keyboard.key, (refInfo) => {
+    keyRefList = keyRefList.filter((info) => info === refInfo);
+  });
+}
+
 /**
  * 注册键盘触发器
  * @param codes 触发的键盘代码
  */
 export function registerKeyboardDown(e: KeyEvent) {
+  if (executeKeyBoard !== null) return;
   const pressKeys = extractEventKeyCode(e);
   checkKeyPress(pressKeys, (refInfo) => {
+    executeKeyBoard = refInfo;
     refInfo.downAction();
   });
 }
@@ -29,6 +39,7 @@ export function registerKeyboardDown(e: KeyEvent) {
 export function registerKeyboardUp(e: KeyEvent) {
   const pressKeys = extractEventKeyCode(e);
   checkKeyPress(pressKeys, (refInfo) => {
+    executeKeyBoard = null;
     refInfo.upAction();
   });
 }

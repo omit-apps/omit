@@ -5,26 +5,40 @@ import {
 } from "@any-disign/core";
 import { useEffect } from "react";
 
+/**
+ * 使用快捷键注册
+ */
 export function useKeyboardRegister() {
   useEffect(() => {
     subKeyboardEventHandler();
     return unsubKeyboardEventHandler;
   }, []);
 
-  const registerEventHandler = (e: KeyboardEvent | MouseEvent) =>
+  /**
+   * 键盘按下事件注册
+   * @param e
+   */
+  const registerEventHandler = (e: KeyboardEvent | MouseEvent) => {
     registerKeyboardDown(e);
+  };
 
-  const registerEventHandler2 = (e: KeyEvent) => registerKeyboardUp(e);
+  /**
+   * 键盘弹起事件注册
+   * @param e
+   */
+  const registerEventHandler2 = (e: KeyEvent) => {
+    registerKeyboardUp(e);
+  };
 
   const subKeyboardEventHandler = () => {
-    document.addEventListener("keypress", registerEventHandler);
+    document.addEventListener("keydown", registerEventHandler);
     document.addEventListener("mousedown", registerEventHandler);
     document.addEventListener("keyup", registerEventHandler2);
     document.addEventListener("mouseup", registerEventHandler2);
   };
 
   const unsubKeyboardEventHandler = () => {
-    document.removeEventListener("keypress", registerEventHandler);
+    document.removeEventListener("keydown", registerEventHandler);
     document.removeEventListener("mousedown", registerEventHandler);
     document.removeEventListener("keyup", registerEventHandler2);
     document.removeEventListener("mouseup", registerEventHandler2);
