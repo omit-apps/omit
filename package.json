@@ -1,14 +1,14 @@
 {
   "name": "any-design",
   "version": "0.0.1",
-  "description": "Any Design Monorep",
-  "main": "index.js",
+  "description": "Any Design Monorepo",
   "dependencies": {},
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "design",
+    "software",
+    "desktop"
+  ],
+  "author": "Eric Zhang",
+  "license": ""
 }

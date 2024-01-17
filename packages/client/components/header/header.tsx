@@ -1,6 +1,6 @@
 import React from "react";
 import UserInfo from "../user/user-info";
-import Option from "../../../components/option/option";
+import { Option } from "@any-disign/component";
 
 export default function Header(): React.ReactElement {
   return (

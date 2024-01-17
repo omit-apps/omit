@@ -1,4 +1,4 @@
-export class KeyboardEvent {
+export class KeyboardBlcok {
   /**
    * 触发键位
    */
@@ -6,7 +6,17 @@ export class KeyboardEvent {
   /**
    * 触发动作
    */
-  action: Action;
+  downAction: Action;
+  /**
+   * 松开动作
+   */
+  upAction: Action;
+
+  constructor(key: KeyCode[], downAction: Action, upAction?: Action) {
+    this.key = key;
+    this.downAction = downAction;
+    this.upAction = upAction;
+  }
 }
 
 export enum KeyCode {
@@ -59,6 +69,7 @@ export enum KeyCode {
   End = "End",
   PageUp = "PageUp",
   PageDown = "PageDown",
+  Space = "Space",
   F1 = "F1",
   F2 = "F2",
   F3 = "F3",

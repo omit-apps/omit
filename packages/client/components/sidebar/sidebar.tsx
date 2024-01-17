@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../../components/button/button";
+import { Button } from "@any-disign/component";
 // @ts-ignore
 import Cursor from "../../assets/icon/cursor.svg";
 // @ts-ignore

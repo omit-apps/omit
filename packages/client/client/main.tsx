@@ -1,10 +1,11 @@
+import { Option, Tab } from "@any-disign/component";
 import * as React from "react";
 import { ReactElement } from "react";
-import { Tab, Option } from "@any-disign/component";
 
-import Sidebar from "../components/sidebar/sidebar";
-import Header from "../components/header/header";
 import FileContainer from "../components/container/file-container";
+import Header from "../components/header/header";
+import Sidebar from "../components/sidebar/sidebar";
+import { useKeyboardRegister } from "../hooks/use-keyboard";
 
 function Main(): ReactElement {
   const tabList: TabOption[] = [
@@ -14,6 +15,8 @@ function Main(): ReactElement {
       component: <FileContainer />,
     },
   ];
+
+  useKeyboardRegister();
 
   return (
     <div className="flex flex-col h-full relative">

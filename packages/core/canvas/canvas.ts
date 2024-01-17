@@ -1,4 +1,6 @@
 import Konva from "konva";
+import { registerKeyboard } from "../keyboard";
+import { KeyCode, KeyboardBlcok } from "../keyboard/keyboard";
 
 export class Canvas {
   container: HTMLDivElement;
@@ -12,8 +14,10 @@ export class Canvas {
 
     this.container = container;
     this.config = config;
+
     this.init();
     this.mountEvent();
+    this.draggableEvent();
     this.opreationEvent();
   }
 
@@ -28,9 +32,7 @@ export class Canvas {
       scale: { x: 1, y: 1 },
     });
 
-    const layer = new Konva.Layer({
-      draggable: true,
-    });
+    const layer = new Konva.Layer();
     stage.add(layer);
 
     const bgRect = new Konva.Rect({
@@ -52,7 +54,36 @@ export class Canvas {
   }
 
   opreationEvent() {
-    // TODO: 操作相关
+    registerKeyboard(
+      new KeyboardBlcok(
+        [KeyCode.Space],
+        () => {
+          // document.body.style.cursor = "pointer";
+          this.changeCanvasDraggableStatus(true);
+        },
+        () => {
+          this.changeCanvasDraggableStatus(false);
+        }
+      )
+    );
+  }
+
+  changeCanvasDraggableStatus(status: boolean) {
+    this.stage.draggable(status);
+  }
+
+  draggableEvent() {
+    this.stage.addEventListener("dragstart", (e) => {
+      console.log(e);
+    });
+
+    this.stage.addEventListener("dragmove", (e) => {
+      console.log(e);
+    });
+
+    this.stage.addEventListener("dragend", (e) => {
+      console.log(e);
+    });
   }
 
   mountEvent() {

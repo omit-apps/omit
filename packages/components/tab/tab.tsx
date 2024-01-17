@@ -13,7 +13,7 @@ export function Tab(props: TabPropsType): React.ReactElement {
     <div className="h-full flex-1 flex flex-col">
       {/* Tab Header */}
       <div className="flex-1">{component}</div>
-      <div className="flex">
+      <div className="flex h-32px">
         <TabHeader
           tabList={props.tabList}
           changeEventProcessor={setActiveTab}
