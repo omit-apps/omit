@@ -1,3 +1,7 @@
-export * from "./tab/tab";
-export { Option } from "./option/option";
-export { Button } from "./button/button";
+import "virtual:uno.css";
+
+// 提供的UI组件
+export * from "./tab";
+export * from "./option";
+export * from "./button";
+export * from "./panel";

@@ -1,11 +1,12 @@
-declare interface ButtonProps {
+export interface ButtonProps {
   value?: string;
   icon?: string;
   iconSize?: number;
   type: ButtonType;
   border?: boolean;
   action?: Action;
+  trigger?: boolean;
   className?: string;
 }
 
-declare type ButtonType = "text" | "icon" | "mixin";
+export type ButtonType = "text" | "icon" | "mixin";

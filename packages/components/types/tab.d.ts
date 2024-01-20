@@ -6,6 +6,7 @@
 declare interface TabPropsType {
   tabList: TabOption[];
   children?: React.ReactElement;
+  noOption?: string | React.ReactElement;
 }
 
 /**

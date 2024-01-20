@@ -6,6 +6,7 @@ import FileContainer from "../components/container/file-container";
 import Header from "../components/header/header";
 import Sidebar from "../components/sidebar/sidebar";
 import { useKeyboardRegister } from "../hooks/use-keyboard";
+import OptionFile from "../view/option-file";
 
 function Main(): ReactElement {
   const tabList: TabOption[] = [
@@ -23,16 +24,16 @@ function Main(): ReactElement {
       <Header />
       <div className="flex flex-1 w-full h-full">
         <Sidebar />
-        <Tab tabList={tabList}>
+        <Tab tabList={tabList} noOption={<OptionFile />}>
           <div className="flex justify-end">
             <Option text="图层" />
             <Option text="工具" />
             <Option text="</>" title="代码" />
           </div>
         </Tab>
-        <div className="bg-dark-100 h-full">
+        {/* <div className="bg-dark-100 h-full">
           <div className=" w-240px"></div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

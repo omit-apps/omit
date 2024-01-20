@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./style/button.scss";
+import { ButtonProps } from "../type/button";
 
 export function Button(props: ButtonProps): React.ReactElement {
   const [active, setActive] = useState(false);
 
   const clickEventHanlder = () => {
-    setActive(!active);
+    if (props.trigger) {
+      setActive(!active);
+    }
     props.action?.();
   };
 
@@ -15,6 +18,7 @@ export function Button(props: ButtonProps): React.ReactElement {
         text-center flex rounded w-32px h-32px justify-center items-center transition-all cursor-pointer hover:bg-white/20
         button-border 
         ${active ? "bg-white/20" : ""}
+        ${props.border ? "b-solid b-white b-1" : ""}
         ${props.className}
         `}
       title={props.value}
