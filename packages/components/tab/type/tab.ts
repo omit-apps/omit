@@ -1,9 +1,7 @@
-/// <reference types="react" />
-
 /**
  * Tab component props type.
  */
-declare interface TabPropsType {
+export interface TabPropsType {
   tabList: TabOption[];
   children?: React.ReactElement;
   noOption?: string | React.ReactElement;
@@ -12,22 +10,22 @@ declare interface TabPropsType {
 /**
  * A tab option.
  */
-declare interface TabOption {
+export interface TabOption {
   title: string;
   key: string;
   component: React.ReactElement;
 }
 
-declare interface TabHeaderPropsType {
+export interface TabHeaderPropsType {
   tabList: TabOption[];
   changeEventProcessor: (tabKey: string) => void;
 }
 
-declare interface TabOptionPropsType {
+export interface TabOptionPropsType {
   title: string;
   key: string;
 }
 
-declare interface TabContainerPropsType {
+export interface TabContainerPropsType {
   children: React.ReactElement;
 }

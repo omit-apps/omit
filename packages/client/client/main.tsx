@@ -1,4 +1,4 @@
-import { Option, Tab } from "@any-disign/component";
+import { Option, Tab, TabOption } from "@any-disign/component";
 import * as React from "react";
 import { ReactElement } from "react";
 

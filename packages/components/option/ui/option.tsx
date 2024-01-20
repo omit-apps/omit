@@ -1,4 +1,5 @@
 import React from "react";
+import { OptionPropsType } from "../type/option";
 
 export function Option(props: OptionPropsType): React.ReactElement {
   return (

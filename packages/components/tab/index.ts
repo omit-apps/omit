@@ -1,1 +1,2 @@
-export * from "./ui/tab.tsx";
+export * from "./ui/tab";
+export * from "./type/tab";
