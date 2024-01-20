@@ -10,7 +10,7 @@ const defaultCanvasRefKeys: CanvasRefKeys = {
 export class Canvas {
   container: HTMLDivElement;
   config: CreateCanvasConfig;
-  stage: Container;
+  stage: Konva.Stage;
   layer: Konva.Layer;
   bgRect: Konva.Rect;
 
