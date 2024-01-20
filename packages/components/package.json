@@ -1,0 +1,22 @@
+{
+  "name": "@any-disign/component",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "dependencies": {
+    "typescript": "~4.5.4",
+    "react": "^18.2.0",
+    "unocss": "0.56",
+    "@unocss/preset-wind": "0.56",
+    "@types/react": "^18.2.42"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^18.2.0"
+  }
+}

@@ -11,18 +11,10 @@
     "baseUrl": "./",
     "outDir": "dist",
     "moduleResolution": "node",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "paths": {
       "client/*": ["./client/*"]
     }
   },
-  "include": [
-    "packages/components",
-    "packages/core",
-    "packages/client/.vite/build",
-    "forge.config.ts",
-    ".vite/build"
-  ]
+  "include": ["./", "forge.config.ts", ".vite/build"]
 }

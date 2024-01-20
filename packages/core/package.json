@@ -1,0 +1,16 @@
+{
+  "name": "@any-disign/core",
+  "version": "0.0.1",
+  "description": "any-disign core code.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "dependencies": {
+    "typescript": "~4.5.4",
+    "konva": "^9.3.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
