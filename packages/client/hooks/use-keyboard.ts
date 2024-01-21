@@ -18,7 +18,7 @@ export function useKeyboardRegister() {
    * 键盘按下事件注册
    * @param e
    */
-  const registerEventHandler = (e: KeyboardEvent | MouseEvent) => {
+  const registerEventHandler = (e: KeyEvent) => {
     registerKeyboardDown(e);
   };
 
@@ -26,8 +26,8 @@ export function useKeyboardRegister() {
    * 键盘弹起事件注册
    * @param e
    */
-  const registerEventHandler2 = (e: KeyEvent) => {
-    registerKeyboardUp(e);
+  const registerEventHandler2 = () => {
+    registerKeyboardUp();
   };
 
   const subKeyboardEventHandler = () => {
@@ -35,6 +35,7 @@ export function useKeyboardRegister() {
     document.addEventListener("mousedown", registerEventHandler);
     document.addEventListener("keyup", registerEventHandler2);
     document.addEventListener("mouseup", registerEventHandler2);
+    document.addEventListener("wheel", registerEventHandler);
   };
 
   const unsubKeyboardEventHandler = () => {
@@ -42,5 +43,6 @@ export function useKeyboardRegister() {
     document.removeEventListener("mousedown", registerEventHandler);
     document.removeEventListener("keyup", registerEventHandler2);
     document.removeEventListener("mouseup", registerEventHandler2);
+    document.addEventListener("wheel", registerEventHandler);
   };
 }

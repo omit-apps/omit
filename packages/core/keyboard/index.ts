@@ -36,12 +36,11 @@ export function registerKeyboardDown(e: KeyEvent) {
   });
 }
 
-export function registerKeyboardUp(e: KeyEvent) {
-  const pressKeys = extractEventKeyCode(e);
-  checkKeyPress(pressKeys, (refInfo) => {
+export function registerKeyboardUp() {
+  if (executeKeyBoard) {
+    executeKeyBoard.upAction();
     executeKeyBoard = null;
-    refInfo.upAction();
-  });
+  }
 }
 
 /**

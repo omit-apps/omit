@@ -8,3 +8,12 @@
   font-size: 14px;
   user-select: none;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 20px;
+}

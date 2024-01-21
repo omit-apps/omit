@@ -32,7 +32,7 @@ export default function LayerPanel(
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex-1 overflow-auto h-0px">
+      <div className="flex-1 px-2 overflow-auto h-0px">
         {layerInfos?.map((layerInfo) => (
           <LayerInfoPreview key={layerInfo.id} value={layerInfo} />
         ))}
