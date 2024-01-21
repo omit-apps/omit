@@ -1,7 +1,7 @@
 import Konva from "konva";
 import { registerKeyboard, removeKeyboard } from "../keyboard";
 import { KeyCode, KeyboardBlcok } from "../keyboard/keyboard";
-import Container from "../elements/container/container";
+import { v4 } from "uuid";
 
 const defaultCanvasRefKeys: CanvasRefKeys = {
   openDragger: [KeyCode.Space],
@@ -9,15 +9,20 @@ const defaultCanvasRefKeys: CanvasRefKeys = {
 };
 
 export class Canvas {
+  // basic elements
   container: HTMLDivElement;
   config: CreateCanvasConfig;
   stage: Konva.Stage;
-  layer: Konva.Layer;
+  activeLayer: Konva.Layer;
   bgRect: Konva.Rect;
 
+  // data
+  layerList: Konva.Layer[] = [];
+
+  // flag
   isZoom: boolean;
 
-  // 快捷键
+  // keyborad refs
   moveKeyRef: KeyboardBlcok;
   zoomKeyRef: KeyboardBlcok;
 
@@ -45,7 +50,7 @@ export class Canvas {
       scale: { x: 1, y: 1 },
     });
 
-    const layer = new Konva.Layer();
+    const layer = this.addLayer("default")[1];
     stage.add(layer);
 
     const bgRect = new Konva.Rect({
@@ -62,15 +67,78 @@ export class Canvas {
     });
 
     this.stage = stage;
-    this.layer = layer;
+    this.activeLayer = layer;
     this.bgRect = bgRect;
   }
 
+  /**
+   * 添加图层
+   * @param name
+   * @returns
+   */
+  addLayer(name: string): [string, Konva.Layer] {
+    const layer = new Konva.Layer({
+      name: name,
+      id: v4(),
+    });
+
+    this.layerList.push(layer);
+
+    return [layer.id(), layer];
+  }
+
+  /**
+   * 添加元素到画布图层
+   * @param element 要添加的元素
+   * @param layerId 添加的目标图层
+   * @returns
+   */
+  addElement(element: Konva.Group | Konva.Shape): void;
+  addElement(element: Konva.Group | Konva.Shape, layerId?: string): void {
+    if (this.activeLayer === null && !layerId) return;
+    const targetLayer = layerId
+      ? this.findLayerById(layerId)
+      : this.activeLayer;
+
+    targetLayer.add(element);
+  }
+
+  findLayerById(layerId: string): Konva.Layer | null {
+    let findLayer: Konva.Layer | null = null;
+
+    for (const layer of this.layerList) {
+      if (layer.id() === layerId) {
+        findLayer = layer;
+        break;
+      }
+    }
+
+    return findLayer;
+  }
+
+  changeActiveLayer(layerId: string) {
+    if (!layerId) return;
+
+    const willChangeLayer = this.findLayerById(layerId);
+
+    if (willChangeLayer) {
+      this.activeLayer = willChangeLayer;
+    }
+  }
+
+  /**
+   * 变更画布的拖拽状态
+   * @param status 拖拽状态
+   * @returns
+   */
   changeCanvasDraggableStatus(status: boolean) {
     if (this.stage.draggable() === status) return;
     this.stage.draggable(status);
   }
 
+  /**
+   * 挂载事件相关的逻辑
+   */
   mountEvent() {
     this.stage.addEventListener("wheel", (e: WheelEvent) => {
       if (!this.isZoom) return;
@@ -99,6 +167,9 @@ export class Canvas {
     this.opreationEvent();
   }
 
+  /**
+   * 拖拽事件
+   */
   draggableEvent() {
     this.stage.addEventListener("dragstart", (e) => {
       // console.log(e);
@@ -113,6 +184,9 @@ export class Canvas {
     });
   }
 
+  /**
+   * 操作快捷键事件
+   */
   opreationEvent() {
     this.moveKeyRef = new KeyboardBlcok(
       this.config.refKeys.openDragger,

@@ -10,13 +10,29 @@ import LayerPanel from "../components/panel/layer-panel";
 import OptionFile from "./option-file";
 import { LayerInfo } from "../components/layer/layer-info";
 import { CodePanel } from "../components/panel/code-panel";
+import { Canvas } from "@any-disign/core";
+import { useDispatch } from "react-redux";
+import { changeActiveCanvas } from "../store/reducers/application";
 
 function Main(): ReactElement {
+  const dispath = useDispatch();
+  /**
+   * 切换激活的画布
+   * @param canvas 需要切换的画布
+   */
+  const changeActiveCanvasEventHandler = (canvas: Canvas) => {
+    dispath(changeActiveCanvas(canvas));
+  };
+
   const tabList: TabOption[] = [
     {
       title: "新建文件",
       key: "1",
-      component: <FileContainer />,
+      component: (
+        <FileContainer
+          changeActiveFileContainer={changeActiveCanvasEventHandler}
+        />
+      ),
     },
   ];
 

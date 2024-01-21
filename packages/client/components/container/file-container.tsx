@@ -3,7 +3,13 @@ import { TabContainer } from "@any-disign/component";
 import { createContainer } from "@any-disign/core";
 import { Canvas } from "@any-disign/core";
 
-export default function FileContainer(): React.ReactElement {
+export interface FileContainerProps {
+  changeActiveFileContainer: (canvas: Canvas) => void;
+}
+
+export default function FileContainer(
+  props: FileContainerProps
+): React.ReactElement {
   let canvas: Canvas | null = null;
   useEffect(() => {
     initCanvas();
