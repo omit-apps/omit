@@ -1,6 +1,6 @@
 import { Option, Panel, Tab, TabOption } from "@any-disign/component";
 import * as React from "react";
-import { ReactElement, useRef } from "react";
+import { MutableRefObject, ReactElement, useRef } from "react";
 import { useKeyboardRegister } from "../hooks/use-keyboard";
 
 import FileContainer from "../components/container/file-container";
@@ -9,6 +9,7 @@ import Sidebar from "../components/sidebar/sidebar";
 import LayerPanel from "../components/panel/layer-panel";
 import OptionFile from "./option-file";
 import { LayerInfo } from "../components/layer/layer-info";
+import { CodePanel } from "../components/panel/code-panel";
 
 function Main(): ReactElement {
   const tabList: TabOption[] = [
@@ -27,11 +28,12 @@ function Main(): ReactElement {
   ];
 
   const layerPanel = useRef(null);
+  const codePanel = useRef(null);
 
   useKeyboardRegister();
 
-  const layerOptionAction = (e: MouseEvent) => {
-    layerPanel.current.changePanelVisible(!layerPanel.current.visible, e);
+  const openPanelAction = (e: MouseEvent, panelRef: MutableRefObject<any>) => {
+    panelRef.current.changePanelVisible(!panelRef.current.visible, e);
   };
 
   return (
@@ -43,16 +45,23 @@ function Main(): ReactElement {
           <div className="flex justify-end">
             <Option
               active={layerPanel?.current?.visible ?? false}
-              action={layerOptionAction}
+              action={(e: MouseEvent) => openPanelAction(e, layerPanel)}
               text="图层"
             />
             <Option text="工具" />
-            <Option text="</>" title="代码" />
+            <Option
+              text="</>"
+              title="代码"
+              action={(e: MouseEvent) => openPanelAction(e, codePanel)}
+            />
           </div>
         </Tab>
       </div>
       <Panel ref={layerPanel} name="图层面板">
         <LayerPanel layerInfos={layerInfoList} />
+      </Panel>
+      <Panel ref={codePanel} name="代码">
+        <CodePanel />
       </Panel>
     </div>
   );

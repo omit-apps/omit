@@ -5,6 +5,7 @@ import Container from "../elements/container/container";
 
 const defaultCanvasRefKeys: CanvasRefKeys = {
   openDragger: [KeyCode.Space],
+  openZoom: [KeyCode.Ctrl, KeyCode.Mouse0],
 };
 
 export class Canvas {
@@ -14,14 +15,18 @@ export class Canvas {
   layer: Konva.Layer;
   bgRect: Konva.Rect;
 
+  isZoom: boolean;
+
   // 快捷键
   moveKeyRef: KeyboardBlcok;
+  zoomKeyRef: KeyboardBlcok;
 
   constructor(container: HTMLDivElement, config?: CreateCanvasConfig) {
     if (!container) throw new Error("container is null");
 
     this.container = container;
     this.config = config;
+    this.isZoom = false;
     // 如果用户没有传入配置表则使用默认的键位配置
     this.config.refKeys = this.config.refKeys ?? defaultCanvasRefKeys;
 
@@ -68,6 +73,7 @@ export class Canvas {
 
   mountEvent() {
     this.stage.addEventListener("wheel", (e: WheelEvent) => {
+      if (!this.isZoom) return;
       let scale = 0.05;
       if (e.deltaY < 0) {
         scale = -0.05;
@@ -119,7 +125,17 @@ export class Canvas {
         this.changeCanvasDraggableStatus(false);
       }
     );
+    this.zoomKeyRef = new KeyboardBlcok(
+      this.config.refKeys.openZoom,
+      () => {
+        this.isZoom = true;
+      },
+      () => {
+        this.isZoom = false;
+      }
+    );
     registerKeyboard(this.moveKeyRef);
+    registerKeyboard(this.zoomKeyRef);
   }
 
   /**
@@ -148,4 +164,8 @@ export interface CanvasRefKeys {
    * 拖拽快捷键
    */
   openDragger?: KeyCode[];
+  /**
+   * 开启缩放
+   */
+  openZoom?: KeyCode[];
 }

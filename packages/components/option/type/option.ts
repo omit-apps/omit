@@ -2,7 +2,7 @@ export interface OptionPropsType {
   text: string;
   active?: boolean;
   title?: string;
-  action?: Action;
+  action?: Action<MouseEvent>;
   type?: OptionType;
 }
 
