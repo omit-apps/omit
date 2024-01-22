@@ -1,5 +1,5 @@
 import { Button } from "@any-disign/component";
-import React, { useState } from "react";
+import React from "react";
 import LayerInfoPreview from "../../components/layer/layer-info";
 
 // @ts-ignore
@@ -9,7 +9,10 @@ import Delete from "../../assets/icon/delete.svg";
 // @ts-ignore
 import Group from "../../assets/icon/group.svg";
 
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
 import { getActiveCanvas } from "../../global";
+import { addLayerInfo } from "../../store/reducers/application";
 
 /**
  * 图层面板配置
@@ -22,24 +25,21 @@ export interface LayerPanelPropType {
 export default function LayerPanel(
   props: LayerPanelPropType
 ): React.ReactElement {
-  const [layerInfos, setLayerInfos] = useState([
-    {
-      id: "1",
-      name: "图层1",
-    },
-  ]);
+  const dispatchEvent = useDispatch();
 
+  const layerInfos = useSelector(
+    (state: RootState) => state.application.layerInfo
+  );
   const addLayerAction = () => {
     const layerName = `图层${layerInfos.length + 1}`;
     const layerId = getActiveCanvas().addLayer(layerName)[0];
 
-    setLayerInfos([
-      ...layerInfos,
-      {
+    dispatchEvent(
+      addLayerInfo({
         id: layerId,
         name: layerName,
-      },
-    ]);
+      })
+    );
   };
 
   return (

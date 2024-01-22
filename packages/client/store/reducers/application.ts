@@ -1,24 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { type Canvas } from "@any-disign/core";
+import { LayerInfo } from "../../components/layer/layer-info";
 
 export interface ApplicationState {
-  activeCanvas: Canvas | null;
+  layerInfo: LayerInfo[];
 }
 
 const initialState: ApplicationState = {
-  activeCanvas: null,
+  layerInfo: [],
 };
 
 const applicationSlice = createSlice({
   name: "application",
   initialState,
   reducers: {
-    changeActiveCanvas: (state, action) => {
-      state.activeCanvas = action.payload;
+    refershLayerInfo: (state, action) => {
+      state.layerInfo = action.payload;
+    },
+    addLayerInfo: (state, action) => {
+      state.layerInfo = state.layerInfo.concat([action.payload]);
     },
   },
 });
 
-export const { changeActiveCanvas } = applicationSlice.actions;
+export const { refershLayerInfo, addLayerInfo } = applicationSlice.actions;
 
 export default applicationSlice.reducer;

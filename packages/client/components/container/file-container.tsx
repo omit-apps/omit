@@ -1,8 +1,8 @@
 import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import { TabContainer } from "@any-disign/component";
+import { useDispatch } from "react-redux";
 import { createContainer } from "@any-disign/core";
 import { Canvas } from "@any-disign/core";
-import { useDispatch } from "react-redux";
 import { setActiveCanvas } from "../../global";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -15,13 +15,14 @@ export default forwardRef(function FileContainer(
   ref
 ): React.ReactElement {
   let canvas: Canvas | null = null;
+  const dispatchEvent = useDispatch();
 
   /**
    * 切换激活的画布
    * @param canvas 需要切换的画布
    */
   const changeActiveCanvasEventHandler = (canvas: Canvas) => {
-    setActiveCanvas(canvas);
+    setActiveCanvas(canvas, dispatchEvent);
   };
 
   useEffect(() => {

@@ -50,7 +50,7 @@ export class Canvas {
       scale: { x: 1, y: 1 },
     });
 
-    const layer = this.addLayer("default")[1];
+    const layer = this.addLayer("默认图层")[1];
     stage.add(layer);
 
     const bgRect = new Konva.Rect({
@@ -103,6 +103,20 @@ export class Canvas {
     targetLayer.add(element);
   }
 
+  changeActiveLayer(params: Konva.Layer | string): void {
+    if (params instanceof Konva.Layer) {
+      this.activeLayer = params;
+      return;
+    }
+
+    if (typeof params === "string") {
+      const layer = this.findLayerById(params);
+      if (layer) {
+        this.activeLayer = layer;
+      }
+    }
+  }
+
   findLayerById(layerId: string): Konva.Layer | null {
     let findLayer: Konva.Layer | null = null;
 
@@ -114,16 +128,6 @@ export class Canvas {
     }
 
     return findLayer;
-  }
-
-  changeActiveLayer(layerId: string) {
-    if (!layerId) return;
-
-    const willChangeLayer = this.findLayerById(layerId);
-
-    if (willChangeLayer) {
-      this.activeLayer = willChangeLayer;
-    }
   }
 
   /**
