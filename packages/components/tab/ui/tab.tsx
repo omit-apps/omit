@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TabHeader from "./tab-header";
+import { TabOption, TabPropsType } from "../type/tab";
 
 export function Tab(props: TabPropsType): React.ReactElement {
   if (props.tabList.length === 0) {
@@ -18,8 +19,26 @@ export function Tab(props: TabPropsType): React.ReactElement {
   const [component, setComponent] = useState(props.tabList[0].component);
 
   useEffect(() => {
-    // TODO: Change Tab
+    props.activeTabChangeEvent(findTabOptionByKey(activeTab));
   }, [activeTab]);
+
+  /**
+   * 根据key获取TabOption数据
+   * @param key 查找的option的key
+   * @returns
+   */
+  const findTabOptionByKey = (key: string) => {
+    let resultOption: TabOption | null = null;
+
+    for (const option of props.tabList) {
+      if (option.key === key) {
+        resultOption = option;
+        break;
+      }
+    }
+
+    return resultOption;
+  };
 
   return (
     <div className="h-full flex-1 flex flex-col">

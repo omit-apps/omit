@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import { Button } from "@any-disign/component";
-import LayerInfoPreview, { LayerInfo } from "../../components/layer/layer-info";
+import React, { useState } from "react";
+import LayerInfoPreview from "../../components/layer/layer-info";
 
 // @ts-ignore
 import NewLayer from "../../assets/icon/new-layer.svg";
@@ -9,30 +9,42 @@ import Delete from "../../assets/icon/delete.svg";
 // @ts-ignore
 import Group from "../../assets/icon/group.svg";
 
+import { getActiveCanvas } from "../../global";
+
 /**
  * 图层面板配置
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LayerPanelPropType {
-  layerInfos?: LayerInfo[];
+  // TODO: Add some attributes.
 }
 
 export default function LayerPanel(
   props: LayerPanelPropType
 ): React.ReactElement {
-  const [layerInfos, setLayerInfos] = useState(props.layerInfos);
+  const [layerInfos, setLayerInfos] = useState([
+    {
+      id: "1",
+      name: "图层1",
+    },
+  ]);
+
   const addLayerAction = () => {
+    const layerName = `图层${layerInfos.length + 1}`;
+    const layerId = getActiveCanvas().addLayer(layerName)[0];
+
     setLayerInfos([
       ...layerInfos,
       {
-        id: layerInfos.length + 1 + "",
-        name: `图层${layerInfos.length + 1}`,
+        id: layerId,
+        name: layerName,
       },
     ]);
   };
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex-1 px-2 overflow-auto h-0px">
+      <div className="flex-1 px-2 space-y-2 overflow-auto h-0px">
         {layerInfos?.map((layerInfo) => (
           <LayerInfoPreview key={layerInfo.id} value={layerInfo} />
         ))}

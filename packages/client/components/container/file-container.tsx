@@ -1,16 +1,29 @@
-import React, { useEffect } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import { TabContainer } from "@any-disign/component";
 import { createContainer } from "@any-disign/core";
 import { Canvas } from "@any-disign/core";
+import { useDispatch } from "react-redux";
+import { setActiveCanvas } from "../../global";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FileContainerProps {
-  changeActiveFileContainer: (canvas: Canvas) => void;
+  // TODO: Add some attributes.
 }
 
-export default function FileContainer(
-  props: FileContainerProps
+export default forwardRef(function FileContainer(
+  props: FileContainerProps,
+  ref
 ): React.ReactElement {
   let canvas: Canvas | null = null;
+
+  /**
+   * 切换激活的画布
+   * @param canvas 需要切换的画布
+   */
+  const changeActiveCanvasEventHandler = (canvas: Canvas) => {
+    setActiveCanvas(canvas);
+  };
+
   useEffect(() => {
     initCanvas();
 
@@ -19,6 +32,16 @@ export default function FileContainer(
       // canvas = null;
     };
   }, []);
+
+  // export out functions.
+  useImperativeHandle(ref, () => ({
+    activeContainer,
+  }));
+
+  const activeContainer = () => {
+    if (!canvas) return;
+    changeActiveCanvasEventHandler(canvas);
+  };
 
   const initCanvas = () => {
     if (canvas) return;
@@ -36,4 +59,4 @@ export default function FileContainer(
       <div id="file-container" className="w-full h-full"></div>
     </TabContainer>
   );
-}
+});

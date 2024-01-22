@@ -10,36 +10,17 @@ import LayerPanel from "../components/panel/layer-panel";
 import OptionFile from "./option-file";
 import { LayerInfo } from "../components/layer/layer-info";
 import { CodePanel } from "../components/panel/code-panel";
-import { Canvas } from "@any-disign/core";
-import { useDispatch } from "react-redux";
-import { changeActiveCanvas } from "../store/reducers/application";
 
 function Main(): ReactElement {
-  const dispath = useDispatch();
-  /**
-   * 切换激活的画布
-   * @param canvas 需要切换的画布
-   */
-  const changeActiveCanvasEventHandler = (canvas: Canvas) => {
-    dispath(changeActiveCanvas(canvas));
-  };
+  const fileContainerMap: Map<string, any> = new Map();
 
-  const tabList: TabOption[] = [
+  const openFileList: TabOption[] = [
     {
       title: "新建文件",
       key: "1",
       component: (
-        <FileContainer
-          changeActiveFileContainer={changeActiveCanvasEventHandler}
-        />
+        <FileContainer ref={(o: any) => gatherFileContaienr("1", o)} />
       ),
-    },
-  ];
-
-  const layerInfoList: LayerInfo[] = [
-    {
-      id: "1",
-      name: "图层1",
     },
   ];
 
@@ -48,8 +29,20 @@ function Main(): ReactElement {
 
   useKeyboardRegister();
 
+  const gatherFileContaienr = (id: string, ref: any) => {
+    if (fileContainerMap.has(id)) return;
+    fileContainerMap.set(id, ref);
+  };
+
   const openPanelAction = (e: MouseEvent, panelRef: MutableRefObject<any>) => {
     panelRef.current.changePanelVisible(!panelRef.current.visible, e);
+  };
+
+  const activeTabChangeEventProcess = (option: TabOption) => {
+    if (!option) return;
+    setTimeout(() => {
+      fileContainerMap.get(option.key).activeContainer();
+    });
   };
 
   return (
@@ -57,7 +50,11 @@ function Main(): ReactElement {
       <Header />
       <div className="flex flex-1 w-full h-full">
         <Sidebar />
-        <Tab tabList={tabList} noOption={<OptionFile />}>
+        <Tab
+          tabList={openFileList}
+          noOption={<OptionFile />}
+          activeTabChangeEvent={activeTabChangeEventProcess}
+        >
           <div className="flex justify-end">
             <Option
               active={layerPanel?.current?.visible ?? false}
@@ -74,7 +71,7 @@ function Main(): ReactElement {
         </Tab>
       </div>
       <Panel ref={layerPanel} name="图层面板">
-        <LayerPanel layerInfos={layerInfoList} />
+        <LayerPanel />
       </Panel>
       <Panel ref={codePanel} name="代码">
         <CodePanel />
