@@ -15,6 +15,12 @@ importers:
         specifier: ^9.0.1
         version: registry.npmjs.org/uuid@9.0.1
 
+  packages/automation:
+    devDependencies:
+      puppeteer:
+        specifier: '20'
+        version: registry.npmjs.org/puppeteer@20.9.0
+
   packages/client:
     dependencies:
       '@any-disign/component':
@@ -81,9 +87,6 @@ importers:
       eslint-plugin-import:
         specifier: ^2.25.0
         version: registry.npmjs.org/eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)
-      puppeteer:
-        specifier: '20'
-        version: registry.npmjs.org/puppeteer@20.9.0(typescript@4.5.5)
       react:
         specifier: ^18.2.0
         version: registry.npmjs.org/react@18.2.0
@@ -1169,9 +1172,8 @@ packages:
     name: '@polka/url'
     version: 1.0.0-next.24
 
-  registry.npmjs.org/@puppeteer/browsers@1.4.6(typescript@4.5.5):
+  registry.npmjs.org/@puppeteer/browsers@1.4.6:
     resolution: {integrity: sha512-x4BEjr2SjOPowNeiguzjozQbsc6h437ovD/wu+JpaenxVLm3jkgzHY2xOslMTp50HoTvQreMjiexiGQw1sqZlQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@puppeteer/browsers/-/browsers-1.4.6.tgz}
-    id: registry.npmjs.org/@puppeteer/browsers/1.4.6
     name: '@puppeteer/browsers'
     version: 1.4.6
     engines: {node: '>=16.3.0'}
@@ -1187,7 +1189,6 @@ packages:
       progress: registry.npmjs.org/progress@2.0.3
       proxy-agent: registry.npmjs.org/proxy-agent@6.3.0
       tar-fs: registry.npmjs.org/tar-fs@3.0.4
-      typescript: registry.npmjs.org/typescript@4.5.5
       unbzip2-stream: registry.npmjs.org/unbzip2-stream@1.4.3
       yargs: registry.npmjs.org/yargs@17.7.1
     transitivePeerDependencies:
@@ -6172,9 +6173,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  registry.npmjs.org/puppeteer-core@20.9.0(typescript@4.5.5):
+  registry.npmjs.org/puppeteer-core@20.9.0:
     resolution: {integrity: sha512-H9fYZQzMTRrkboEfPmf7m3CLDN6JvbxXA3qTtS+dFt27tR+CsFHzPsT6pzp6lYL6bJbAPaR0HaPO6uSi+F94Pg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/puppeteer-core/-/puppeteer-core-20.9.0.tgz}
-    id: registry.npmjs.org/puppeteer-core/20.9.0
     name: puppeteer-core
     version: 20.9.0
     engines: {node: '>=16.3.0'}
@@ -6184,12 +6184,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@puppeteer/browsers': registry.npmjs.org/@puppeteer/browsers@1.4.6(typescript@4.5.5)
+      '@puppeteer/browsers': registry.npmjs.org/@puppeteer/browsers@1.4.6
       chromium-bidi: registry.npmjs.org/chromium-bidi@0.4.16(devtools-protocol@0.0.1147663)
       cross-fetch: registry.npmjs.org/cross-fetch@4.0.0
       debug: registry.npmjs.org/debug@4.3.4
       devtools-protocol: registry.npmjs.org/devtools-protocol@0.0.1147663
-      typescript: registry.npmjs.org/typescript@4.5.5
       ws: registry.npmjs.org/ws@8.13.0
     transitivePeerDependencies:
       - bufferutil
@@ -6198,18 +6197,17 @@ packages:
       - utf-8-validate
     dev: true
 
-  registry.npmjs.org/puppeteer@20.9.0(typescript@4.5.5):
+  registry.npmjs.org/puppeteer@20.9.0:
     resolution: {integrity: sha512-kAglT4VZ9fWEGg3oLc4/de+JcONuEJhlh3J6f5R1TLkrY/EHHIHxWXDOzXvaxQCtedmyVXBwg8M+P8YCO/wZjw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/puppeteer/-/puppeteer-20.9.0.tgz}
-    id: registry.npmjs.org/puppeteer/20.9.0
     name: puppeteer
     version: 20.9.0
     engines: {node: '>=16.3.0'}
     deprecated: < 21.3.7 is no longer supported
     requiresBuild: true
     dependencies:
-      '@puppeteer/browsers': registry.npmjs.org/@puppeteer/browsers@1.4.6(typescript@4.5.5)
+      '@puppeteer/browsers': registry.npmjs.org/@puppeteer/browsers@1.4.6
       cosmiconfig: registry.npmjs.org/cosmiconfig@8.2.0
-      puppeteer-core: registry.npmjs.org/puppeteer-core@20.9.0(typescript@4.5.5)
+      puppeteer-core: registry.npmjs.org/puppeteer-core@20.9.0
     transitivePeerDependencies:
       - bufferutil
       - encoding
