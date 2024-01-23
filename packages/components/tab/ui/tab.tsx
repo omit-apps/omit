@@ -3,20 +3,16 @@ import TabHeader from "./tab-header";
 import { TabOption, TabPropsType } from "../type/tab";
 
 export function Tab(props: TabPropsType): React.ReactElement {
-  if (props.tabList.length === 0) {
-    if (typeof props.noOption === "string" || !props.noOption) {
-      return (
-        <div className="h-full flex-1 text-white flex flex-col justify-center items-center bg-[#222]/80">
-          {props.noOption ?? "No Option"}
-        </div>
-      );
+  const [activeTab, setActiveTab] = useState<string>(null);
+  const [component, setComponent] = useState<React.ReactElement>(null);
+
+  useEffect(() => {
+    if (props.tabList.length) {
+      const firstOption = props.tabList[0];
+      setActiveTab(firstOption.key);
+      setComponent(firstOption.component);
     }
-
-    return props.noOption;
-  }
-
-  const [activeTab, setActiveTab] = useState(props.tabList[0].key);
-  const [component, setComponent] = useState(props.tabList[0].component);
+  }, []);
 
   useEffect(() => {
     props.activeTabChangeEvent(findTabOptionByKey(activeTab));
@@ -40,20 +36,38 @@ export function Tab(props: TabPropsType): React.ReactElement {
     return resultOption;
   };
 
-  return (
-    <div className="h-full flex-1 flex flex-col">
-      {/* Tab Header */}
-      <div className="flex-1">{component}</div>
-      <div className="flex h-32px">
-        <TabHeader
-          tabList={props.tabList}
-          changeEventProcessor={setActiveTab}
-        />
-        <div className="ml-auto bg-dark-100 w-full max-w-[25%]">
-          {props.children}
+  const getNotOpenFileComponent = () => {
+    if (typeof props.noOption === "string" || !props.noOption) {
+      return (
+        <div className="h-full flex-1 text-white flex flex-col justify-center items-center bg-[#222]/80">
+          {props.noOption ?? "No Option"}
         </div>
-      </div>
-    </div>
+      );
+    }
+
+    return props.noOption;
+  };
+
+  return (
+    <>
+      {props.tabList.length ? (
+        <div className="h-full flex-1 flex flex-col">
+          {/* Tab Header */}
+          <div className="flex-1">{component}</div>
+          <div className="flex h-32px">
+            <TabHeader
+              tabList={props.tabList}
+              changeEventProcessor={setActiveTab}
+            />
+            <div className="ml-auto bg-dark-100 w-full max-w-[25%]">
+              {props.children}
+            </div>
+          </div>
+        </div>
+      ) : (
+        getNotOpenFileComponent()
+      )}
+    </>
   );
 }
 

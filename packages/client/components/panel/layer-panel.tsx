@@ -1,5 +1,5 @@
 import { Button } from "@any-disign/component";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LayerInfoPreview from "../../components/layer/layer-info";
 
 // @ts-ignore
@@ -27,11 +27,10 @@ export default function LayerPanel(
 ): React.ReactElement {
   const dispatchEvent = useDispatch();
 
-  const layerInfos = useSelector(
-    (state: RootState) => state.application.layerInfo
-  );
+  const application = useSelector((state: RootState) => state.application);
+
   const addLayerAction = () => {
-    const layerName = `图层${layerInfos.length + 1}`;
+    const layerName = `图层${application.editFile.layerInfos.length + 1}`;
     const layerId = getActiveCanvas().addLayer(layerName)[0];
 
     dispatchEvent(
@@ -45,7 +44,7 @@ export default function LayerPanel(
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex-1 px-2 space-y-2 overflow-auto h-0px">
-        {layerInfos?.map((layerInfo) => (
+        {application.editFile?.layerInfos?.map((layerInfo) => (
           <LayerInfoPreview key={layerInfo.id} value={layerInfo} />
         ))}
       </div>
