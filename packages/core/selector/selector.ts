@@ -32,7 +32,7 @@ export function createSelector(stage: Konva.Stage) {
   selectorLayer.add(group);
 
   stage.addEventListener("mousedown", (mousedownEvent: MouseEvent) => {
-    if (mousedownEvent.button !== 0) return;
+    if (mousedownEvent.button !== 0 || !packageStage.useSeletor) return;
 
     const startPos: Konva.Vector2d = {
       x: mousedownEvent.offsetX,
