@@ -25,9 +25,9 @@ export function createSelector(stage: Konva.Stage) {
   packageStage.useSeletor = true;
 
   const selectorLayer = new Konva.Layer() as SelectorLayer;
-  selectorLayer.zIndex(999);
   selectorLayer.isSelector = true;
   packageStage.add(selectorLayer);
+  selectorLayer.zIndex(1);
   const group = new Konva.Group();
   selectorLayer.add(group);
 
