@@ -5,6 +5,7 @@ export interface TabPropsType {
   tabList: TabOption[];
   children?: React.ReactElement;
   noOption?: string | React.ReactElement;
+  activeTabChangeEvent?: Action<TabOption | null>;
 }
 
 /**
@@ -24,6 +25,7 @@ export interface TabHeaderPropsType {
 export interface TabOptionPropsType {
   title: string;
   key: string;
+  action?: Action<string>;
 }
 
 export interface TabContainerPropsType {

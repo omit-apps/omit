@@ -1,7 +1,14 @@
-import React, { useState } from "react";
 import { Button } from "@any-disign/component";
-import LayerInfoPreview, { LayerInfo } from "../../components/layer/layer-info";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getActiveCanvas } from "../../global";
+import { RootState } from "../../store";
+import { addLayerInfo } from "../../store/reducers/application";
 
+// components
+import LayerInfoPreview from "../../components/layer/layer-info";
+
+// icons
 // @ts-ignore
 import NewLayer from "../../assets/icon/new-layer.svg";
 // @ts-ignore
@@ -12,28 +19,34 @@ import Group from "../../assets/icon/group.svg";
 /**
  * 图层面板配置
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LayerPanelPropType {
-  layerInfos?: LayerInfo[];
+  // TODO: Add some attributes.
 }
 
 export default function LayerPanel(
   props: LayerPanelPropType
 ): React.ReactElement {
-  const [layerInfos, setLayerInfos] = useState(props.layerInfos);
+  const dispatchEvent = useDispatch();
+
+  const application = useSelector((state: RootState) => state.application);
+
   const addLayerAction = () => {
-    setLayerInfos([
-      ...layerInfos,
-      {
-        id: layerInfos.length + 1 + "",
-        name: `图层${layerInfos.length + 1}`,
-      },
-    ]);
+    const layerName = `图层${application.editFile.layerInfos.length + 1}`;
+    const layerId = getActiveCanvas().addLayer(layerName)[0];
+
+    dispatchEvent(
+      addLayerInfo({
+        id: layerId,
+        name: layerName,
+      })
+    );
   };
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex-1 px-2 overflow-auto h-0px">
-        {layerInfos?.map((layerInfo) => (
+      <div className="flex-1 px-2 space-y-2 overflow-auto h-0px">
+        {application.editFile?.layerInfos?.map((layerInfo) => (
           <LayerInfoPreview key={layerInfo.id} value={layerInfo} />
         ))}
       </div>

@@ -1,0 +1,17 @@
+{
+  "name": "@any-design/automation",
+  "productName": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": {
+    "name": "Eric",
+    "email": "487737744@qq.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer": "20"
+  }
+}
