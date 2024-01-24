@@ -2,6 +2,7 @@ import Konva from "konva";
 import { registerKeyboard, removeKeyboard } from "../keyboard";
 import { KeyCode, KeyboardBlcok } from "../keyboard/keyboard";
 import { v4 } from "uuid";
+import { createSelector } from "../selector";
 
 const defaultCanvasRefKeys: CanvasRefKeys = {
   openDragger: [KeyCode.Space],
@@ -37,6 +38,7 @@ export class Canvas {
 
     this.init();
     this.mountEvent();
+    createSelector(this.stage);
   }
 
   init() {

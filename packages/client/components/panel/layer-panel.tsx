@@ -1,18 +1,20 @@
 import { Button } from "@any-disign/component";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getActiveCanvas } from "../../global";
+import { RootState } from "../../store";
+import { addLayerInfo } from "../../store/reducers/application";
+
+// components
 import LayerInfoPreview from "../../components/layer/layer-info";
 
+// icons
 // @ts-ignore
 import NewLayer from "../../assets/icon/new-layer.svg";
 // @ts-ignore
 import Delete from "../../assets/icon/delete.svg";
 // @ts-ignore
 import Group from "../../assets/icon/group.svg";
-
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { getActiveCanvas } from "../../global";
-import { addLayerInfo } from "../../store/reducers/application";
 
 /**
  * 图层面板配置
