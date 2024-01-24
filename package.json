@@ -5,6 +5,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/uuid": "^9.0.7",
+    "react-router": "^6.21.3",
     "uuid": "^9.0.1"
   },
   "keywords": [
