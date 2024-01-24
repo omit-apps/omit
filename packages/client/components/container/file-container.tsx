@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { createContainer } from "@any-disign/core";
 import { Canvas } from "@any-disign/core";
 import { setActiveCanvas } from "../../global";
+import { PickResult } from "@any-disign/core/selector/types/picker-util";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FileContainerProps {
@@ -29,8 +30,8 @@ export default forwardRef(function FileContainer(
     initCanvas();
 
     return () => {
-      // canvas.destroy();
-      // canvas = null;
+      canvas.destroy();
+      canvas = null;
     };
   }, []);
 
@@ -39,11 +40,27 @@ export default forwardRef(function FileContainer(
     activeContainer,
   }));
 
+  /**
+   * 激活容器
+   * @returns
+   */
   const activeContainer = () => {
     if (!canvas) return;
     changeActiveCanvasEventHandler(canvas);
   };
 
+  /**
+   * 拾取事件的处理
+   * @param pickResult 拾取结果
+   */
+  const pickProcessEventHandler = (pickResult: PickResult) => {
+    console.log("拾取信息为:", pickResult);
+  };
+
+  /**
+   * 初始化文件容器的Canvas
+   * @returns
+   */
   const initCanvas = () => {
     if (canvas) return;
     canvas = createContainer(
@@ -51,6 +68,8 @@ export default forwardRef(function FileContainer(
       {
         width: 800,
         height: 600,
+        pick: true,
+        pickProcess: pickProcessEventHandler,
       }
     );
   };

@@ -3,6 +3,9 @@ import { registerKeyboard, removeKeyboard } from "../keyboard";
 import { KeyCode, KeyboardBlcok } from "../keyboard/keyboard";
 import { v4 } from "uuid";
 import { createSelector } from "../selector";
+import { createPicker } from "../selector/picker";
+import { Background } from "../elements/backgroud/backgroud";
+import { PickResult } from "../selector/types/picker-util";
 
 const defaultCanvasRefKeys: CanvasRefKeys = {
   openDragger: [KeyCode.Space],
@@ -15,10 +18,17 @@ export class Canvas {
   config: CreateCanvasConfig;
   stage: Konva.Stage;
   activeLayer: Konva.Layer;
-  bgRect: Konva.Rect;
+  backgroud: Konva.Rect;
 
   // data
+  /**
+   * 图层列表
+   */
   layerList: Konva.Layer[] = [];
+  /**
+   * 元素列表
+   */
+  elementList: (Konva.Shape | Konva.Group)[] = [];
 
   // flag
   isZoom: boolean;
@@ -39,6 +49,9 @@ export class Canvas {
     this.init();
     this.mountEvent();
     createSelector(this.stage);
+    if (this.config.pick) {
+      createPicker(this.stage, this.config.pickProcess);
+    }
   }
 
   init() {
@@ -55,22 +68,22 @@ export class Canvas {
     const layer = this.addLayer("默认图层")[1];
     stage.add(layer);
 
-    const bgRect = new Konva.Rect({
+    const backgroud = new Background({
       width: this.config.width ?? cW,
       height: this.config.height ?? cH,
       fill: "#fff",
     });
 
-    layer.add(bgRect);
+    layer.add(backgroud);
     layer.scale({ x: 1, y: 1 });
     layer.position({
-      x: (cW - bgRect.attrs.width) / 2,
-      y: (cH - bgRect.attrs.height) / 2,
+      x: (cW - backgroud.attrs.width) / 2,
+      y: (cH - backgroud.attrs.height) / 2,
     });
 
     this.stage = stage;
     this.activeLayer = layer;
-    this.bgRect = bgRect;
+    this.backgroud = backgroud;
   }
 
   /**
@@ -103,6 +116,7 @@ export class Canvas {
       : this.activeLayer;
 
     targetLayer.add(element);
+    this.elementList.push(element);
   }
 
   changeActiveLayer(params: Konva.Layer | string): void {
@@ -231,12 +245,17 @@ export class Canvas {
  * 创建画布的配置
  */
 export interface CreateCanvasConfig {
+  /**
+   * 画布宽度
+   */
   width?: number;
   height?: number;
   /**
    *快捷键映射表
    */
   refKeys?: CanvasRefKeys;
+  pick?: boolean;
+  pickProcess?: (pickResult: PickResult) => void;
 }
 
 export interface CanvasRefKeys {
