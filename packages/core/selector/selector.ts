@@ -1,4 +1,5 @@
 import Konva from "konva";
+import { Canvas } from "../canvas";
 
 /**
  * Stage的包装类型
@@ -17,11 +18,11 @@ export type SelectorLayer = Konva.Layer & {
 
 /**
  * 创建选择器
- * @param stage 选择器使用的舞台
+ * @param canvas 选择器使用的舞台
  */
-export function createSelector(stage: Konva.Stage) {
+export function createSelector(canvas: Canvas) {
   // 转换为包装类型
-  let packageStage = stage as StagePackage;
+  let packageStage = canvas.stage as StagePackage;
   packageStage.useSeletor = true;
 
   const selectorLayer = new Konva.Layer() as SelectorLayer;
@@ -31,13 +32,16 @@ export function createSelector(stage: Konva.Stage) {
   const group = new Konva.Group();
   selectorLayer.add(group);
 
-  stage.addEventListener("mousedown", (mousedownEvent: MouseEvent) => {
-    if (mousedownEvent.button !== 0 || !packageStage.useSeletor) return;
+  packageStage.on("mousedown", (mousedownEvent) => {
+    // 除左键、禁用选择器、拖拽的情况下才能生成选区
+    if (
+      mousedownEvent.evt.button !== 0 ||
+      !packageStage.useSeletor ||
+      canvas.isDrag
+    )
+      return;
+    const startPos: Konva.Vector2d = packageStage.getRelativePointerPosition();
 
-    const startPos: Konva.Vector2d = {
-      x: mousedownEvent.offsetX,
-      y: mousedownEvent.offsetY,
-    };
     const selectorRect = new Konva.Rect({
       width: 0,
       height: 0,
@@ -47,19 +51,17 @@ export function createSelector(stage: Konva.Stage) {
     selectorRect.setPosition(startPos);
     group.add(selectorRect);
 
-    stage.addEventListener("mousemove", (mousemoveEvent: MouseEvent) => {
-      const currentPos: Konva.Vector2d = {
-        x: mousemoveEvent.offsetX,
-        y: mousemoveEvent.offsetY,
-      };
+    packageStage.on("mousemove", () => {
+      const currentPos: Konva.Vector2d =
+        packageStage.getRelativePointerPosition();
       selectorRect.setSize({
         width: currentPos.x - startPos.x,
         height: currentPos.y - startPos.y,
       });
     });
-    stage.addEventListener("mouseup", () => {
-      stage.removeEventListener("mouseup");
-      stage.removeEventListener("mousemove");
+    packageStage.on("mouseup", () => {
+      packageStage.off("mouseup");
+      packageStage.off("mousemove");
       selectorRect.remove();
     });
   });

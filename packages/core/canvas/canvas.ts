@@ -32,6 +32,7 @@ export class Canvas {
 
   // flag
   isZoom: boolean;
+  isDrag: boolean;
 
   // keyborad refs
   moveKeyRef: KeyboardBlcok;
@@ -43,12 +44,13 @@ export class Canvas {
     this.container = container;
     this.config = config;
     this.isZoom = false;
+    this.isDrag = false;
     // 如果用户没有传入配置表则使用默认的键位配置
     this.config.refKeys = this.config.refKeys ?? defaultCanvasRefKeys;
 
     this.init();
     this.mountEvent();
-    createSelector(this.stage);
+    createSelector(this);
     if (this.config.pick) {
       createPicker(this.stage, this.config.pickProcess);
     }
@@ -212,10 +214,12 @@ export class Canvas {
       this.config.refKeys.openDragger,
       () => {
         document.body.style.cursor = "grab";
+        this.isDrag = true;
         this.changeCanvasDraggableStatus(true);
       },
       () => {
         document.body.style.cursor = "default";
+        this.isDrag = false;
         this.changeCanvasDraggableStatus(false);
       }
     );

@@ -30,8 +30,8 @@ export default forwardRef(function FileContainer(
     initCanvas();
 
     return () => {
-      canvas.destroy();
-      canvas = null;
+      // canvas.destroy();
+      // canvas = null;
     };
   }, []);
 
