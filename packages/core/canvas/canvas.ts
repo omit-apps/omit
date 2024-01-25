@@ -16,7 +16,7 @@ export class Canvas {
   // basic elements
   container: HTMLDivElement;
   config: CreateCanvasConfig;
-  stage: Konva.Stage;
+  stage: Konva.Stage & { useSelector?: boolean };
   activeLayer: Konva.Layer;
   backgroud: Konva.Rect;
 
@@ -78,7 +78,7 @@ export class Canvas {
 
     layer.add(backgroud);
     layer.scale({ x: 1, y: 1 });
-    layer.position({
+    backgroud.position({
       x: (cW - backgroud.attrs.width) / 2,
       y: (cH - backgroud.attrs.height) / 2,
     });

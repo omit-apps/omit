@@ -8,8 +8,17 @@ import Selector from "../../assets/icon/selector.svg";
 import Font from "../../assets/icon/font.svg";
 // @ts-ignore
 import Container from "../../assets/icon/container.svg";
+import { createContainer } from "../../function/create-container";
 
 export default function Sidebar(): React.ReactElement {
+  let unsubscription: () => void | null = null;
+  const createContainerHandler = () => {
+    if (unsubscription) {
+      unsubscription();
+    } else {
+      unsubscription = createContainer("新建容器1");
+    }
+  };
   return (
     <section className="flex flex-col w-[32px] px-1 bg-dark-100 text-white/80">
       {/* Header */}
@@ -35,6 +44,7 @@ export default function Sidebar(): React.ReactElement {
         className="my-1.5"
         type="icon"
         iconSize={22}
+        action={createContainerHandler}
         icon={Container}
         value="容器"
       />

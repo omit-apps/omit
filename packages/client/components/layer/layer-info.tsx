@@ -14,6 +14,9 @@ export interface LayerInfo {
   id: string;
   name: string;
   lock?: boolean;
+  /**
+   * 给Group类型的用
+   */
   children?: LayerInfo[];
 }
 

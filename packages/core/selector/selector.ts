@@ -1,12 +1,13 @@
 import Konva from "konva";
 import { Canvas } from "../canvas";
+import { EventObject } from "../event";
 
 /**
  * Stage的包装类型
  */
 export type StagePackage = Konva.Stage & {
   // 是否使用选择器
-  useSeletor: boolean;
+  useSelector: boolean;
 };
 
 /**
@@ -23,7 +24,7 @@ export type SelectorLayer = Konva.Layer & {
 export function createSelector(canvas: Canvas) {
   // 转换为包装类型
   let packageStage = canvas.stage as StagePackage;
-  packageStage.useSeletor = true;
+  packageStage.useSelector = true;
 
   const selectorLayer = new Konva.Layer() as SelectorLayer;
   selectorLayer.isSelector = true;
@@ -32,11 +33,11 @@ export function createSelector(canvas: Canvas) {
   const group = new Konva.Group();
   selectorLayer.add(group);
 
-  packageStage.on("mousedown", (mousedownEvent) => {
+  const onMouseDown = (mousedownEvent: EventObject<MouseEvent>) => {
     // 除左键、禁用选择器、拖拽的情况下才能生成选区
     if (
       mousedownEvent.evt.button !== 0 ||
-      !packageStage.useSeletor ||
+      !packageStage.useSelector ||
       canvas.isDrag
     )
       return;
@@ -51,18 +52,24 @@ export function createSelector(canvas: Canvas) {
     selectorRect.setPosition(startPos);
     group.add(selectorRect);
 
-    packageStage.on("mousemove", () => {
+    const onMouseMove = () => {
       const currentPos: Konva.Vector2d =
         packageStage.getRelativePointerPosition();
       selectorRect.setSize({
         width: currentPos.x - startPos.x,
         height: currentPos.y - startPos.y,
       });
-    });
-    packageStage.on("mouseup", () => {
-      packageStage.off("mouseup");
-      packageStage.off("mousemove");
+    };
+
+    const onMouseUp = () => {
+      packageStage.off("mouseup", onMouseUp);
+      packageStage.off("mousemove", onMouseMove);
       selectorRect.remove();
-    });
-  });
+    };
+
+    packageStage.on("mousemove", onMouseMove);
+    packageStage.on("mouseup", onMouseUp);
+  };
+
+  packageStage.on("mousedown", onMouseDown);
 }
