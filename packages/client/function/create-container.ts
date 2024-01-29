@@ -1,6 +1,6 @@
 import { Container, EventObject } from "@any-disign/core";
-import { getActiveCanvas } from "../global";
 import { getState } from "../store";
+import { getActiveCanvas } from "../file/file-manager";
 
 export function createContainer(name: string) {
   const application = getState().application;

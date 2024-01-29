@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SourceFile } from "../../file/type/file";
+import { LayerInfo } from "info/layer-info";
 
 export interface ApplicationState {
   /**
    * 打开的文件列表
    */
-  openFileList: SourceFile[];
+  openFileMap: Map<string, SourceFile>;
   /**
    * 正在编辑的文件
    */
@@ -13,7 +14,7 @@ export interface ApplicationState {
 }
 
 const initialState: ApplicationState = {
-  openFileList: [],
+  openFileMap: new Map(),
   editFile: null,
 };
 
@@ -25,7 +26,7 @@ const applicationSlice = createSlice({
      * 清空已经打开的文件
      */
     clearOpenFile(state) {
-      state.openFileList.length = 0;
+      state.openFileMap.clear();
     },
     /**
      * 刷新文件图层信息
@@ -62,14 +63,16 @@ const applicationSlice = createSlice({
      * 添加打开的文件
      */
     addOpenFile: (state, action) => {
-      const data = action.payload;
+      const data = action.payload as SourceFile | SourceFile[];
       let setActiveFile: SourceFile | null = null;
       if (data instanceof Array) {
-        state.openFileList = state.openFileList.concat(data);
+        data.forEach((file) => {
+          state.openFileMap.set(file.md5, file);
+        });
         // 如果打开多个文件则取最后一个作为激活的界面
         setActiveFile = data[data.length - 1] as SourceFile;
       } else {
-        state.openFileList = state.openFileList.concat([data]);
+        state.openFileMap.set(data.md5, data);
         setActiveFile = data as SourceFile;
       }
 
@@ -85,9 +88,39 @@ const applicationSlice = createSlice({
     },
     /**
      * 切换正在编辑的文件
+     * 传入一个文件的md5值
      */
     changeActiveEditFile: (state, action) => {
-      state.editFile = action.payload;
+      const data = action.payload as string;
+      const targetFile = state.openFileMap.get(data);
+      if (state.editFile.md5 === data || targetFile === null) return;
+      if (state.editFile) {
+        state.editFile = {
+          ...state.editFile,
+          ...targetFile,
+        };
+      } else {
+        state.editFile = targetFile;
+      }
+    },
+    /**
+     * 根据SourceFile的MD5值设置激活图层信息
+     * @param state
+     * @param action
+     * @returns
+     */
+    setActiveLayerBySourceFileMD5: (state, action) => {
+      const data = action.payload as { id: string; layerInfo: LayerInfo };
+      // 如果SourceFile正在处于编辑状态，则直接使用正在编辑的File
+      const sourceFile =
+        state.editFile.md5 === data.id
+          ? state.editFile
+          : state.openFileMap.get(action.payload.id);
+      if (sourceFile === null) {
+        return;
+      }
+
+      sourceFile.activeLayerInfo = data.layerInfo;
     },
   },
 });
@@ -99,6 +132,7 @@ export const {
   changeActiveLayerInfo,
   changeActiveEditFile,
   clearOpenFile,
+  setActiveLayerBySourceFileMD5,
 } = applicationSlice.actions;
 
 export default applicationSlice.reducer;

@@ -1,9 +1,12 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFileParser } from "../file/hook/use-file-parser";
-import { activeTabChangeEventProcess, gatherFileContaienr } from "../global";
 import { RootState } from "../store";
 import { clearOpenFile } from "../store/reducers/application";
+import {
+  activeTabChangeEventProcess,
+  gatherFileContaienr,
+} from "../file/file-manager";
 
 // components
 import { Option, Panel, Tab, TabOption } from "@any-disign/component";
@@ -29,7 +32,7 @@ export default function FileEditor(): React.ReactElement {
 
   useEffect(() => {
     updateOptionList();
-  }, [application.openFileList]);
+  }, [application.openFileMap]);
 
   const openPanelAction = (e: MouseEvent, panelRef: MutableRefObject<any>) => {
     panelRef.current.changePanelVisible(!panelRef.current.visible, e);
@@ -40,18 +43,22 @@ export default function FileEditor(): React.ReactElement {
    */
   const updateOptionList = () => {
     const openOptionIds = openOptionList.map((option) => option.key);
-    const newOpenFiles: TabOption[] = application.openFileList
+    const newOpenFiles: TabOption[] = Array.from(
+      application.openFileMap.values()
+    )
       .filter((file) => !openOptionIds.includes(file.md5))
       .map((file) => {
         return {
           title: file.name + "." + file.ext,
           key: file.md5,
           component: (
-            <FileContainer ref={(o: any) => gatherFileContaienr(file.md5, o)} />
+            <FileContainer
+              source={file}
+              ref={(o: any) => gatherFileContaienr(file.md5, o)}
+            />
           ),
         };
       });
-
     setOpenOptionList(openOptionList.concat(newOpenFiles));
   };
 

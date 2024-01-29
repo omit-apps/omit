@@ -1,5 +1,4 @@
-import { Canvas, createContainer } from "@any-disign/core";
-import { type LayerInfo } from "../../components/layer/layer-info";
+import { LayerInfo } from "../../info/layer-info";
 
 /**
  * Any Design 打开的文件信息
@@ -26,6 +25,7 @@ export class SourceFile {
    * 图层信息
    */
   layerInfos: LayerInfo[] = [];
+
   /**
    * 激活的图层
    */

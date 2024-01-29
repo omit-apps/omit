@@ -29,6 +29,10 @@ export class Canvas {
    * 元素列表
    */
   elementList: (Konva.Shape | Konva.Group)[] = [];
+  /**
+   * 变换控制器
+   */
+  tranformer: Konva.Transformer | null;
 
   // flag
   isZoom: boolean;

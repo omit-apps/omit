@@ -2,27 +2,17 @@ import { Button } from "@any-disign/component";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeActiveLayerInfo } from "../../store/reducers/application";
+import { LayerInfo } from "../../info/layer-info";
+
 
 // @ts-ignore
 import Lock from "../../assets/icon/lock.svg";
 import { RootState } from "../../store";
 
-/**
- * 图层信息
- */
-export interface LayerInfo {
-  id: string;
-  name: string;
-  lock?: boolean;
-  /**
-   * 给Group类型的用
-   */
-  children?: LayerInfo[];
-}
-
 export interface LayerInfoPreviewPropType {
   value: LayerInfo;
 }
+
 
 export default function LayerInfoPreview(
   props: LayerInfoPreviewPropType

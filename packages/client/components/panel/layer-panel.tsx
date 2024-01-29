@@ -1,9 +1,9 @@
 import { Button } from "@any-disign/component";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getActiveCanvas } from "../../global";
 import { RootState } from "../../store";
 import { addLayerInfo } from "../../store/reducers/application";
+import { getActiveCanvas } from "../../file/file-manager";
 
 // components
 import LayerInfoPreview from "../../components/layer/layer-info";

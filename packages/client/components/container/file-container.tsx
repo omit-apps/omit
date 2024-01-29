@@ -1,14 +1,16 @@
-import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import { TabContainer } from "@any-disign/component";
-import { useDispatch } from "react-redux";
-import { createContainer } from "@any-disign/core";
-import { Canvas } from "@any-disign/core";
-import { setActiveCanvas } from "../../global";
+import { Canvas, createContainer } from "@any-disign/core";
 import { PickResult } from "@any-disign/core/selector/types/picker-util";
+import React, { forwardRef, useEffect, useImperativeHandle } from "react";
+import { useDispatch } from "react-redux";
+import { setActiveCanvas } from "../../file/file-manager";
+import { SourceFile } from "../../file/type/file";
+import { makeLayerInfo } from "../../info/layer-info";
+import { setActiveLayerBySourceFileMD5 } from "../../store/reducers/application";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FileContainerProps {
-  // TODO: Add some attributes.
+  source: SourceFile;
 }
 
 export default forwardRef(function FileContainer(
@@ -71,6 +73,13 @@ export default forwardRef(function FileContainer(
         pick: true,
         pickProcess: pickProcessEventHandler,
       }
+    );
+    // 设置默认图层为source file 的激活图层
+    dispatchEvent(
+      setActiveLayerBySourceFileMD5({
+        id: props.source.md5,
+        layerInfo: makeLayerInfo(canvas.activeLayer),
+      })
     );
   };
 

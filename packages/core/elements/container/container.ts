@@ -12,7 +12,7 @@ export interface ContainerConfig {
 export class Container extends Konva.Rect {
   constructor(config?: ContainerConfig) {
     super({
-      fill: "#999",
+      fill: "#eee",
       draggable: true,
       ...config,
     });
