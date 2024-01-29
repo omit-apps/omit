@@ -6,6 +6,8 @@ import { createSelector } from "../selector";
 import { createPicker } from "../selector/picker";
 import { Background } from "../elements/backgroud/backgroud";
 import { PickResult } from "../selector/types/picker-util";
+import { changeCursorStyle } from "../utils/document-utils";
+import { ActiveTransformer } from "../elements";
 
 const defaultCanvasRefKeys: CanvasRefKeys = {
   openDragger: [KeyCode.Space],
@@ -30,9 +32,16 @@ export class Canvas {
    */
   elementList: (Konva.Shape | Konva.Group)[] = [];
   /**
-   * 变换控制器
+   * Move变换控制器
    */
-  tranformer: Konva.Transformer | null;
+  moveTransformer: Konva.Transformer | null;
+  moveTransformerElement: Konva.Shape | null;
+  /**
+   * Pick变换控制器
+   */
+  pickTransformer: Konva.Transformer | null;
+  pickTransformerElement: Konva.Shape | null;
+  transformerLayer: Konva.Layer | null;
 
   // flag
   isZoom: boolean;
@@ -49,6 +58,7 @@ export class Canvas {
     this.config = config;
     this.isZoom = false;
     this.isDrag = false;
+    this.moveTransformerElement = null;
     // 如果用户没有传入配置表则使用默认的键位配置
     this.config.refKeys = this.config.refKeys ?? defaultCanvasRefKeys;
 
@@ -56,7 +66,14 @@ export class Canvas {
     this.mountEvent();
     createSelector(this);
     if (this.config.pick) {
-      createPicker(this.stage, this.config.pickProcess);
+      createPicker(
+        this.stage,
+        (pickResult) => {
+          this.pickerDownProcess(pickResult);
+          this.config.pickProcess(pickResult);
+        },
+        (pickResult) => this.pickerMoveProcess(pickResult)
+      );
     }
   }
 
@@ -87,9 +104,58 @@ export class Canvas {
       y: (cH - backgroud.attrs.height) / 2,
     });
 
+    if (this.config.enableTrans) {
+      this.transformerLayer = new Konva.Layer();
+      stage.add(this.transformerLayer);
+      this.transformerLayer.setZIndex(1);
+
+      this.moveTransformer = new ActiveTransformer();
+      this.pickTransformer = new Konva.Transformer();
+      this.transformerLayer.add(this.moveTransformer);
+      this.transformerLayer.add(this.pickTransformer);
+    }
+
     this.stage = stage;
     this.activeLayer = layer;
     this.backgroud = backgroud;
+  }
+
+  /**
+   * 鼠标Down事件的处理
+   * @param pickResult
+   */
+  pickerDownProcess(pickResult: PickResult) {
+    if (!this.config.enableTrans) return;
+    if (!this.config.enableTrans) return;
+    if (pickResult.element === null) {
+      if (this.pickTransformerElement === null) return;
+      this.pickTransformerElement = null;
+      this.pickTransformer.setNodes([]);
+    } else {
+      if (this.pickTransformerElement === pickResult.element) return;
+      this.pickTransformerElement = pickResult.element;
+      this.pickTransformer.setNodes([pickResult.element]);
+    }
+  }
+
+  /**
+   * 鼠标Move的处理
+   * @param pickResult
+   * @returns
+   */
+  pickerMoveProcess(pickResult: PickResult) {
+    if (!this.config.enableTrans) return;
+    if (pickResult.element === null) {
+      if (this.moveTransformerElement === null) return;
+      this.moveTransformerElement = null;
+      this.moveTransformer.setNodes([]);
+      changeCursorStyle("default");
+    } else {
+      if (this.moveTransformerElement === pickResult.element) return;
+      this.moveTransformerElement = pickResult.element;
+      this.moveTransformer.setNodes([pickResult.element]);
+      changeCursorStyle("pointer");
+    }
   }
 
   /**
@@ -217,12 +283,12 @@ export class Canvas {
     this.moveKeyRef = new KeyboardBlcok(
       this.config.refKeys.openDragger,
       () => {
-        document.body.style.cursor = "grab";
+        changeCursorStyle("grab");
         this.isDrag = true;
         this.changeCanvasDraggableStatus(true);
       },
       () => {
-        document.body.style.cursor = "default";
+        changeCursorStyle("default");
         this.isDrag = false;
         this.changeCanvasDraggableStatus(false);
       }
@@ -263,6 +329,8 @@ export interface CreateCanvasConfig {
    */
   refKeys?: CanvasRefKeys;
   pick?: boolean;
+  // 开启变换控制器
+  enableTrans?: boolean;
   pickProcess?: (pickResult: PickResult) => void;
 }
 

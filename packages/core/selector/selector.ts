@@ -23,7 +23,7 @@ export type SelectorLayer = Konva.Layer & {
  */
 export function createSelector(canvas: Canvas) {
   // 转换为包装类型
-  let packageStage = canvas.stage as StagePackage;
+  const packageStage = canvas.stage as StagePackage;
   packageStage.useSelector = true;
 
   const selectorLayer = new Konva.Layer() as SelectorLayer;

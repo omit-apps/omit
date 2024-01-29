@@ -2,9 +2,7 @@ import Konva from "konva";
 import { KonvaEventObject } from "konva/lib/Node";
 import { PickResult, makePickResult } from "./types/picker-util";
 
-export type PickerStage = Konva.Stage & {
-  _add: (...args: unknown[]) => Konva.Stage;
-};
+export type PickerProcess = (result: PickResult) => void;
 
 /**
  * 创建拾取器
@@ -12,9 +10,13 @@ export type PickerStage = Konva.Stage & {
  */
 export function createPicker(
   stage: Konva.Stage,
-  process: (result: PickResult) => void
+  clickProcess: PickerProcess,
+  moveProcess: PickerProcess
 ) {
   stage.on("click", (evt: KonvaEventObject<MouseEvent>) => {
-    process(makePickResult(evt));
+    clickProcess(makePickResult(evt));
+  });
+  stage.on("mousemove", (evt: KonvaEventObject<MouseEvent>) => {
+    moveProcess(makePickResult(evt));
   });
 }

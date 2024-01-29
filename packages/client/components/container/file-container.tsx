@@ -71,6 +71,7 @@ export default forwardRef(function FileContainer(
         width: 800,
         height: 600,
         pick: true,
+        enableTrans: true,
         pickProcess: pickProcessEventHandler,
       }
     );
