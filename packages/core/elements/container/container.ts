@@ -7,7 +7,7 @@ export interface ContainerConfig {
 }
 
 /**
- * 容器继承于Konva的舞台类型
+ * 容器继承于Konva的Rect类型
  */
 export class Container extends Konva.Rect {
   constructor(config?: ContainerConfig) {

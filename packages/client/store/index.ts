@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import application from "./reducers/application";
 import { enableMapSet } from "immer";
+
+import application from "./reducers/application";
+import command from "./reducers/command";
 
 enableMapSet();
 
 export const store = configureStore({
   reducer: {
     application,
+    command,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({

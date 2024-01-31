@@ -8,6 +8,7 @@ export function Button(props: ButtonProps): React.ReactElement {
   const clickEventHanlder = () => {
     if (props.trigger) {
       setActive(!active);
+      console.log(active)
     }
     props.action?.();
   };

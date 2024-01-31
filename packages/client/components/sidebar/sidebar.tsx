@@ -1,5 +1,9 @@
-import React from "react";
 import { Button } from "@any-disign/component";
+import React from "react";
+import { FunctionalType } from "../../function";
+import { createContainerFunction } from "../../function/create-container";
+import useCommand from "../../hooks/use-command";
+
 // @ts-ignore
 import Cursor from "../../assets/icon/cursor.svg";
 // @ts-ignore
@@ -8,26 +12,41 @@ import Selector from "../../assets/icon/selector.svg";
 import Font from "../../assets/icon/font.svg";
 // @ts-ignore
 import Container from "../../assets/icon/container.svg";
-import { createContainer } from "../../function/create-container";
 
 export default function Sidebar(): React.ReactElement {
-  let unsubscription: () => void | null = null;
-  const createContainerHandler = () => {
-    if (unsubscription) {
-      unsubscription();
-    } else {
-      unsubscription = createContainer("新建容器1");
-    }
-  };
+  const { executeFunction } = useCommand();
+
+  function functionButtonClickEventHandler<T extends FunctionalType>(
+    fun: FunctionalType,
+    params: Parameters<T["execute"]>[0]
+  ) {
+    let unsubscription: () => void | null = null;
+
+    return () => {
+      if (unsubscription) {
+        unsubscription();
+        unsubscription = null;
+      } else {
+        unsubscription = executeFunction(fun, params);
+      }
+    };
+  }
   return (
     <section className="flex flex-col w-[32px] px-1 bg-dark-100 text-white/80">
       {/* Header */}
       <div className="py-1 mb-2 text-center cursor-grab text-white/30">
         <p className="mb-1">........</p>
       </div>
-      <Button className="my-1.5" type="icon" icon={Cursor} value="选择" />
       <Button
         className="my-1.5"
+        trigger={true}
+        type="icon"
+        icon={Cursor}
+        value="选择"
+      />
+      <Button
+        className="my-1.5"
+        trigger={true}
         type="icon"
         iconSize={20}
         icon={Selector}
@@ -35,6 +54,7 @@ export default function Sidebar(): React.ReactElement {
       />
       <Button
         className="my-1.5"
+        trigger={true}
         type="icon"
         iconSize={16}
         icon={Font}
@@ -42,9 +62,14 @@ export default function Sidebar(): React.ReactElement {
       />
       <Button
         className="my-1.5"
+        trigger={true}
         type="icon"
         iconSize={22}
-        action={createContainerHandler}
+        action={() => {
+          functionButtonClickEventHandler(createContainerFunction, {
+            name: "Container",
+          })();
+        }}
         icon={Container}
         value="容器"
       />
