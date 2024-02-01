@@ -24,7 +24,7 @@ export function gatherFileContaienr(id: string, ref: any) {
 }
 /**
  * 根据TabOption切换激活的FileContainer
- * @param option 
+ * @param option
  */
 export function activeTabChangeEventProcess(option: TabOption) {
   if (!option) return;
@@ -34,8 +34,8 @@ export function activeTabChangeEventProcess(option: TabOption) {
 }
 /**
  * 改变激活的Cavnas对象
- * @param canvas 
- * @param dispatchEvent 
+ * @param canvas
+ * @param dispatchEvent
  */
 export function setActiveCanvas(canvas: Canvas, dispatchEvent: Dispatch) {
   activeCanvas = canvas;
@@ -52,7 +52,7 @@ export function getActiveCanvas() {
 
 /**
  * 获取Canva中的图层信息
- * @returns 
+ * @returns
  */
 const getCanvasLayerInfo = () => {
   const activeCanvas = getActiveCanvas();
@@ -60,5 +60,7 @@ const getCanvasLayerInfo = () => {
   return activeCanvas.layerList.map<LayerInfo>((layerInfo) => ({
     id: layerInfo.id(),
     name: layerInfo.name(),
+    lock: true,
+    visible: true,
   }));
 };

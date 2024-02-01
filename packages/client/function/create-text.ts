@@ -14,11 +14,15 @@ export interface CreateTextParams {
  * @returns
  */
 function createText(params: CreateTextParams) {
-  const result = functionalPreProcessor();
+  let result = functionalPreProcessor();
   if (result === null) return;
-  const { activeLayer, canvas } = result;
+  let { activeLayer, canvas } = result;
 
   const onMousedownEventHandler = () => {
+    result = functionalPreProcessor();
+    canvas = result.canvas;
+    activeLayer = result.activeLayer;
+
     const pos = canvas.stage.getRelativePointerPosition();
     const text = new Text({
       text: params.text,

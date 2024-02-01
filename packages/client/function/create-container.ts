@@ -12,12 +12,16 @@ export interface CreateContainerParams {
  * @returns
  */
 function createContainer(params: CreateContainerParams) {
-  const result = functionalPreProcessor();
+  let result = functionalPreProcessor();
   if (result === null) return;
-  const { canvas, activeLayer } = result;
+  let { canvas, activeLayer } = result;
 
   // 开始创建逻辑流程
   const beforCreateContainer = (e: EventObject<MouseEvent>) => {
+    result = functionalPreProcessor();
+    canvas = result.canvas;
+    activeLayer = result.activeLayer;
+
     if (e.evt.button !== 0) return;
     const container = new Container({ name: params.name, width: 0, height: 0 });
     // 将容器添加到当前激活的图层中

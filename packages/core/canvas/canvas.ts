@@ -81,15 +81,14 @@ export class Canvas {
     const cW = this.container.clientWidth;
     const cH = this.container.clientHeight;
     // TODO: 创建容器
-    const stage = new Konva.Stage({
+    const stage = (this.stage = new Konva.Stage({
       container: this.container,
       width: cW,
       height: cH,
       scale: { x: 1, y: 1 },
-    });
+    }));
 
     const layer = this.addLayer("默认图层")[1];
-    stage.add(layer);
 
     const backgroud = new Background({
       width: this.config.width ?? cW,
@@ -170,8 +169,16 @@ export class Canvas {
     });
 
     this.layerList.push(layer);
+    this.stage.add(layer);
 
     return [layer.id(), layer];
+  }
+
+  removeLayer(layerId: string): void {
+    const layer = this.findLayerById(layerId);
+    if (layer) {
+      layer.remove();
+    }
   }
 
   /**

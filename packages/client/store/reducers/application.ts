@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SourceFile } from "../../file/type/file";
-import { LayerInfo } from "info/layer-info";
+import { LayerInfo } from "../../info/layer-info";
 
+/**
+ * TODO: 命名不合适后续修改
+ */
 export interface ApplicationState {
   /**
    * 打开的文件列表
@@ -42,6 +45,22 @@ const applicationSlice = createSlice({
       state.editFile.layerInfos = state.editFile.layerInfos.concat([
         action.payload,
       ]);
+    },
+    /**
+     * 移除图层
+     */
+    removeLayerInfo: (state, action) => {
+      state.editFile.layerInfos = state.editFile.layerInfos.filter(
+        (layerInfo) => layerInfo.id !== action.payload
+      );
+
+      state.editFile.activeLayerInfo = state.editFile.layerInfos[0];
+    },
+    modifyLayerInfo: (state, action) => {
+      state.editFile.activeLayerInfo = Object.assign(
+        state.editFile.activeLayerInfo,
+        action.payload
+      );
     },
     /**
      * 切换当前文件的激活图层
@@ -133,6 +152,8 @@ export const {
   changeActiveEditFile,
   clearOpenFile,
   setActiveLayerBySourceFileMD5,
+  removeLayerInfo,
+  modifyLayerInfo,
 } = applicationSlice.actions;
 
 export default applicationSlice.reducer;

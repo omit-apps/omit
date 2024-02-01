@@ -1,9 +1,14 @@
 import { Button } from "@any-disign/component";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { addLayerInfo } from "../../store/reducers/application";
 import { getActiveCanvas } from "../../file/file-manager";
+import { makeLayerInfo } from "../../info/layer-info";
+import { RootState } from "../../store";
+import {
+  addLayerInfo,
+  removeLayerInfo,
+} from "../../store/reducers/application";
+
 
 // components
 import LayerInfoPreview from "../../components/layer/layer-info";
@@ -31,16 +36,34 @@ export default function LayerPanel(
 
   const application = useSelector((state: RootState) => state.application);
 
+  /**
+   * 添加图层
+   */
   const addLayerAction = () => {
     const layerName = `图层${application.editFile.layerInfos.length + 1}`;
-    const layerId = getActiveCanvas().addLayer(layerName)[0];
+    const layer = getActiveCanvas().addLayer(layerName)[1];
 
-    dispatchEvent(
-      addLayerInfo({
-        id: layerId,
-        name: layerName,
-      })
-    );
+    dispatchEvent(addLayerInfo(makeLayerInfo(layer)));
+  };
+
+  /**
+   * 删除图层
+   */
+  const removeLayerAction = () => {
+    if (application.editFile.layerInfos.length === 1) {
+      console.warn("至少保留一个图层");
+      return;
+    }
+
+    const activeLayerInfo = application.editFile.activeLayerInfo;
+
+    if (activeLayerInfo.lock) {
+      console.warn("该图层已经锁定");
+      return;
+    }
+
+    getActiveCanvas().removeLayer(application.editFile.activeLayerInfo.id);
+    dispatchEvent(removeLayerInfo(application.editFile.activeLayerInfo.id));
   };
 
   return (
@@ -64,6 +87,7 @@ export default function LayerPanel(
           type="icon"
           value="删除图层"
           icon={Delete}
+          action={removeLayerAction}
           iconSize={16}
         />
         <Button
