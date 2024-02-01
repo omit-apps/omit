@@ -1,6 +1,6 @@
 import { Button } from "@any-disign/component";
 import React from "react";
-import { FunctionalType } from "../../function";
+import { FunctionalType, createTextFunction } from "../../function";
 import { createContainerFunction } from "../../function/create-container";
 import useCommand from "../../hooks/use-command";
 
@@ -58,6 +58,11 @@ export default function Sidebar(): React.ReactElement {
         type="icon"
         iconSize={16}
         icon={Font}
+        action={() => {
+          functionButtonClickEventHandler(createTextFunction, {
+            text: "Create Text",
+          })();
+        }}
         value="文字"
       />
       <Button

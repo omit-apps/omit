@@ -1,7 +1,6 @@
 import { Container, EventObject } from "@any-disign/core";
-import { getActiveCanvas } from "../file/file-manager";
 import { FunctionalFunctions } from "../info/func-info";
-import { getState } from "../store";
+import { functionalPreProcessor } from "../utils/functional-utls";
 
 export interface CreateContainerParams {
   name: string;
@@ -13,22 +12,19 @@ export interface CreateContainerParams {
  * @returns
  */
 function createContainer(params: CreateContainerParams) {
-  const application = getState().application;
-  if (application.editFile === null) return null;
-  // 准备canvas以及创建的容器
-  const canvas = getActiveCanvas();
-  // 暂时禁用选区
-  canvas.stage.useSelector = false;
+  const result = functionalPreProcessor();
+  if (result === null) return;
+  const { canvas, activeLayer } = result;
 
   // 开始创建逻辑流程
   const beforCreateContainer = (e: EventObject<MouseEvent>) => {
     if (e.evt.button !== 0) return;
     const container = new Container({ name: params.name, width: 0, height: 0 });
     // 将容器添加到当前激活的图层中
-    const layer = canvas.findLayerById(application.editFile.activeLayerInfo.id);
+
     const startPosition = canvas.stage.getRelativePointerPosition();
     container.setPosition(startPosition);
-    layer.add(container);
+    activeLayer.add(container);
 
     const onMouseMove = () => {
       const currentPosition = canvas.stage.getRelativePointerPosition();
