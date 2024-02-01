@@ -1,6 +1,6 @@
-import { EventObject, Text } from "@any-disign/core";
+import { Text } from "@any-disign/core";
 import { FunctionalFunctions } from "../info/func-info";
-import { functionalPreProcessor } from "../utils/functional-utls";
+import { functionalPreProcessor } from "../utils/functional-utils";
 
 /**
  * 创建文字所需的参数
@@ -18,7 +18,7 @@ function createText(params: CreateTextParams) {
   if (result === null) return;
   const { activeLayer, canvas } = result;
 
-  const onMousedownEventHandler = (event: EventObject<MouseEvent>) => {
+  const onMousedownEventHandler = () => {
     const pos = canvas.stage.getRelativePointerPosition();
     const text = new Text({
       text: params.text,

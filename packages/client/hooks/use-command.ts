@@ -2,8 +2,11 @@ import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { FunctionalType } from "../function";
 import { RootState } from "../store";
-import { changeUseFunction as commandChangeUseFunction } from "../store/reducers/command";
-import { FunctionUnsubscribe } from "../info/func-info";
+import {
+  clearUnsubscription,
+  changeUseFunction as commandChangeUseFunction,
+  setUnsubscription,
+} from "../store/reducers/command";
 
 export default function useCommand() {
   const dispatch = useDispatch();
@@ -28,9 +31,26 @@ export default function useCommand() {
   function executeFunction<T extends FunctionalType>(
     fun: T,
     params: Parameters<T["execute"]>[0]
-  ): FunctionUnsubscribe {
-    changeUseFunction(fun);
-    return fun.execute(params);
+  ): void {
+    let unsubscription: () => void;
+    if (commandState.useFunction) {
+      dispatch(clearUnsubscription());
+      changeUseFunction(null);
+      // 如果不是当前的命令
+      if (fun.id !== commandState?.useFunction.id) {
+        changeUseFunction(fun);
+
+        // TODO: 参数类型推断后续在解决
+        // @ts-ignore
+        unsubscription = fun.execute(params);
+      }
+    } else {
+      changeUseFunction(fun);
+      // @ts-ignore
+      unsubscription = fun.execute(params);
+    }
+
+    dispatch(setUnsubscription(unsubscription));
   }
 
   return {
