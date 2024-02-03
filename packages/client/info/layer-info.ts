@@ -6,17 +6,19 @@ import { Layer } from "@any-disign/core";
 export interface LayerInfo {
   id: string;
   name: string;
-  lock?: boolean;
+  lock: boolean;
+  visible: boolean;
   /**
    * 给Group类型的用
    */
   children?: LayerInfo[];
 }
 
-export function makeLayerInfo(layer: Layer):LayerInfo {
+export function makeLayerInfo(layer: Layer): LayerInfo {
   return {
     id: layer.id(),
     name: layer.name(),
-    lock: false
-  }
+    lock: false,
+    visible: true,
+  };
 }

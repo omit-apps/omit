@@ -1,4 +1,4 @@
-import useCommand from "../../hooks/use-command";
+import useCommand from "../../module/functional/hook/use-command";
 import React from "react";
 
 export function CommandState(): React.ReactElement {

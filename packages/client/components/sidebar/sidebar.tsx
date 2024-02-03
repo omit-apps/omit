@@ -1,8 +1,8 @@
 import { Button } from "@any-disign/component";
 import React from "react";
-import { FunctionalType } from "../../function";
-import { createContainerFunction } from "../../function/create-container";
-import useCommand from "../../hooks/use-command";
+import { createTextFunction } from "../../module/functional";
+import { createContainerFunction } from "../../module/functional/function/create-container";
+import useCommand from "../../module/functional/hook/use-command";
 
 // @ts-ignore
 import Cursor from "../../assets/icon/cursor.svg";
@@ -16,21 +16,19 @@ import Container from "../../assets/icon/container.svg";
 export default function Sidebar(): React.ReactElement {
   const { executeFunction } = useCommand();
 
-  function functionButtonClickEventHandler<T extends FunctionalType>(
-    fun: FunctionalType,
-    params: Parameters<T["execute"]>[0]
-  ) {
-    let unsubscription: () => void | null = null;
+  /**
+   * 创建文字按钮点击后的事件处理
+   */
+  const createTextButtonClickEventHandler = () => {
+    executeFunction(createTextFunction, {
+      text: "Create Text",
+    });
+  };
 
-    return () => {
-      if (unsubscription) {
-        unsubscription();
-        unsubscription = null;
-      } else {
-        unsubscription = executeFunction(fun, params);
-      }
-    };
-  }
+  const createContainerButtonClickEventHandler = () => {
+    executeFunction(createContainerFunction, { name: "新建容器" });
+  };
+
   return (
     <section className="flex flex-col w-[32px] px-1 bg-dark-100 text-white/80">
       {/* Header */}
@@ -58,6 +56,7 @@ export default function Sidebar(): React.ReactElement {
         type="icon"
         iconSize={16}
         icon={Font}
+        action={createTextButtonClickEventHandler}
         value="文字"
       />
       <Button
@@ -65,11 +64,7 @@ export default function Sidebar(): React.ReactElement {
         trigger={true}
         type="icon"
         iconSize={22}
-        action={() => {
-          functionButtonClickEventHandler(createContainerFunction, {
-            name: "Container",
-          })();
-        }}
+        action={createContainerButtonClickEventHandler}
         icon={Container}
         value="容器"
       />

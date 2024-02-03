@@ -1,23 +1,23 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useFileParser } from "../file/hook/use-file-parser";
-import { RootState } from "../store";
-import { clearOpenFile } from "../store/reducers/application";
 import {
   activeTabChangeEventProcess,
   gatherFileContaienr,
-} from "../file/file-manager";
+} from "../module/file/file-manager";
+import { useFileParser } from "../module/file/hook/use-file-parser";
+import { clearOpenFile } from "../module/file/reducer/file-slice";
+import { RootState } from "../store";
 
 // components
 import { Option, Panel, Tab, TabOption } from "@any-disign/component";
-import FileContainer from "../components/container/file-container";
 import { CodePanel } from "../components/panel/code-panel";
 import LayerPanel from "../components/panel/layer-panel";
+import FileContainer from "../module/file/components/file-container";
 import OptionFile from "./option-file";
 
 export default function FileEditor(): React.ReactElement {
   const dispatch = useDispatch();
-  const application = useSelector((state: RootState) => state.application);
+  const file = useSelector((state: RootState) => state.file);
   const layerPanel = useRef(null);
   const codePanel = useRef(null);
   const [openOptionList, setOpenOptionList] = useState<TabOption[]>([]);
@@ -32,20 +32,18 @@ export default function FileEditor(): React.ReactElement {
 
   useEffect(() => {
     updateOptionList();
-  }, [application.openFileMap]);
+  }, [file.openFileMap]);
 
   const openPanelAction = (e: MouseEvent, panelRef: MutableRefObject<any>) => {
     panelRef.current.changePanelVisible(!panelRef.current.visible, e);
   };
 
   /**
-   * 更新Option列表
+   * Update list by layer option.
    */
   const updateOptionList = () => {
     const openOptionIds = openOptionList.map((option) => option.key);
-    const newOpenFiles: TabOption[] = Array.from(
-      application.openFileMap.values()
-    )
+    const newOpenFiles: TabOption[] = Array.from(file.openFileMap.values())
       .filter((file) => !openOptionIds.includes(file.md5))
       .map((file) => {
         return {
@@ -53,12 +51,14 @@ export default function FileEditor(): React.ReactElement {
           key: file.md5,
           component: (
             <FileContainer
+              key={file.md5}
               source={file}
               ref={(o: any) => gatherFileContaienr(file.md5, o)}
             />
           ),
         };
       });
+
     setOpenOptionList(openOptionList.concat(newOpenFiles));
   };
 

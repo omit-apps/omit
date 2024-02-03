@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./style/button.scss";
 import { ButtonProps } from "../type/button";
+import "./style/button.scss";
 
 export function Button(props: ButtonProps): React.ReactElement {
   const [active, setActive] = useState(false);
@@ -8,7 +8,6 @@ export function Button(props: ButtonProps): React.ReactElement {
   const clickEventHanlder = () => {
     if (props.trigger) {
       setActive(!active);
-      console.log(active)
     }
     props.action?.();
   };

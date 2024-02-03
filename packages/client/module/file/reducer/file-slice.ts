@@ -1,47 +1,74 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SourceFile } from "../../file/type/file";
-import { LayerInfo } from "info/layer-info";
+import { LayerInfo } from "../../../info/layer-info";
+import { SourceFile } from "../type/file";
 
-export interface ApplicationState {
+export interface FileSliceState {
   /**
-   * 打开的文件列表
+   * List of opened files.
    */
   openFileMap: Map<string, SourceFile>;
   /**
-   * 正在编辑的文件
+   * The file beding edited.
    */
   editFile: SourceFile;
 }
 
-const initialState: ApplicationState = {
+const initialState: FileSliceState = {
   openFileMap: new Map(),
   editFile: null,
 };
 
-const applicationSlice = createSlice({
-  name: "application",
+const fileSlice = createSlice({
+  name: "file",
   initialState,
   reducers: {
     /**
-     * 清空已经打开的文件
+     * Clear the opened file.
      */
     clearOpenFile(state) {
       state.openFileMap.clear();
+      state.editFile = null;
     },
     /**
      * 刷新文件图层信息
      */
     refershLayerInfo: (state, action) => {
       if (state.editFile === null) return;
-      state.editFile.layerInfos = action.payload;
+      state.editFile = {
+        ...state.editFile,
+        layerInfos: action.payload,
+      };
     },
     /**
      * 添加图层到文件
      */
     addLayerInfo: (state, action) => {
-      state.editFile.layerInfos = state.editFile.layerInfos.concat([
-        action.payload,
-      ]);
+      state.editFile = {
+        ...state.editFile,
+        layerInfos: state.editFile.layerInfos.concat([action.payload]),
+      };
+    },
+    /**
+     * Remove the layer infonation.
+     */
+    removeLayerInfo: (state, action) => {
+      state.editFile = {
+        ...state.editFile,
+        layerInfos: state.editFile.layerInfos.filter(
+          (layerInfo) => layerInfo.id !== action.payload
+        ),
+      };
+
+      state.editFile = {
+        ...state.editFile,
+        activeLayerInfo: state.editFile.layerInfos[0],
+      };
+    },
+    modifyLayerInfo: (state, action) => {
+      state.editFile.activeLayerInfo = Object.assign(
+        state.editFile.activeLayerInfo,
+        action.payload
+      );
     },
     /**
      * 切换当前文件的激活图层
@@ -49,15 +76,10 @@ const applicationSlice = createSlice({
      * @param action
      */
     changeActiveLayerInfo: (state, action) => {
-      const editFile = state.editFile;
-      if (editFile.activeLayerInfo) {
-        editFile.activeLayerInfo = {
-          ...editFile.activeLayerInfo,
-          ...action.payload,
-        };
-      } else {
-        editFile.activeLayerInfo = action.payload;
-      }
+      state.editFile = {
+        ...state.editFile,
+        activeLayerInfo: action.payload,
+      };
     },
     /**
      * 添加打开的文件
@@ -70,13 +92,14 @@ const applicationSlice = createSlice({
           state.openFileMap.set(file.md5, file);
         });
         // 如果打开多个文件则取最后一个作为激活的界面
-        setActiveFile = data[data.length - 1] as SourceFile;
+        setActiveFile = data[0] as SourceFile;
       } else {
         state.openFileMap.set(data.md5, data);
         setActiveFile = data as SourceFile;
       }
 
-      if (setActiveFile === null) return;
+      if (setActiveFile === null || state.editFile?.md5 === setActiveFile.md5)
+        return;
       if (state.editFile) {
         state.editFile = {
           ...state.editFile,
@@ -122,6 +145,20 @@ const applicationSlice = createSlice({
 
       sourceFile.activeLayerInfo = data.layerInfo;
     },
+    /**
+     * Switch the currently active editing source file based on the its MD5.
+     * @param state
+     * @param action.payload MD5 code of the source file.
+     */
+    switchEditSourceFileByMD5: (state, action: { payload: string }) => {
+      if (state.editFile.md5 !== action.payload) {
+        const newSourceFile = state.openFileMap.get(action.payload);
+        
+        if (newSourceFile) {
+          state.editFile = newSourceFile;
+        }
+      }
+    },
   },
 });
 
@@ -133,6 +170,9 @@ export const {
   changeActiveEditFile,
   clearOpenFile,
   setActiveLayerBySourceFileMD5,
-} = applicationSlice.actions;
+  removeLayerInfo,
+  modifyLayerInfo,
+  switchEditSourceFileByMD5,
+} = fileSlice.actions;
 
-export default applicationSlice.reducer;
+export default fileSlice.reducer;

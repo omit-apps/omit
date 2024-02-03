@@ -1,4 +1,4 @@
-import { LayerInfo } from "../../info/layer-info";
+import { LayerInfo } from "../../../info/layer-info";
 
 /**
  * Any Design 打开的文件信息
