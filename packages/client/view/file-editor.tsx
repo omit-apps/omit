@@ -1,18 +1,18 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useFileParser } from "../file/hook/use-file-parser";
-import { RootState } from "../store";
-import { clearOpenFile } from "../store/reducers/application";
 import {
   activeTabChangeEventProcess,
   gatherFileContaienr,
-} from "../file/file-manager";
+} from "../module/file/file-manager";
+import { useFileParser } from "../module/file/hook/use-file-parser";
+import { RootState } from "../store";
+import { clearOpenFile } from "../module/file/reducer/file-slice";
 
 // components
 import { Option, Panel, Tab, TabOption } from "@any-disign/component";
-import FileContainer from "../components/container/file-container";
 import { CodePanel } from "../components/panel/code-panel";
 import LayerPanel from "../components/panel/layer-panel";
+import FileContainer from "../module/file/components/file-container";
 import OptionFile from "./option-file";
 
 export default function FileEditor(): React.ReactElement {
@@ -47,7 +47,7 @@ export default function FileEditor(): React.ReactElement {
       application.openFileMap.values()
     )
       .filter((file) => !openOptionIds.includes(file.md5))
-      .map((file) => {
+      .map(function (file) {
         return {
           title: file.name + "." + file.ext,
           key: file.md5,

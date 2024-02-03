@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SourceFile } from "../../file/type/file";
-import { LayerInfo } from "../../info/layer-info";
+import { SourceFile } from "../type/file";
+import { LayerInfo } from "../../../info/layer-info";
 
 /**
  * TODO: 命名不合适后续修改
  */
-export interface ApplicationState {
+export interface FileSliceState {
   /**
    * 打开的文件列表
    */
@@ -16,13 +16,13 @@ export interface ApplicationState {
   editFile: SourceFile;
 }
 
-const initialState: ApplicationState = {
+const initialState: FileSliceState = {
   openFileMap: new Map(),
   editFile: null,
 };
 
-const applicationSlice = createSlice({
-  name: "application",
+const fileSlice = createSlice({
+  name: "file",
   initialState,
   reducers: {
     /**
@@ -154,6 +154,6 @@ export const {
   setActiveLayerBySourceFileMD5,
   removeLayerInfo,
   modifyLayerInfo,
-} = applicationSlice.actions;
+} = fileSlice.actions;
 
-export default applicationSlice.reducer;
+export default fileSlice.reducer;

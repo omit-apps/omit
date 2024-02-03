@@ -1,4 +1,4 @@
-import { getActiveCanvas } from "../file/file-manager";
+import { getActiveCanvas } from "../module/file/file-manager";
 import { getState } from "../store";
 
 /**

@@ -1,8 +1,8 @@
-import { createContainerFunction } from "./create-container";
-import { createTextFunction } from "./create-text";
+import { createContainerFunction } from "./function/create-container";
+import { createTextFunction } from "./function/create-text";
 
-export * from "./create-container";
-export * from "./create-text";
+export * from "./function/create-container";
+export * from "./function/create-text";
 
 /**
  * 对外暴露的功能性函数

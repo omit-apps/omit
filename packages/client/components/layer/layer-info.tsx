@@ -6,7 +6,7 @@ import { RootState } from "../../store";
 import {
   changeActiveLayerInfo,
   modifyLayerInfo,
-} from "../../store/reducers/application";
+} from "../../module/file/reducer/file-slice";
 
 // @ts-ignore
 import Lock from "../../assets/icon/lock.svg";

@@ -1,12 +1,12 @@
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { FunctionalType } from "../function";
-import { RootState } from "../store";
+import { RootState } from "../../../store";
 import {
   clearUnsubscription,
   changeUseFunction as commandChangeUseFunction,
   setUnsubscription,
-} from "../store/reducers/command";
+} from "../reducer/command";
+import { FunctionalType } from "../index";
 
 export default function useCommand() {
   const dispatch = useDispatch();

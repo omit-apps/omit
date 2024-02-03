@@ -1,8 +1,8 @@
 import { TabOption } from "@any-disign/component";
 import { Canvas } from "@any-disign/core";
 import { Dispatch } from "@reduxjs/toolkit";
-import { LayerInfo } from "../info/layer-info";
-import { refershLayerInfo } from "../store/reducers/application";
+import { LayerInfo } from "../../info/layer-info";
+import { refershLayerInfo } from "./reducer/file-slice";
 
 /**
  * 激活的canvas对象

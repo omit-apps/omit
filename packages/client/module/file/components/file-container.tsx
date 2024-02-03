@@ -3,10 +3,10 @@ import { Canvas, createContainer } from "@any-disign/core";
 import { PickResult } from "@any-disign/core/selector/types/picker-util";
 import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import { useDispatch } from "react-redux";
-import { setActiveCanvas } from "../../file/file-manager";
-import { SourceFile } from "../../file/type/file";
-import { makeLayerInfo } from "../../info/layer-info";
-import { setActiveLayerBySourceFileMD5 } from "../../store/reducers/application";
+import { makeLayerInfo } from "../../../info/layer-info";
+import { setActiveLayerBySourceFileMD5 } from "../reducer/file-slice";
+import { setActiveCanvas } from "../file-manager";
+import { SourceFile } from "../type/file";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FileContainerProps {

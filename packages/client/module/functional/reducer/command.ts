@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FunctionalType } from "../../function";
+import { FunctionalType } from "..";
 
 export interface CommandSliceState {
   /**

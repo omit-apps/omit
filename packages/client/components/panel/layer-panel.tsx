@@ -1,13 +1,13 @@
 import { Button } from "@any-disign/component";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getActiveCanvas } from "../../file/file-manager";
+import { getActiveCanvas } from "../../module/file/file-manager";
 import { makeLayerInfo } from "../../info/layer-info";
 import { RootState } from "../../store";
 import {
   addLayerInfo,
   removeLayerInfo,
-} from "../../store/reducers/application";
+} from "../../module/file/reducer/file-slice";
 
 
 // components

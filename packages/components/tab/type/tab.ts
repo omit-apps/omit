@@ -24,7 +24,7 @@ export interface TabHeaderPropsType {
 
 export interface TabOptionPropsType {
   title: string;
-  key: string;
+  id: string;
   action?: Action<string>;
 }
 

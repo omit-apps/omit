@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { enableMapSet } from "immer";
 
-import application from "./reducers/application";
-import command from "./reducers/command";
+import application from "../module/file/reducer/file-slice";
+import command from "../module/functional/reducer/command";
 
 enableMapSet();
 

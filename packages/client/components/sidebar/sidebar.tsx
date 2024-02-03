@@ -1,8 +1,8 @@
 import { Button } from "@any-disign/component";
 import React from "react";
-import { createTextFunction } from "../../function";
-import { createContainerFunction } from "../../function/create-container";
-import useCommand from "../../hooks/use-command";
+import { createTextFunction } from "../../module/functional";
+import { createContainerFunction } from "../../module/functional/function/create-container";
+import useCommand from "../../module/functional/hook/use-command";
 
 // @ts-ignore
 import Cursor from "../../assets/icon/cursor.svg";

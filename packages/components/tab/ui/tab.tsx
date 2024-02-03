@@ -10,12 +10,16 @@ export function Tab(props: TabPropsType): React.ReactElement {
     if (props.tabList.length) {
       const firstOption = props.tabList[0];
       setActiveTab(firstOption.key);
-      setComponent(firstOption.component);
     }
   }, []);
 
   useEffect(() => {
-    props.activeTabChangeEvent(findTabOptionByKey(activeTab));
+    if (activeTab === null) return;
+    const tabOption = props.tabList.find((option) => option.key === activeTab);
+    setComponent(tabOption.component);
+    setTimeout(() => {
+      props.activeTabChangeEvent(findTabOptionByKey(activeTab));
+    },200);
   }, [activeTab]);
 
   /**

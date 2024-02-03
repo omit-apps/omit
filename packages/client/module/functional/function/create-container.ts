@@ -1,6 +1,6 @@
 import { Container, EventObject } from "@any-disign/core";
-import { FunctionalFunctions } from "../info/func-info";
-import { functionalPreProcessor } from "../utils/functional-utils";
+import { FunctionalFunctions } from "../../../info/func-info";
+import { functionalPreProcessor } from "../../../utils/functional-utils";
 
 export interface CreateContainerParams {
   name: string;
