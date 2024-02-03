@@ -9,7 +9,6 @@ import {
   removeLayerInfo,
 } from "../../module/file/reducer/file-slice";
 
-
 // components
 import LayerInfoPreview from "../../components/layer/layer-info";
 
@@ -34,13 +33,13 @@ export default function LayerPanel(
 ): React.ReactElement {
   const dispatchEvent = useDispatch();
 
-  const application = useSelector((state: RootState) => state.application);
+  const file = useSelector((state: RootState) => state.file);
 
   /**
    * 添加图层
    */
   const addLayerAction = () => {
-    const layerName = `图层${application.editFile.layerInfos.length + 1}`;
+    const layerName = `图层${file.editFile.layerInfos.length + 1}`;
     const layer = getActiveCanvas().addLayer(layerName)[1];
 
     dispatchEvent(addLayerInfo(makeLayerInfo(layer)));
@@ -50,28 +49,28 @@ export default function LayerPanel(
    * 删除图层
    */
   const removeLayerAction = () => {
-    if (application.editFile.layerInfos.length === 1) {
+    if (file.editFile.layerInfos.length === 1) {
       console.warn("至少保留一个图层");
       return;
     }
 
-    const activeLayerInfo = application.editFile.activeLayerInfo;
+    const activeLayerInfo = file.editFile.activeLayerInfo;
 
     if (activeLayerInfo.lock) {
       console.warn("该图层已经锁定");
       return;
     }
 
-    getActiveCanvas().removeLayer(application.editFile.activeLayerInfo.id);
-    dispatchEvent(removeLayerInfo(application.editFile.activeLayerInfo.id));
+    getActiveCanvas().removeLayer(file.editFile.activeLayerInfo.id);
+    dispatchEvent(removeLayerInfo(file.editFile.activeLayerInfo.id));
   };
 
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex-1 px-2 space-y-2 overflow-auto h-0px">
-        {application.editFile?.layerInfos?.map((layerInfo) => (
-          <LayerInfoPreview key={layerInfo.id} value={layerInfo} />
-        ))}
+        {file.editFile.layerInfos.map((layerInfo) => {
+          return <LayerInfoPreview key={layerInfo.id} value={layerInfo} />;
+        })}
       </div>
       <div className="h-32px flex justify-end items-center text-white/70 px-1">
         <Button

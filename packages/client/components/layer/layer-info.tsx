@@ -25,12 +25,11 @@ export default function LayerInfoPreview(
   props: LayerInfoPreviewPropType
 ): React.ReactElement {
   const dispatch = useDispatch();
-  const application = useSelector((state: RootState) => state.application);
+  const file = useSelector((state: RootState) => state.file);
   const [editName, setEditName] = useState(false);
   const [info, setInfo] = useState<Partial<LayerInfo>>(props.value);
 
   const nameInput = useRef<HTMLInputElement>();
-
   /**
    * 编辑名称
    * @param status
@@ -80,9 +79,7 @@ export default function LayerInfoPreview(
       className={`
       flex p-2 cursor-pointer hover:bg-dark-50 items-center text-white
       ${
-        application.editFile.activeLayerInfo?.id === props.value.id
-          ? "bg-dark-50"
-          : ""
+        file.editFile.activeLayerInfo?.id === props.value.id ? "bg-dark-50" : ""
       }
       `}
       title={props.value.name}

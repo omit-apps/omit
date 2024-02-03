@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import TabHeader from "./tab-header";
 import { TabOption, TabPropsType } from "../type/tab";
+import TabHeader from "./tab-header";
 
 export function Tab(props: TabPropsType): React.ReactElement {
   const [activeTab, setActiveTab] = useState<string>(null);
@@ -10,6 +10,7 @@ export function Tab(props: TabPropsType): React.ReactElement {
     if (props.tabList.length) {
       const firstOption = props.tabList[0];
       setActiveTab(firstOption.key);
+      props.activeTabChangeEvent(findTabOptionByKey(firstOption.key));
     }
   }, []);
 
@@ -19,7 +20,7 @@ export function Tab(props: TabPropsType): React.ReactElement {
     setComponent(tabOption.component);
     setTimeout(() => {
       props.activeTabChangeEvent(findTabOptionByKey(activeTab));
-    },200);
+    });
   }, [activeTab]);
 
   /**
@@ -57,9 +58,10 @@ export function Tab(props: TabPropsType): React.ReactElement {
       {props.tabList.length ? (
         <div className="h-full flex-1 flex flex-col">
           {/* Tab Header */}
-          <div className="flex-1">{component}</div>
+          {component}
           <div className="flex h-32px">
             <TabHeader
+              activeTab={activeTab}
               tabList={props.tabList}
               changeEventProcessor={setActiveTab}
             />
@@ -76,3 +78,4 @@ export function Tab(props: TabPropsType): React.ReactElement {
 }
 
 export { TabContainer } from "./tab-container";
+

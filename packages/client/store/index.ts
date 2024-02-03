@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { enableMapSet } from "immer";
 
-import application from "../module/file/reducer/file-slice";
+import file from "../module/file/reducer/file-slice";
 import command from "../module/functional/reducer/command";
 
 enableMapSet();
 
 export const store = configureStore({
   reducer: {
-    application,
+    file,
     command,
   },
   middleware: (getDefaultMiddleware) => {

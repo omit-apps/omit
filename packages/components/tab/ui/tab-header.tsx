@@ -11,6 +11,7 @@ export default function TabHeader(
         <TabOption
           title={tab.title}
           id={tab.key}
+          active={props.activeTab === tab.key}
           key={tab.key}
           action={(id) => props.changeEventProcessor(id)}
         />

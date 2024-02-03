@@ -1,6 +1,6 @@
 import { Text } from "@any-disign/core";
 import { FunctionalFunctions } from "../../../info/func-info";
-import { functionalPreProcessor } from "../../../utils/functional-utils";
+import { functionalPreProcessor } from "../util/functional-utils";
 
 /**
  * 创建文字所需的参数

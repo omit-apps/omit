@@ -18,6 +18,7 @@ export interface TabOption {
 }
 
 export interface TabHeaderPropsType {
+  activeTab: string;
   tabList: TabOption[];
   changeEventProcessor: (tabKey: string) => void;
 }
@@ -25,6 +26,7 @@ export interface TabHeaderPropsType {
 export interface TabOptionPropsType {
   title: string;
   id: string;
+  active: boolean;
   action?: Action<string>;
 }
 

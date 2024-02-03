@@ -1,13 +1,13 @@
 import Konva from "konva";
+import { v4 } from "uuid";
+import { ActiveTransformer } from "../elements";
+import { Background } from "../elements/backgroud/backgroud";
 import { registerKeyboard, removeKeyboard } from "../keyboard";
 import { KeyCode, KeyboardBlcok } from "../keyboard/keyboard";
-import { v4 } from "uuid";
 import { createSelector } from "../selector";
 import { createPicker } from "../selector/picker";
-import { Background } from "../elements/backgroud/backgroud";
 import { PickResult } from "../selector/types/picker-util";
 import { changeCursorStyle } from "../utils/document-utils";
-import { ActiveTransformer } from "../elements";
 
 const defaultCanvasRefKeys: CanvasRefKeys = {
   openDragger: [KeyCode.Space],
@@ -53,7 +53,6 @@ export class Canvas {
 
   constructor(container: HTMLDivElement, config?: CreateCanvasConfig) {
     if (!container) throw new Error("container is null");
-
     this.container = container;
     this.config = config;
     this.isZoom = false;
@@ -93,7 +92,7 @@ export class Canvas {
     const backgroud = new Background({
       width: this.config.width ?? cW,
       height: this.config.height ?? cH,
-      fill: "#fff",
+      fill: this.config.fill,
     });
 
     layer.add(backgroud);
@@ -120,7 +119,17 @@ export class Canvas {
   }
 
   /**
-   * 鼠标Down事件的处理
+   * Redraw the cotent of canvas onto the container.
+   * @param container
+   */
+  redraw(container: HTMLDivElement) {
+    if (this.stage) {
+      this.stage.container(container);
+    }
+  }
+
+  /**
+   * Handing the mouse down event.
    * @param pickResult
    */
   pickerDownProcess(pickResult: PickResult) {
@@ -138,7 +147,7 @@ export class Canvas {
   }
 
   /**
-   * 鼠标Move的处理
+   * Handing the mouse move event.
    * @param pickResult
    * @returns
    */
@@ -158,7 +167,7 @@ export class Canvas {
   }
 
   /**
-   * 添加图层
+   * Add layer.
    * @param name
    * @returns
    */
@@ -174,6 +183,10 @@ export class Canvas {
     return [layer.id(), layer];
   }
 
+  /**
+   * Remove layer.
+   * @param layerId Layer ID.
+   */
   removeLayer(layerId: string): void {
     const layer = this.findLayerById(layerId);
     if (layer) {
@@ -182,7 +195,7 @@ export class Canvas {
   }
 
   /**
-   * 添加元素到画布图层
+   * Add elements to the target layer.
    * @param element 要添加的元素
    * @param layerId 添加的目标图层
    * @returns
@@ -198,6 +211,11 @@ export class Canvas {
     this.elementList.push(element);
   }
 
+  /**
+   * Change the currently active layer.
+   * @param params
+   * @returns
+   */
   changeActiveLayer(params: Konva.Layer | string): void {
     if (params instanceof Konva.Layer) {
       this.activeLayer = params;
@@ -212,6 +230,11 @@ export class Canvas {
     }
   }
 
+  /**
+   *  Retrieve layer information based on its ID.
+   * @param layerId
+   * @returns
+   */
   findLayerById(layerId: string): Konva.Layer | null {
     let findLayer: Konva.Layer | null = null;
 
@@ -226,8 +249,8 @@ export class Canvas {
   }
 
   /**
-   * 变更画布的拖拽状态
-   * @param status 拖拽状态
+   * Change drag state of the canvas.
+   * @param status drag state of the canvas.
    * @returns
    */
   changeCanvasDraggableStatus(status: boolean) {
@@ -236,7 +259,7 @@ export class Canvas {
   }
 
   /**
-   * 挂载事件相关的逻辑
+   * Mount the logic related to event handling.
    */
   mountEvent() {
     this.stage.addEventListener("wheel", (e: WheelEvent) => {
@@ -267,7 +290,7 @@ export class Canvas {
   }
 
   /**
-   * 拖拽事件
+   * Drag event handling.
    */
   draggableEvent() {
     this.stage.addEventListener("dragstart", (e) => {
@@ -284,7 +307,7 @@ export class Canvas {
   }
 
   /**
-   * 操作快捷键事件
+   * Handle keyboard shortcut events.
    */
   opreationEvent() {
     this.moveKeyRef = new KeyboardBlcok(
@@ -314,7 +337,7 @@ export class Canvas {
   }
 
   /**
-   * 销毁画布
+   * Destroy the canvas.
    */
   destroy() {
     removeKeyboard(this.moveKeyRef);
@@ -323,7 +346,7 @@ export class Canvas {
 }
 
 /**
- * 创建画布的配置
+ * Create the configuration of the canvas.
  */
 export interface CreateCanvasConfig {
   /**
@@ -339,6 +362,7 @@ export interface CreateCanvasConfig {
   // 开启变换控制器
   enableTrans?: boolean;
   pickProcess?: (pickResult: PickResult) => void;
+  fill: string;
 }
 
 export interface CanvasRefKeys {

@@ -1,49 +1,58 @@
 import { TabOption } from "@any-disign/component";
 import { Canvas } from "@any-disign/core";
-import { Dispatch } from "@reduxjs/toolkit";
 import { LayerInfo } from "../../info/layer-info";
-import { refershLayerInfo } from "./reducer/file-slice";
+import { dispatch } from "../../store";
+import {
+  refershLayerInfo,
+  switchEditSourceFileByMD5,
+} from "./reducer/file-slice";
 
 /**
- * 激活的canvas对象
+ * Activeing canvas.
  */
 let activeCanvas: Canvas | null;
 /**
- * md5与FileContainer Ref的映射表
+ * MD5 and file-continer Ref mapping table.
  */
 const fileContainerMap: Map<string, any> = new Map();
 
 /**
- * 收集FileContainer
- * @param id 文件的md5值
- * @param ref Component的Ref
+ * Gathering file-container.
+ * @param id MD5 code for file.
+ * @param ref The ref of the componet.
  */
 export function gatherFileContaienr(id: string, ref: any) {
   if (fileContainerMap.has(id)) return;
   fileContainerMap.set(id, ref);
 }
 /**
- * 根据TabOption切换激活的FileContainer
+ * Switch the activeing file-container based on the tab-option.
  * @param option
  */
 export function activeTabChangeEventProcess(option: TabOption) {
   if (!option) return;
+  // Switch the active canvas.
+  dispatch(switchEditSourceFileByMD5(option.key));
+  // Switch the active container,but do not switch immediately. Give the DOM some time to settle.
   setTimeout(() => {
-    fileContainerMap.get(option.key).activeContainer();
+    fileContainerMap.get(option.key)?.activeContainer();
   });
 }
 /**
- * 改变激活的Cavnas对象
+ * Change the activeing canvas.
  * @param canvas
  * @param dispatchEvent
  */
-export function setActiveCanvas(canvas: Canvas, dispatchEvent: Dispatch) {
+export function setActiveCanvas(canvas: Canvas) {
+  // Switch the canvas.
   activeCanvas = canvas;
-  dispatchEvent(refershLayerInfo(getCanvasLayerInfo()));
+  if (activeCanvas === null) return;
+  // Refresh the layer infomation based on the new canvas.
+  dispatch(refershLayerInfo(getCanvasLayerInfo()));
 }
 
 /**
- * 获取激活的Canvas
+ * Get the active canvas.
  * @returns Canvas
  */
 export function getActiveCanvas() {
@@ -51,7 +60,7 @@ export function getActiveCanvas() {
 }
 
 /**
- * 获取Canva中的图层信息
+ * Retrieve the layer information in the current canvas.
  * @returns
  */
 const getCanvasLayerInfo = () => {
