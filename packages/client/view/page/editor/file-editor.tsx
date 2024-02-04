@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   activeTabChangeEventProcess,
   gatherFileContaienr,
-} from "../module/file/file-manager";
-import { useFileParser } from "../module/file/hook/use-file-parser";
-import { clearOpenFile } from "../module/file/reducer/file-slice";
-import { RootState } from "../store";
+} from "../../../module/file/file-manager";
+import { useFileParser } from "../../../module/file/hook/use-file-parser";
+import { clearOpenFile } from "../../../module/file/reducer/file-slice";
+import { RootState } from "../../../store";
 
 // components
 import { Option, Panel, Tab, TabOption } from "@any-disign/component";
-import { CodePanel } from "../components/panel/code-panel";
-import LayerPanel from "../components/panel/layer-panel";
-import FileContainer from "../module/file/components/file-container";
-import OptionFile from "./option-file";
+import { CodePanel } from "../../../components/panel/code-panel";
+import LayerPanel from "../../../components/panel/layer-panel";
+import FileContainer from "../../../module/file/components/file-container";
+import OptionFile from "../home/components/option-file";
 
 export default function FileEditor(): React.ReactElement {
   const dispatch = useDispatch();

@@ -1,0 +1,18 @@
+import React from "react";
+import Header from "../../../components/header/header";
+import Sidebar from "../../../components/sidebar/sidebar";
+import { CommandState } from "../../../components/tip/command-state";
+import FileEditor from "./file-editor";
+
+export default function Editor(): React.ReactElement {
+  return (
+    <div className="flex flex-col h-full relative">
+      <Header />
+      <div id="page-editor" className="w-full h-full flex flex-1 relative">
+        <CommandState />
+        <Sidebar />
+        <FileEditor />
+      </div>
+    </div>
+  );
+}

@@ -8,15 +8,16 @@
   },
   "keywords": [],
   "dependencies": {
-    "typescript": "~4.5.4",
-    "react": "^18.2.0",
-    "unocss": "0.56",
+    "@types/react": "^18.2.42",
     "@unocss/preset-wind": "0.56",
-    "@types/react": "^18.2.42"
+    "react": "^18.2.0",
+    "typescript": "~4.5.4",
+    "unocss": "0.56"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "lottie-web": "^5.12.2",
     "react": "^18.2.0"
   }
 }

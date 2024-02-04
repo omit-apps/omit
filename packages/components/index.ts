@@ -5,3 +5,4 @@ export * from "./components/tab";
 export * from "./components/option";
 export * from "./components/button";
 export * from "./components/panel";
+export * from "./components/loading";

@@ -1,24 +1,19 @@
 import * as React from "react";
 import { ReactElement } from "react";
+import { Route, Routes } from "react-router-dom";
 import { useKeyboardRegister } from "../hooks/use-keyboard";
 
-import Header from "../components/header/header";
-import Sidebar from "../components/sidebar/sidebar";
-import FileEditor from "./file-editor";
-import { CommandState } from "../components/tip/command-state";
+import Editor from "./page/editor/editor";
+import Home from "./page/home/home";
 
 function Main(): ReactElement {
   useKeyboardRegister();
 
   return (
-    <div className="flex flex-col h-full relative">
-      <Header />
-      <div className="flex flex-1 w-full h-full relative">
-        <CommandState />
-        <Sidebar />
-        <FileEditor />
-      </div>
-    </div>
+    <Routes location={"/home"}>
+      <Route path="/" element={<Editor />} />
+      <Route path="/home" element={<Home />} />
+    </Routes>
   );
 }
 
