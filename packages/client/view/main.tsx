@@ -1,6 +1,5 @@
-import * as React from "react";
-import { ReactElement } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { ReactElement } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useKeyboardRegister } from "../hooks/use-keyboard";
 
 import Editor from "./page/editor/editor";
@@ -10,9 +9,10 @@ function Main(): ReactElement {
   useKeyboardRegister();
 
   return (
-    <Routes location={"/home"}>
-      <Route path="/" element={<Editor />} />
-      <Route path="/home" element={<Home />} />
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" />}></Route>
+      <Route path="home/*" element={<Home />} />
+      <Route path="editor/*" element={<Editor />} />
     </Routes>
   );
 }

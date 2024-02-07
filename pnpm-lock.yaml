@@ -97,8 +97,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(@types/react@18.2.48)(react@18.2.0)(redux@5.0.1)
       react-router:
-        specifier: ^6.21.2
-        version: 6.21.2(react@18.2.0)
+        specifier: ^6.22.0
+        version: registry.npmjs.org/react-router@6.22.0(react@18.2.0)
       react-router-dom:
         specifier: ^6.22.0
         version: registry.npmjs.org/react-router-dom@6.22.0(react-dom@18.2.0)(react@18.2.0)
@@ -1140,7 +1140,7 @@ packages:
       '@unocss/core': 0.56.5
       '@unocss/reset': 0.56.5
       '@unocss/vite': 0.56.5(vite@4.5.1)
-      vite: registry.npmjs.org/vite@4.5.1
+      vite: 4.5.1(@types/node@20.11.4)(sass@1.69.7)
     transitivePeerDependencies:
       - rollup
 
@@ -1308,7 +1308,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.3.2
       magic-string: 0.30.5
-      vite: registry.npmjs.org/vite@4.5.1
+      vite: 4.5.1(@types/node@20.11.4)(sass@1.69.7)
     transitivePeerDependencies:
       - rollup
 
@@ -2170,7 +2170,6 @@ packages:
       '@esbuild/win32-arm64': registry.npmjs.org/@esbuild/win32-arm64@0.18.20
       '@esbuild/win32-ia32': registry.npmjs.org/@esbuild/win32-ia32@0.18.20
       '@esbuild/win32-x64': registry.npmjs.org/@esbuild/win32-x64@0.18.20
-    dev: true
 
   /escalade@3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
@@ -3036,7 +3035,6 @@ packages:
 
   /immutable@4.3.4:
     resolution: {integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==}
-    dev: true
 
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -3737,7 +3735,6 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}
@@ -4117,7 +4114,6 @@ packages:
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
-    dev: true
 
   /picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
@@ -4158,7 +4154,6 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
-    dev: true
 
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -4274,16 +4269,6 @@ packages:
       react: 18.2.0
       redux: 5.0.1
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: true
-
-  /react-router@6.21.2(react@18.2.0):
-    resolution: {integrity: sha512-jJcgiwDsnaHIeC+IN7atO0XiSRCrOsQAHHbChtJxmgqG2IaYQXSnhqGb5vk2CU/wBQA12Zt+TkbuJjIn65gzbA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.14.2
-      react: 18.2.0
     dev: true
 
   /react-router@6.21.3(react@18.2.0):
@@ -4476,7 +4461,6 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: registry.npmjs.org/fsevents@2.3.3
-    dev: true
 
   /run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
@@ -4524,7 +4508,6 @@ packages:
       chokidar: 3.5.3
       immutable: 4.3.4
       source-map-js: 1.0.2
-    dev: true
 
   /scheduler@0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
@@ -5137,7 +5120,7 @@ packages:
       '@unocss/transformer-directives': 0.56.5
       '@unocss/transformer-variant-group': 0.56.5
       '@unocss/vite': 0.56.5(vite@4.5.1)
-      vite: registry.npmjs.org/vite@4.5.1
+      vite: 4.5.1(@types/node@20.11.4)(sass@1.69.7)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -5239,7 +5222,6 @@ packages:
       sass: 1.69.7
     optionalDependencies:
       fsevents: registry.npmjs.org/fsevents@2.3.3
-    dev: true
 
   /wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
@@ -5795,7 +5777,6 @@ packages:
     version: 20.11.4
     dependencies:
       undici-types: registry.npmjs.org/undici-types@5.26.5
-    dev: true
 
   registry.npmjs.org/@types/yauzl@2.10.3:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/yauzl/-/yauzl-2.10.3.tgz}
@@ -6067,37 +6048,6 @@ packages:
       iconv-lite: 0.6.3
     dev: true
     optional: true
-
-  registry.npmjs.org/esbuild@0.18.20:
-    resolution: {integrity: sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/esbuild/-/esbuild-0.18.20.tgz}
-    name: esbuild
-    version: 0.18.20
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    optionalDependencies:
-      '@esbuild/android-arm': registry.npmjs.org/@esbuild/android-arm@0.18.20
-      '@esbuild/android-arm64': registry.npmjs.org/@esbuild/android-arm64@0.18.20
-      '@esbuild/android-x64': registry.npmjs.org/@esbuild/android-x64@0.18.20
-      '@esbuild/darwin-arm64': registry.npmjs.org/@esbuild/darwin-arm64@0.18.20
-      '@esbuild/darwin-x64': registry.npmjs.org/@esbuild/darwin-x64@0.18.20
-      '@esbuild/freebsd-arm64': registry.npmjs.org/@esbuild/freebsd-arm64@0.18.20
-      '@esbuild/freebsd-x64': registry.npmjs.org/@esbuild/freebsd-x64@0.18.20
-      '@esbuild/linux-arm': registry.npmjs.org/@esbuild/linux-arm@0.18.20
-      '@esbuild/linux-arm64': registry.npmjs.org/@esbuild/linux-arm64@0.18.20
-      '@esbuild/linux-ia32': registry.npmjs.org/@esbuild/linux-ia32@0.18.20
-      '@esbuild/linux-loong64': registry.npmjs.org/@esbuild/linux-loong64@0.18.20
-      '@esbuild/linux-mips64el': registry.npmjs.org/@esbuild/linux-mips64el@0.18.20
-      '@esbuild/linux-ppc64': registry.npmjs.org/@esbuild/linux-ppc64@0.18.20
-      '@esbuild/linux-riscv64': registry.npmjs.org/@esbuild/linux-riscv64@0.18.20
-      '@esbuild/linux-s390x': registry.npmjs.org/@esbuild/linux-s390x@0.18.20
-      '@esbuild/linux-x64': registry.npmjs.org/@esbuild/linux-x64@0.18.20
-      '@esbuild/netbsd-x64': registry.npmjs.org/@esbuild/netbsd-x64@0.18.20
-      '@esbuild/openbsd-x64': registry.npmjs.org/@esbuild/openbsd-x64@0.18.20
-      '@esbuild/sunos-x64': registry.npmjs.org/@esbuild/sunos-x64@0.18.20
-      '@esbuild/win32-arm64': registry.npmjs.org/@esbuild/win32-arm64@0.18.20
-      '@esbuild/win32-ia32': registry.npmjs.org/@esbuild/win32-ia32@0.18.20
-      '@esbuild/win32-x64': registry.npmjs.org/@esbuild/win32-x64@0.18.20
 
   registry.npmjs.org/escalade@3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/escalade/-/escalade-3.1.1.tgz}
@@ -6430,15 +6380,6 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/rollup@3.29.4:
-    resolution: {integrity: sha512-oWzmBZwvYrU0iJHtDmhsm662rC15FRXmcjCk1xD771dFDx5jJ02ufAQQTn0etB2emNk4J9EZg/yWKpsn9BWGRw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/rollup/-/rollup-3.29.4.tgz}
-    name: rollup
-    version: 3.29.4
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: registry.npmjs.org/fsevents@2.3.3
-
   registry.npmjs.org/semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/semver/-/semver-7.5.4.tgz}
     name: semver
@@ -6535,7 +6476,6 @@ packages:
     name: undici-types
     version: 5.26.5
     requiresBuild: true
-    dev: true
 
   registry.npmjs.org/universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/universalify/-/universalify-2.0.1.tgz}
@@ -6545,42 +6485,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  registry.npmjs.org/vite@4.5.1:
-    resolution: {integrity: sha512-AXXFaAJ8yebyqzoNB9fu2pHoo/nWX+xZlaRwoeYUxEqBO+Zj4msE5G+BhGBll9lYEKv9Hfks52PAF2X7qDYXQA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/vite/-/vite-4.5.1.tgz}
-    name: vite
-    version: 4.5.1
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: registry.npmjs.org/esbuild@0.18.20
-      postcss: registry.npmjs.org/postcss@8.4.33
-      rollup: registry.npmjs.org/rollup@3.29.4
-    optionalDependencies:
-      fsevents: registry.npmjs.org/fsevents@2.3.3
 
   registry.npmjs.org/which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/which/-/which-2.0.2.tgz}
