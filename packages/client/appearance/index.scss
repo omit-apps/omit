@@ -18,3 +18,11 @@
   background-color: #666;
   border-radius: 20px;
 }
+
+.drag-area {
+  -webkit-app-region: drag;
+}
+
+.no-drag-area {
+  -webkit-app-region: no-drag;
+}

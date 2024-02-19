@@ -13,6 +13,7 @@ const createWindow = () => {
     title: "Any Design - 原型直接生成App",
     width: 1440,
     height: 900,
+    titleBarStyle: "hidden",
     darkTheme: true,
     autoHideMenuBar: true,
     resizable: false,
