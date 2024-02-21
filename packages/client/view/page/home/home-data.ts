@@ -6,6 +6,7 @@ import ResourceLibraryIcon from "../../../assets/icon/resource-library.svg";
 import MyTeamIcon from "../../../assets/icon/my-team.svg";
 // @ts-ignore
 import AssetsRepositoryIcon from "../../../assets/icon/assets-repository.svg";
+import { MenuItem } from "@any-disign/component";
 
 export interface SideBar {
   title: string;
@@ -38,5 +39,29 @@ export const homeSidebarList: SideBar[] = [
     id: "plugin-bazaar",
     icon: ResourceLibraryIcon,
     iconSize: 28,
+  },
+];
+
+export const homeSettingItem: MenuItem[] = [
+  {
+    id: "user-profile",
+    title: "用户简介",
+  },
+  {
+    id: "my-organization",
+    title: "我的组织",
+  },
+  {
+    id: "general-setting",
+    title: "通用设置",
+  },
+  {
+    id: "update",
+    breakLine: true,
+    title: "版本更新",
+  },
+  {
+    id: "quit",
+    title: "登出",
   },
 ];

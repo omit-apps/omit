@@ -17,7 +17,11 @@ export function Button(props: ButtonProps): React.ReactElement {
       className={`
         text-center flex rounded w-32px h-32px justify-center items-center transition-all cursor-pointer hover:bg-white/20
         button-border 
-        ${active ? "bg-white/20" : ""}
+        ${
+          (active && props.trigger) || (!props.trigger && props.active)
+            ? "bg-white/20"
+            : ""
+        }
         ${props.border ? "b-solid b-white b-1" : ""}
         ${props.className}
         `}

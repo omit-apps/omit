@@ -7,6 +7,7 @@ export interface ButtonProps {
   action?: Action;
   trigger?: boolean;
   className?: string;
+  active?: boolean;
 }
 
 export type ButtonType = "text" | "icon" | "mixin";
