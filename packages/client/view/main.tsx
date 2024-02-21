@@ -4,6 +4,7 @@ import { useKeyboardRegister } from "../hooks/use-keyboard";
 
 import Editor from "./page/editor/editor";
 import Home from "./page/home/home";
+import Update from "./page/update/update";
 
 function Main(): ReactElement {
   useKeyboardRegister();
@@ -13,6 +14,7 @@ function Main(): ReactElement {
       <Route path="/" element={<Navigate to="/home" />}></Route>
       <Route path="home/*" element={<Home />} />
       <Route path="editor/*" element={<Editor />} />
+      <Route path="update" element={<Update />} />
     </Routes>
   );
 }

@@ -1,11 +1,14 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import "../../automation/index";
+import { init } from "../os/windows";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
+
+init();
 
 const createWindow = () => {
   // Create the browser window.
@@ -18,9 +21,9 @@ const createWindow = () => {
     autoHideMenuBar: true,
     resizable: false,
     webPreferences: {
-      // preload: path.join(__dirname, "preload.js"),
-      contextIsolation: false,
-      nodeIntegration: true,
+      preload: path.join(__dirname, "preload.js"),
+      // contextIsolation: false,
+      // nodeIntegration: true,
     },
   });
 

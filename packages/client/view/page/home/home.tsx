@@ -1,4 +1,4 @@
-import { Button, Loading } from "@any-disign/component";
+import { Button, Loading, SearchBox } from "@any-disign/component";
 import React, { useEffect, useState } from "react";
 import {
   Navigate,
@@ -16,8 +16,6 @@ import AssetsBazaar from "./pages/assets-bazaar/assets-bazaar";
 import PluginBazaar from "./pages/plugin-bazaar/plugin-bazaar";
 
 // icons
-// @ts-ignore
-import SearchIcon from "../../../assets/icon/search.svg";
 // @ts-ignore
 import ProfessionalIcon from "../../../assets/icon/professional.svg";
 
@@ -40,22 +38,6 @@ export default function Home(): React.ReactElement {
       clearTimeout(timer);
     };
   });
-
-  const searchBox = () => {
-    return (
-      <div className="relative">
-        <input
-          className="bg-[#333] border-none text-white px-3 py-3 w-[240px] rounded placeholder:text-xl focus:outline-none"
-          placeholder="Search..."
-          type="text"
-        />
-        <img
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white h-6 w-6"
-          src={SearchIcon}
-        />
-      </div>
-    );
-  };
 
   const menuHeader = () => {
     return (
@@ -136,6 +118,31 @@ export default function Home(): React.ReactElement {
     );
   };
 
+  /**
+   * 侧边导航条
+   */
+  const siderbar = (
+    <div className="drag-area flex flex-col items-center bg-dark-300 w-64px h-full">
+      <section className="mt-4 space-y-4 flex flex-col items-center text-[16px] text-white">
+        {homeSidebarList.map((option) => (
+          <Button
+            className="p-2 no-drag-area"
+            key={option.title}
+            type="icon"
+            active={activeTabId === option.id}
+            action={() => {
+              siderbarAction(option);
+              navigate(option.id);
+            }}
+            iconSize={option.iconSize}
+            value={option.title}
+            icon={option.icon}
+          />
+        ))}
+      </section>
+    </div>
+  );
+
   return (
     <div className="w-full h-full">
       {loading ? (
@@ -145,25 +152,7 @@ export default function Home(): React.ReactElement {
         />
       ) : (
         <div className="bg-dark flex w-full h-full">
-          <div className="drag-area flex flex-col items-center bg-dark-300 w-64px h-full">
-            <section className="mt-4 space-y-4 flex flex-col items-center text-[16px] text-white">
-              {homeSidebarList.map((option) => (
-                <Button
-                  className="p-2 no-drag-area"
-                  key={option.title}
-                  type="icon"
-                  active={activeTabId === option.id}
-                  action={() => {
-                    siderbarAction(option);
-                    navigate(option.id);
-                  }}
-                  iconSize={option.iconSize}
-                  value={option.title}
-                  icon={option.icon}
-                />
-              ))}
-            </section>
-          </div>
+          {siderbar}
           <div className="flex-1 flex flex-col text-white p-3 ">
             <div className="py-3 flex justify-between border-b border-b-solid border-gray-800">
               <div>
@@ -177,7 +166,7 @@ export default function Home(): React.ReactElement {
               </div>
               <div className="flex items-center">
                 {/* Search box */}
-                {searchBox()}
+                <SearchBox />
                 <section className="cursor-pointer transition-all-300 rounded mx-2 p-1 mt-2">
                   {/* User infomation */}
                   <Menu header={menuHeader()} items={homeSettingItem}>

@@ -3,10 +3,12 @@ import React from "react";
 
 export default function MyDesign(): React.ReactElement {
   return (
-    <div className="relative flex-1 text-white p-4">
-      <div className="h-120px"></div>
+    <div className="relative flex-1 text-white">
+      <div className="h-32px"></div>
       {/* Folder Container */}
-      <div>
+      <div className="space-x-4 space-y-4 p-4">
+        <Folder />
+        <Folder />
         <Folder />
       </div>
       <div className="absolute bottom-4 right-4 w-60 bg-gray-800 text-white p-4 rounded-lg shadow-md">

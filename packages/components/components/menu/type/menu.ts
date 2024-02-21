@@ -6,6 +6,7 @@ export interface MenuItem {
   icon?: string;
   // Generate break line on the top.
   breakLine?: boolean;
+  action?: () => void;
 }
 
 export interface MenuPropsType {

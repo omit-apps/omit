@@ -59,6 +59,9 @@ export const homeSettingItem: MenuItem[] = [
     id: "update",
     breakLine: true,
     title: "版本更新",
+    action: () => {
+      electronAPI.openModal("版本更新", "update");
+    },
   },
   {
     id: "quit",

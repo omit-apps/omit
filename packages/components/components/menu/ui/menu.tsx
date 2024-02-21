@@ -24,6 +24,10 @@ export function Menu(props: MenuPropsType): React.ReactElement {
               ) : null}
               <div
                 className="text-white px-6 py-4 cursor-pointer hover:bg-gray-700"
+                onClick={() => {
+                  setDisplay(false);
+                  item.action();
+                }}
                 title={item.title}
               >
                 {item.title}
