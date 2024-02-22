@@ -1,11 +1,14 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import "../../automation/index";
+import { init } from "../os/windows";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
+
+init();
 
 const createWindow = () => {
   // Create the browser window.
@@ -13,13 +16,15 @@ const createWindow = () => {
     title: "Any Design - 原型直接生成App",
     width: 1440,
     height: 900,
+    titleBarStyle: "hidden",
     darkTheme: true,
     autoHideMenuBar: true,
+    show: false,
     resizable: false,
     webPreferences: {
-      // preload: path.join(__dirname, "preload.js"),
-      contextIsolation: false,
-      nodeIntegration: true,
+      preload: path.join(__dirname, "preload.js"),
+      // contextIsolation: false,
+      // nodeIntegration: true,
     },
   });
 
@@ -31,6 +36,11 @@ const createWindow = () => {
       path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
     );
   }
+
+  // Jump white screen the application init.
+  mainWindow.webContents.addListener("did-finish-load", () => {
+    mainWindow.show();
+  });
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();

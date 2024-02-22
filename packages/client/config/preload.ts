@@ -5,4 +5,6 @@ import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("electronAPI", {
   fetchWebData: (url: string) => ipcRenderer.send("fetch", url),
+  openModal: (title: string, url: string) =>
+    ipcRenderer.send("openModal", title, url),
 });
