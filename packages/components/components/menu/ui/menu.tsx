@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { MenuPropsType } from "../type/menu";
 
 export function Menu(props: MenuPropsType): React.ReactElement {
@@ -25,8 +25,8 @@ export function Menu(props: MenuPropsType): React.ReactElement {
               <div
                 className="text-white px-6 py-4 cursor-pointer hover:bg-gray-700"
                 onClick={() => {
+                  item.action?.();
                   setDisplay(false);
-                  item.action();
                 }}
                 title={item.title}
               >
@@ -58,10 +58,9 @@ export function Menu(props: MenuPropsType): React.ReactElement {
   return (
     <div
       className={`no-drag-area menu-container relative z-10 ${props.className}`}
-      onClick={clickEventHandler}
     >
       {display ? menuItemContent() : null}
-      {props.children}
+      <div onClick={clickEventHandler}>{props.children}</div>
     </div>
   );
 }

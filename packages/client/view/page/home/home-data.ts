@@ -5,6 +5,8 @@ import ResourceLibraryIcon from "../../../assets/icon/resource-library.svg";
 // @ts-ignore
 import MyTeamIcon from "../../../assets/icon/my-team.svg";
 // @ts-ignore
+import MessageIcon from "../../../assets/icon/message.svg";
+// @ts-ignore
 import AssetsRepositoryIcon from "../../../assets/icon/assets-repository.svg";
 import { MenuItem } from "@any-disign/component";
 
@@ -27,6 +29,12 @@ export const homeSidebarList: SideBar[] = [
     id: "my-team",
     icon: MyTeamIcon,
     iconSize: 26,
+  },
+  {
+    title: "消息",
+    id: "my-message",
+    icon: MessageIcon,
+    iconSize: 36,
   },
   {
     title: "资源市场",

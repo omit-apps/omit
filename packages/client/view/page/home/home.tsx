@@ -21,6 +21,7 @@ import ProfessionalIcon from "../../../assets/icon/professional.svg";
 
 // components
 import { Menu } from "@any-disign/component";
+import MyMessage from "./pages/my-message/my-message";
 
 export default function Home(): React.ReactElement {
   const navigate = useNavigate();
@@ -182,6 +183,7 @@ export default function Home(): React.ReactElement {
               <Route path="/" element={<Navigate to="my-design" />} />
               <Route path="my-design" element={<MyDesign />} />
               <Route path="my-team" element={<MyTeam />} />
+              <Route path="my-message" element={<MyMessage />} />
               <Route path="assets-bazaar" element={<AssetsBazaar />} />
               <Route path="plugin-bazaar" element={<PluginBazaar />} />
             </Routes>

@@ -19,6 +19,7 @@ const createWindow = () => {
     titleBarStyle: "hidden",
     darkTheme: true,
     autoHideMenuBar: true,
+    show: false,
     resizable: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -35,6 +36,11 @@ const createWindow = () => {
       path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
     );
   }
+
+  // Jump white screen the application init.
+  mainWindow.webContents.addListener("did-finish-load", () => {
+    mainWindow.show();
+  });
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
