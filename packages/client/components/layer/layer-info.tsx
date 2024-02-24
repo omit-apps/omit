@@ -1,4 +1,4 @@
-import { Button } from "@any-disign/component";
+import { Button } from "@any-design/component";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LayerInfo } from "../../info/layer-info";
@@ -8,14 +8,7 @@ import {
   modifyLayerInfo,
 } from "../../module/file/reducer/file-slice";
 
-// @ts-ignore
-import Lock from "../../assets/icon/lock.svg";
-// @ts-ignore
-import UnLock from "../../assets/icon/unlock.svg";
-// @ts-ignore
-import Hidden from "../../assets/icon/hidden.svg";
-// @ts-ignore
-import Show from "../../assets/icon/show.svg";
+import { Lock, UnLock, Hidden, Show } from "@any-design/icons";
 
 export interface LayerInfoPreviewPropType {
   value: LayerInfo;

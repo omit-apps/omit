@@ -1,12 +1,11 @@
-import FileItem from "../../../../../components/file-item/file-item";
 import React from "react";
-import { fileList } from "./my-design-data";
-import { Button } from "@any-disign/component";
-
-// @ts-ignore
-import AddIcon from "../../../../../assets/icon/add.svg";
+import FileItem from "../../../../../components/file-item/file-item";
 import { useOpenModal } from "../../../../../hooks/use-modal";
 import CreateFile from "../../../../../modal/create-file";
+import { fileList } from "./my-design-data";
+
+import { Button } from "@any-design/component";
+import { Add } from "@any-design/icons";
 
 export default function MyDesign(): React.ReactElement {
   return (
@@ -14,7 +13,7 @@ export default function MyDesign(): React.ReactElement {
       <div className="h-32px flex justify-end space-x-2">
         <Button
           className="px-2 bg-blue hover:bg-red-400"
-          icon={AddIcon}
+          icon={Add}
           type="mixin"
           action={() => {
             useOpenModal("创建文件", CreateFile());
@@ -23,7 +22,7 @@ export default function MyDesign(): React.ReactElement {
         />
         <Button
           className="px-2 bg-blue hover:bg-red-400"
-          icon={AddIcon}
+          icon={Add}
           type="mixin"
           value="新建文件夹"
         />

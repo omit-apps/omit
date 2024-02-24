@@ -1,4 +1,4 @@
-import { Container, EventObject } from "@any-disign/core";
+import { Container, EventObject } from "@any-design/core";
 import { FunctionalFunctions } from "../../../info/func-info";
 import { functionalPreProcessor } from "../util/functional-utils";
 

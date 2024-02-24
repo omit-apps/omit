@@ -1,4 +1,4 @@
-import { Layer } from "@any-disign/core";
+import { Layer } from "@any-design/core";
 
 /**
  * 图层信息

@@ -1,17 +1,10 @@
-import { Button } from "@any-disign/component";
+import { Button } from "@any-design/component";
 import React from "react";
 import { createTextFunction } from "../../module/functional";
 import { createContainerFunction } from "../../module/functional/function/create-container";
 import useCommand from "../../module/functional/hook/use-command";
 
-// @ts-ignore
-import Cursor from "../../assets/icon/cursor.svg";
-// @ts-ignore
-import Selector from "../../assets/icon/selector.svg";
-// @ts-ignore
-import Font from "../../assets/icon/font.svg";
-// @ts-ignore
-import Container from "../../assets/icon/container.svg";
+import { Cursor, Selector, Font, Container } from "@any-design/icons";
 
 export default function Sidebar(): React.ReactElement {
   const { executeFunction } = useCommand();

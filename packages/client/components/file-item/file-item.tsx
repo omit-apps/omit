@@ -1,5 +1,6 @@
 import { FileType } from "../../info/file-info";
 import React from "react";
+import { File } from "@any-design/icons";
 
 const getItemIcon = (type: FileType) => {
   return (
@@ -11,11 +12,7 @@ const getItemIcon = (type: FileType) => {
           src="../../assets/images/folder.png"
         />
       ) : (
-        <img
-          className="w-20 h-24"
-          draggable={false}
-          src="../../assets/icon/file.svg"
-        />
+        <img className="w-20 h-24" draggable={false} src={File} />
       )}
     </div>
   );
