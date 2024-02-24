@@ -1,16 +1,12 @@
 {
-  "name": "@any-design/core",
+  "name": "@any-design/icons",
   "version": "0.0.1",
-  "description": "any-design core code.",
+  "description": "",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "dependencies": {
-    "typescript": "~4.5.4",
-    "konva": "^9.3.0"
-  },
   "author": "",
   "license": "ISC"
 }

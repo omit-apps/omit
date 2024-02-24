@@ -2,7 +2,7 @@ import {
   KeyEvent,
   registerKeyboardDown,
   registerKeyboardUp,
-} from "@any-disign/core";
+} from "@any-design/core";
 import { useEffect } from "react";
 
 /**

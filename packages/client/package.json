@@ -50,8 +50,9 @@
     "vite-plugin-optimizer": "^1.4.3"
   },
   "dependencies": {
-    "@any-disign/component": "workspace:*",
-    "@any-disign/core": "workspace:*",
+    "@any-design/component": "workspace:*",
+    "@any-design/core": "workspace:*",
+    "@any-design/icons": "workspace:*",
     "electron-squirrel-startup": "^1.0.0"
   }
 }

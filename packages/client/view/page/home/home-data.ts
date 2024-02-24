@@ -1,14 +1,12 @@
-// @ts-ignore
-import BrushIcon from "../../../assets/icon/brush.svg";
-// @ts-ignore
-import ResourceLibraryIcon from "../../../assets/icon/resource-library.svg";
-// @ts-ignore
-import MyTeamIcon from "../../../assets/icon/my-team.svg";
-// @ts-ignore
-import MessageIcon from "../../../assets/icon/message.svg";
-// @ts-ignore
-import AssetsRepositoryIcon from "../../../assets/icon/assets-repository.svg";
-import { MenuItem } from "@any-disign/component";
+import {
+  Brush,
+  ResourceLib,
+  MyTeam,
+  Message,
+  AssetsRepository,
+} from "@any-design/icons";
+
+import { MenuItem } from "@any-design/component";
 
 export interface SideBar {
   title: string;
@@ -21,31 +19,31 @@ export const homeSidebarList: SideBar[] = [
   {
     title: "我的设计",
     id: "my-design",
-    icon: BrushIcon,
+    icon: Brush,
     iconSize: 24,
   },
   {
     title: "我的团队",
     id: "my-team",
-    icon: MyTeamIcon,
+    icon: MyTeam,
     iconSize: 26,
   },
   {
     title: "消息",
     id: "my-message",
-    icon: MessageIcon,
+    icon: Message,
     iconSize: 36,
   },
   {
     title: "资源市场",
     id: "assets-bazaar",
-    icon: AssetsRepositoryIcon,
+    icon: AssetsRepository,
     iconSize: 32,
   },
   {
     title: "插件市场",
     id: "plugin-bazaar",
-    icon: ResourceLibraryIcon,
+    icon: ResourceLib,
     iconSize: 28,
   },
 ];

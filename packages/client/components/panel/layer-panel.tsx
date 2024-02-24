@@ -1,4 +1,4 @@
-import { Button } from "@any-disign/component";
+import { Button } from "@any-design/component";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getActiveCanvas } from "../../module/file/file-manager";
@@ -13,13 +13,7 @@ import {
 import LayerInfoPreview from "../../components/layer/layer-info";
 
 // icons
-// @ts-ignore
-import NewLayer from "../../assets/icon/new-layer.svg";
-// @ts-ignore
-import Delete from "../../assets/icon/delete.svg";
-// @ts-ignore
-import Group from "../../assets/icon/group.svg";
-
+import { NewLayer, Delete, Group } from "@any-design/icons";
 /**
  * 图层面板配置
  */

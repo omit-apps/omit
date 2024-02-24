@@ -1,4 +1,4 @@
-import { Button, Loading, SearchBox } from "@any-disign/component";
+import { Button, Loading, SearchBox } from "@any-design/component";
 import React, { useEffect, useState } from "react";
 import {
   Navigate,
@@ -16,11 +16,10 @@ import AssetsBazaar from "./pages/assets-bazaar/assets-bazaar";
 import PluginBazaar from "./pages/plugin-bazaar/plugin-bazaar";
 
 // icons
-// @ts-ignore
-import ProfessionalIcon from "../../../assets/icon/professional.svg";
+import { Professional } from "@any-design/icons";
 
 // components
-import { Menu } from "@any-disign/component";
+import { Menu } from "@any-design/component";
 import MyMessage from "./pages/my-message/my-message";
 
 export default function Home(): React.ReactElement {
@@ -54,7 +53,7 @@ export default function Home(): React.ReactElement {
               <img
                 className="w-6 h-6 bottom-0 right-0"
                 title="专业版"
-                src={ProfessionalIcon}
+                src={Professional}
               />
               <p className="text-sm">Pro</p>
             </div>
@@ -120,9 +119,9 @@ export default function Home(): React.ReactElement {
   };
 
   /**
-   * 侧边导航条
+   * Broadside navigation bar.
    */
-  const siderbar = (
+  const sidebar = (
     <div className="drag-area flex flex-col items-center bg-dark-300 w-64px h-full">
       <section className="mt-4 space-y-4 flex flex-col items-center text-[16px] text-white">
         {homeSidebarList.map((option) => (
@@ -153,7 +152,7 @@ export default function Home(): React.ReactElement {
         />
       ) : (
         <div className="bg-dark flex w-full h-full">
-          {siderbar}
+          {sidebar}
           <div className="flex-1 flex flex-col text-white p-3 ">
             <div className="py-3 flex justify-between border-b border-b-solid border-gray-800">
               <div>

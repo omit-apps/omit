@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@any-disign/component";
+import { Button } from "@any-design/component";
 
 export default function OptionFile(): React.ReactElement {
   return (
