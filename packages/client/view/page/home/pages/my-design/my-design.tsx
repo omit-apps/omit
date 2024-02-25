@@ -1,7 +1,7 @@
+import FileItem from "client/components/file-item/file-item";
+import { useOpenModal } from "client/hooks/use-modal";
+import CreateFile from "client/modal/create-file";
 import React from "react";
-import FileItem from "../../../../../components/file-item/file-item";
-import { useOpenModal } from "../../../../../hooks/use-modal";
-import CreateFile from "../../../../../modal/create-file";
 import { fileList } from "./my-design-data";
 
 import { Button } from "@any-design/component";

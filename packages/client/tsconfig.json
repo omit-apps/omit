@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
-      "client/*": ["./client/*"]
+      "client/*": ["./*"]
     }
   },
   "include": ["./", "forge.config.ts", ".vite/build", "../automation/index.ts"]

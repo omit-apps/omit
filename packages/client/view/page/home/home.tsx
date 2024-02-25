@@ -1,4 +1,3 @@
-import { Button, Loading, SearchBox } from "@any-design/component";
 import React, { useEffect, useState } from "react";
 import {
   Navigate,
@@ -10,16 +9,16 @@ import {
 import { SideBar, homeSettingItem, homeSidebarList } from "./home-data";
 
 // children pages
+import AssetsBazaar from "./pages/assets-bazaar/assets-bazaar";
 import MyDesign from "./pages/my-design/my-design";
 import MyTeam from "./pages/my-team/my-team";
-import AssetsBazaar from "./pages/assets-bazaar/assets-bazaar";
 import PluginBazaar from "./pages/plugin-bazaar/plugin-bazaar";
 
 // icons
 import { Professional } from "@any-design/icons";
 
 // components
-import { Menu } from "@any-design/component";
+import { Button, Loading, Menu, SearchBox } from "@any-design/component";
 import MyMessage from "./pages/my-message/my-message";
 
 export default function Home(): React.ReactElement {

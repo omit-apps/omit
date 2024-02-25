@@ -1,4 +1,4 @@
-import { File } from "../../../../../info/file-info";
+import { File } from "client/info/file-info";
 export const fileList: File[] = [
   {
     id: "1",

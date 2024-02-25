@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../../../components/header/header";
-import Sidebar from "../../../components/sidebar/sidebar";
-import { CommandState } from "../../../components/tip/command-state";
+import Header from "client/components/header/header";
+import Sidebar from "client/components/sidebar/sidebar";
+import { CommandState } from "client/components/tip/command-state";
 import FileEditor from "./file-editor";
 
 export default function Editor(): React.ReactElement {

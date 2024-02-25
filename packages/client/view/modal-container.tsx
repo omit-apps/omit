@@ -1,5 +1,5 @@
 import { Button } from "@any-design/component";
-import { useChangeModalContent } from "../hooks/use-modal";
+import { useChangeModalContent } from "client/hooks/use-modal";
 import React, { useEffect, useState } from "react";
 
 // This is embedded modal.
