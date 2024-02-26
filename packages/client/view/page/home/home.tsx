@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Navigate,
   Route,
@@ -18,8 +18,16 @@ import PluginBazaar from "./pages/plugin-bazaar/plugin-bazaar";
 import { Professional } from "@any-design/icons";
 
 // components
-import { Button, Loading, Menu, SearchBox } from "@any-design/component";
+import {
+  Button,
+  Loading,
+  Menu,
+  MenuRefTypes,
+  SearchBox,
+} from "@any-design/component";
 import MyMessage from "./pages/my-message/my-message";
+import { useOpenModal } from "client/hooks/use-modal";
+import EditStatus from "client/modal/edit-status";
 
 export default function Home(): React.ReactElement {
   const navigate = useNavigate();
@@ -29,6 +37,8 @@ export default function Home(): React.ReactElement {
   const [activeTabId, setActiveTabId] = useState("my-design");
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
+  const menuRef = useRef<MenuRefTypes>(null);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -37,6 +47,26 @@ export default function Home(): React.ReactElement {
       clearTimeout(timer);
     };
   });
+
+  useEffect(() => {
+    const siderbarOption = homeSidebarList.find((option) => {
+      return option.id === location.pathname.split("/")[2];
+    });
+    if (siderbarOption) {
+      siderbarAction(siderbarOption);
+    }
+  }, [location]);
+
+  const siderbarAction = (option: SideBar) => {
+    setTitle(option.title);
+    setId(option.id);
+    setActiveTabId(option.id);
+  };
+
+  const editStatusEventHandler = () => {
+    menuRef.current.setMenuDisplayStatus(false);
+    useOpenModal("设置状态", <EditStatus />);
+  };
 
   const menuHeader = () => {
     return (
@@ -62,12 +92,14 @@ export default function Home(): React.ReactElement {
           <div className="inline-flex rounded-full my-2 bg-[#181819]  transition-all-300">
             <p
               className="hover:bg-[#333] min-w-[160px] text-left py-2 leading-[18px] rounded-l-full pl-4 pr-2"
+              onClick={editStatusEventHandler}
               title="编辑签名"
             >
               这是我的签名
             </p>
             <div
               className="pl-2 flex py-2 pr-4 hover:bg-[#333] rounded-r-full"
+              onClick={editStatusEventHandler}
               title="编辑状态"
             >
               {/* <p>➕</p> */}
@@ -77,21 +109,6 @@ export default function Home(): React.ReactElement {
         </div>
       </div>
     );
-  };
-
-  useEffect(() => {
-    const siderbarOption = homeSidebarList.find((option) => {
-      return option.id === location.pathname.split("/")[2];
-    });
-    if (siderbarOption) {
-      siderbarAction(siderbarOption);
-    }
-  }, [location]);
-
-  const siderbarAction = (option: SideBar) => {
-    setTitle(option.title);
-    setId(option.id);
-    setActiveTabId(option.id);
   };
 
   const userAvatar = (width: number, height: number, edit = false) => {
@@ -168,7 +185,11 @@ export default function Home(): React.ReactElement {
                 <SearchBox />
                 <section className="cursor-pointer transition-all-300 rounded mx-2 p-1 mt-2">
                   {/* User infomation */}
-                  <Menu header={menuHeader()} items={homeSettingItem}>
+                  <Menu
+                    ref={menuRef}
+                    header={menuHeader()}
+                    items={homeSettingItem}
+                  >
                     <div className="flex">
                       {/* Avatar */}
                       {userAvatar(36, 36)}

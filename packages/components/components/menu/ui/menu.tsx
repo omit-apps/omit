@@ -1,12 +1,35 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, {
+  Ref,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { MenuPropsType } from "../type/menu";
 
-export function Menu(props: MenuPropsType): React.ReactElement {
+export type MenuRefTypes = {
+  setMenuDisplayStatus: (status: boolean) => void;
+};
+
+export const Menu = forwardRef(function Menu(
+  props: MenuPropsType,
+  ref
+): React.ReactElement {
   const [display, setDisplay] = useState(false);
+
+  const setMenuDisplayStatus = (status: boolean) => {
+    setDisplay(status);
+  };
 
   const clickEventHandler = () => {
     setDisplay(true);
   };
+
+  useImperativeHandle(ref, () => {
+    return {
+      setMenuDisplayStatus,
+    };
+  });
 
   const menuItemContent = () => {
     return (
@@ -63,4 +86,4 @@ export function Menu(props: MenuPropsType): React.ReactElement {
       <div onClick={clickEventHandler}>{props.children}</div>
     </div>
   );
-}
+});

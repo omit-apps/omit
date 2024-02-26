@@ -4,7 +4,7 @@ import { File } from "client/info/file-info";
 import CreateFile from "client/modal/create-file";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fileList } from "./my-design-data";
+import { fileList, getFolderDataById } from "./my-design-data";
 
 import { Button } from "@any-design/component";
 import { Add } from "@any-design/icons";
@@ -12,6 +12,7 @@ import { Add } from "@any-design/icons";
 export default function MyDesign(): React.ReactElement {
   const navigate = useNavigate();
   const [currentOpenPaths, setCurrentOpenPaths] = useState<string[]>([]);
+  const [currentFileList, setCurrentFileList] = useState<File[]>([...fileList]);
 
   const openDesigner = () => {
     electronAPI.window.createWindow({
@@ -29,6 +30,7 @@ export default function MyDesign(): React.ReactElement {
         break;
       case "folder":
         setCurrentOpenPaths([...currentOpenPaths, file.name]);
+        setCurrentFileList([...getFolderDataById("1")]);
         break;
     }
   };
@@ -71,7 +73,7 @@ export default function MyDesign(): React.ReactElement {
       </div>
       {/* Folder Container */}
       <div className="space-x-4 flex items-start p-4 h-640px overscroll-y-auto">
-        {fileList.map((file) => (
+        {currentFileList.map((file) => (
           <FileItem
             key={file.id}
             type={file.type}

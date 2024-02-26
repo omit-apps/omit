@@ -20,7 +20,6 @@ export const fileList: File[] = [
 export function getFolderDataById(id: string): File[] {
   return [
     { id: "1_1", name: "新建文件夹", type: "folder" },
-    { id: "1_2", name: "新建文件夹(2)", type: "folder" },
     { id: "1_3", name: "New Design", type: "file" },
   ];
 }

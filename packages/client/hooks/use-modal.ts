@@ -7,6 +7,8 @@ export type ChangeModalContentCallback = (
 
 let callback: ChangeModalContentCallback | null = null;
 
+type ModalConfirmCallback<Arg> = (arg: Arg) => void;
+
 export function useOpenModal(title: string, modal: React.ReactElement) {
   callback(title, modal);
 }

@@ -73,7 +73,11 @@ export const homeSettingItem: MenuItem[] = [
     },
   },
   {
-    id: "quit",
+    id: "logout",
     title: "登出",
+  },
+  {
+    id: "exit",
+    title: "退出",
   },
 ];
