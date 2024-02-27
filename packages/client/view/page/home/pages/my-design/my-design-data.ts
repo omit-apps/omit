@@ -1,4 +1,4 @@
-import { File } from "../../../../../info/file-info";
+import { File } from "client/info/file-info";
 export const fileList: File[] = [
   {
     id: "1",
@@ -16,3 +16,10 @@ export const fileList: File[] = [
     type: "file",
   },
 ];
+
+export function getFolderDataById(id: string): File[] {
+  return [
+    { id: "1_1", name: "新建文件夹", type: "folder" },
+    { id: "1_3", name: "New Design", type: "file" },
+  ];
+}

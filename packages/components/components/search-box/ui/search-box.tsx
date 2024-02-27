@@ -19,25 +19,38 @@ const SearchIcon = (
   </svg>
 );
 
-export function SearchBox(): React.ReactElement {
+export type SearchBoxPropType = {
+  dropMenu?: boolean;
+  action?: Action;
+  placeholder?: string;
+  className?: string;
+};
+
+export function SearchBox(props: SearchBoxPropType): React.ReactElement {
   const [dropdown, setDropdown] = useState(false);
+
+  const onFocusEventHandler = () => {
+    setDropdown(true);
+    props.action?.();
+  };
+
+  const onBlurEventHandler = () => {
+    setDropdown(false);
+  };
+
   return (
     <div className="relative">
       <div className="relative">
         <input
-          className="bg-[#333] border-none text-white px-3 py-3 w-[240px] rounded placeholder:text-xl focus:outline-none"
-          placeholder="Search..."
+          className={`bg-[#333] border-none text-white px-3 py-3 w-[240px] rounded placeholder:text-xl focus:outline-none ${props.className}`}
+          placeholder={props.placeholder ? props.placeholder : "Search..."}
           type="text"
-          onFocus={() => {
-            setDropdown(true);
-          }}
-          onBlur={() => {
-            setDropdown(false);
-          }}
+          onFocus={onFocusEventHandler}
+          onBlur={onBlurEventHandler}
         />
         {SearchIcon}
       </div>
-      {dropdown ? (
+      {props.dropMenu && dropdown ? (
         <div className="absolute transition-all w-full bg-[#333] h-300px top-100% shadow-xl rounded-b">
           <div className="mx-4 b-t-gray-600 b-t-solid b-t my-2"></div>
         </div>

@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import optimizer from "vite-plugin-optimizer";
+import { resolve } from "node:path";
 // eslint-disable-next-line import/no-unresolved
 import UnoCSS from "unocss/vite";
 
@@ -14,9 +15,9 @@ export default defineConfig({
     UnoCSS(),
   ],
   resolve: {
-    // extensions: [".ts", ".tsx"],
+    extensions: [".ts", ".tsx"],
     alias: {
-      client: "./client",
+      client: resolve(process.cwd()),
     },
   },
 });

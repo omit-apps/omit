@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useKeyboardRegister } from "../hooks/use-keyboard";
+import { useKeyboardRegister } from "client/hooks/use-keyboard";
 
 import Editor from "./page/editor/editor";
 import Home from "./page/home/home";

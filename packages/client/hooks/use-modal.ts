@@ -1,14 +1,26 @@
 import React from "react";
 
+export type OpenModalOptions = {
+  width?: number;
+  height?: number;
+};
+
 export type ChangeModalContentCallback = (
-  title: string,
-  children: React.ReactElement
+  title: string | React.ReactElement,
+  children: React.ReactElement,
+  options: OpenModalOptions
 ) => void;
 
 let callback: ChangeModalContentCallback | null = null;
 
-export function useOpenModal(title: string, modal: React.ReactElement) {
-  callback(title, modal);
+type ModalConfirmCallback<Arg> = (arg: Arg) => void;
+
+export function useOpenModal(
+  title: string | React.ReactElement,
+  modal: React.ReactElement,
+  options?: OpenModalOptions
+) {
+  callback(title, modal, options);
 }
 
 export function useChangeModalContent(cb: ChangeModalContentCallback) {
