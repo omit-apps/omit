@@ -28,6 +28,7 @@ import {
 import MyMessage from "./pages/my-message/my-message";
 import { useOpenModal } from "client/hooks/use-modal";
 import EditStatus from "client/modal/edit-status";
+import { SearchPanel } from "client/modal/search-panel";
 
 export default function Home(): React.ReactElement {
   const navigate = useNavigate();
@@ -182,7 +183,19 @@ export default function Home(): React.ReactElement {
               </div>
               <div className="flex items-center">
                 {/* Search box */}
-                <SearchBox />
+                <SearchBox
+                  dropMenu={false}
+                  action={() => {
+                    useOpenModal(
+                      <SearchBox className="w-740px mt-2" placeholder="检索你想要的内容" />,
+                      <SearchPanel />,
+                      {
+                        width: 800,
+                        height: 420,
+                      }
+                    );
+                  }}
+                />
                 <section className="cursor-pointer transition-all-300 rounded mx-2 p-1 mt-2">
                   {/* User infomation */}
                   <Menu

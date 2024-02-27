@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Tray } from "electron";
 import path from "path";
 import "../../automation/index";
 import { init } from "../os/windows";
@@ -13,6 +13,7 @@ init();
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    icon: "assets/icon.png",
     title: "Any Design - 原型直接生成App",
     width: 1440,
     height: 900,

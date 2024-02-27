@@ -6,6 +6,7 @@ declare type CreateWindowOptions = {
   url: string;
   width: number;
   height: number;
+  resizable: boolean;
 };
 
 declare type APIOption = {
