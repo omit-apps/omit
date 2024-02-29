@@ -1,7 +1,7 @@
 {
-  "name": "any-design",
+  "name": "omit",
   "version": "0.0.1",
-  "description": "Any Design Monorepo",
+  "description": "Omit Monorepo",
   "dependencies": {},
   "devDependencies": {
     "@types/uuid": "^9.0.7",

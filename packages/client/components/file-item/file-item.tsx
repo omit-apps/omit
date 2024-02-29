@@ -1,6 +1,6 @@
 import { FileType } from "../../info/file-info";
 import React from "react";
-import { File } from "@any-design/icons";
+import { File } from "@omit/icons";
 
 const getItemIcon = (type: FileType) => {
   return (

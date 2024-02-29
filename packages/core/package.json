@@ -1,5 +1,5 @@
 {
-  "name": "@any-design/core",
+  "name": "@omit/core",
   "version": "0.0.1",
   "description": "any-design core code.",
   "main": "index.ts",

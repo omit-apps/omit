@@ -1,6 +1,6 @@
-import { TabContainer } from "@any-design/component";
-import { Canvas, createContainer } from "@any-design/core";
-import { PickResult } from "@any-design/core/selector/types/picker-util";
+import { TabContainer } from "@omit/component";
+import { Canvas, createContainer } from "@omit/core";
+import { PickResult } from "@omit/core/selector/types/picker-util";
 import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import { useDispatch } from "react-redux";
 import { makeLayerInfo } from "../../../info/layer-info";

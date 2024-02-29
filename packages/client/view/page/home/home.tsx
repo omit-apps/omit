@@ -15,7 +15,7 @@ import MyTeam from "./pages/my-team/my-team";
 import PluginBazaar from "./pages/plugin-bazaar/plugin-bazaar";
 
 // icons
-import { Professional } from "@any-design/icons";
+import { Professional } from "@omit/icons";
 
 // components
 import {
@@ -24,11 +24,11 @@ import {
   Menu,
   MenuRefTypes,
   SearchBox,
-} from "@any-design/component";
-import MyMessage from "./pages/my-message/my-message";
+} from "@omit/component";
 import { useOpenModal } from "client/hooks/use-modal";
 import EditStatus from "client/modal/edit-status";
 import { SearchPanel } from "client/modal/search-panel";
+import MyMessage from "./pages/my-message/my-message";
 
 export default function Home(): React.ReactElement {
   const navigate = useNavigate();
@@ -187,7 +187,10 @@ export default function Home(): React.ReactElement {
                   dropMenu={false}
                   action={() => {
                     useOpenModal(
-                      <SearchBox className="w-740px mt-2" placeholder="检索你想要的内容" />,
+                      <SearchBox
+                        className="w-740px mt-2"
+                        placeholder="检索你想要的内容"
+                      />,
                       <SearchPanel />,
                       {
                         width: 800,

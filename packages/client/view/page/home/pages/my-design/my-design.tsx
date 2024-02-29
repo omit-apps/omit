@@ -6,8 +6,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fileList, getFolderDataById } from "./my-design-data";
 
-import { Button } from "@any-design/component";
-import { Add } from "@any-design/icons";
+import { Button } from "@omit/component";
+import { Add } from "@omit/icons";
 
 export default function MyDesign(): React.ReactElement {
   const navigate = useNavigate();
