@@ -1,11 +1,17 @@
 import { TabOption } from "@omit/component";
 import { Canvas } from "@omit/core";
-import { LayerInfo } from "../../info/layer-info";
-import { dispatch } from "../../store";
+import { LayerInfo } from "client/info/layer-info";
+import { dispatch } from "client/store";
 import {
   refershLayerInfo,
   switchEditSourceFileByMD5,
 } from "./reducer/file-slice";
+
+export * from "./hook/use-file-parser";
+
+export * from "./reducer/file-slice";
+
+export * from "./type/file";
 
 /**
  * Activeing canvas.

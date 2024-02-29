@@ -34,7 +34,8 @@ const commandSlice = createSlice({
   },
 });
 
+// Note: No allow use imoprt { changeUseFunction } from "./command.ts", you must be from to "client/module/functional" import.
 export const { changeUseFunction, clearUnsubscription, setUnsubscription } =
   commandSlice.actions;
 
-export default commandSlice.reducer;
+export const reducer = commandSlice.reducer;

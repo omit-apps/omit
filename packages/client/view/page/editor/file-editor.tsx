@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   activeTabChangeEventProcess,
   gatherFileContaienr,
-} from "client/module/file/file-manager";
+} from "client/module/file";
 import { useFileParser } from "client/module/file/hook/use-file-parser";
 import { clearOpenFile } from "client/module/file/reducer/file-slice";
 import { RootState } from "client/store";

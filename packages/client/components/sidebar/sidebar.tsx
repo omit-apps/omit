@@ -1,10 +1,12 @@
 import { Button } from "@omit/component";
+import {
+  createContainerFunction,
+  createTextFunction,
+  useCommand,
+} from "client/module/functional";
 import React from "react";
-import { createTextFunction } from "../../module/functional";
-import { createContainerFunction } from "../../module/functional/function/create-container";
-import useCommand from "../../module/functional/hook/use-command";
 
-import { Cursor, Selector, Font, Container } from "@omit/icons";
+import { Container, Cursor, Font, Selector } from "@omit/icons";
 
 export default function Sidebar(): React.ReactElement {
   const { executeFunction } = useCommand();

@@ -1,7 +1,7 @@
 import { Button } from "@omit/component";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getActiveCanvas } from "../../module/file/file-manager";
+import { getActiveCanvas } from "../../module/file";
 import { makeLayerInfo } from "../../info/layer-info";
 import { RootState } from "../../store";
 import {

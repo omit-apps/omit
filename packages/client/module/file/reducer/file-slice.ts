@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LayerInfo } from "../../../info/layer-info";
-import { SourceFile } from "../type/file";
+import { LayerInfo } from "client/info/layer-info";
+import { SourceFile } from "client/module/file";
 
 export interface FileSliceState {
   /**
@@ -153,7 +153,7 @@ const fileSlice = createSlice({
     switchEditSourceFileByMD5: (state, action: { payload: string }) => {
       if (state.editFile.md5 !== action.payload) {
         const newSourceFile = state.openFileMap.get(action.payload);
-        
+
         if (newSourceFile) {
           state.editFile = newSourceFile;
         }
@@ -175,4 +175,4 @@ export const {
   switchEditSourceFileByMD5,
 } = fileSlice.actions;
 
-export default fileSlice.reducer;
+export const reducer = fileSlice.reducer;
