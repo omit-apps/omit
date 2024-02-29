@@ -4,9 +4,9 @@ import {
   MyTeam,
   Message,
   AssetsRepository,
-} from "@any-design/icons";
+} from "@omit/icons";
 
-import { MenuItem } from "@any-design/component";
+import { MenuItem } from "@omit/component";
 
 export interface SideBar {
   title: string;

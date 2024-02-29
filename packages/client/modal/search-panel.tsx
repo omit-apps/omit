@@ -1,4 +1,4 @@
-import { SearchBox } from "@any-design/component";
+import { SearchBox } from "@omit/component";
 import React from "react";
 
 export function SearchPanel(): React.ReactElement {

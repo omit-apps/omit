@@ -9,7 +9,7 @@ import { clearOpenFile } from "client/module/file/reducer/file-slice";
 import { RootState } from "client/store";
 
 // components
-import { Option, Panel, Tab, TabOption } from "@any-design/component";
+import { Option, Panel, Tab, TabOption } from "@omit/component";
 import { CodePanel } from "client/components/panel/code-panel";
 import LayerPanel from "client/components/panel/layer-panel";
 import FileContainer from "client/module/file/components/file-container";

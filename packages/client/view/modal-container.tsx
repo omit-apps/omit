@@ -1,4 +1,4 @@
-import { Button } from "@any-design/component";
+import { Button } from "@omit/component";
 import {
   OpenModalOptions,
   useChangeModalContent,

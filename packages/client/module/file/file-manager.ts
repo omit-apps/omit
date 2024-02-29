@@ -1,5 +1,5 @@
-import { TabOption } from "@any-design/component";
-import { Canvas } from "@any-design/core";
+import { TabOption } from "@omit/component";
+import { Canvas } from "@omit/core";
 import { LayerInfo } from "../../info/layer-info";
 import { dispatch } from "../../store";
 import {

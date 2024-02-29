@@ -1,4 +1,4 @@
-import { Text } from "@any-design/core";
+import { Text } from "@omit/core";
 import { FunctionalFunctions } from "../../../info/func-info";
 import { functionalPreProcessor } from "../util/functional-utils";
 

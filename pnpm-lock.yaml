@@ -20,13 +20,13 @@ importers:
 
   packages/client:
     dependencies:
-      '@any-design/component':
+      '@omit/component':
         specifier: workspace:*
         version: link:../components
-      '@any-design/core':
+      '@omit/core':
         specifier: workspace:*
         version: link:../core
-      '@any-design/icons':
+      '@omit/icons':
         specifier: workspace:*
         version: link:../icons
       electron-squirrel-startup:

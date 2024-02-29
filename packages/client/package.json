@@ -1,5 +1,5 @@
 {
-  "name": "@any-design/client",
+  "name": "@omit/client",
   "productName": "AnyDesign",
   "version": "1.0.0",
   "description": "My Electron application description",
@@ -50,9 +50,9 @@
     "vite-plugin-optimizer": "^1.4.3"
   },
   "dependencies": {
-    "@any-design/component": "workspace:*",
-    "@any-design/core": "workspace:*",
-    "@any-design/icons": "workspace:*",
+    "@omit/component": "workspace:*",
+    "@omit/core": "workspace:*",
+    "@omit/icons": "workspace:*",
     "electron-squirrel-startup": "^1.0.0"
   }
 }
