@@ -1,16 +1,14 @@
 import FileItem from "client/components/file-item/file-item";
-import { useOpenModal } from "client/hooks/use-modal";
+import { useOpenModal } from "client/module/modal/hooks/use-modal";
 import { File } from "client/info/file-info";
 import CreateFile from "client/modal/create-file";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { fileList, getFolderDataById } from "./my-design-data";
 
 import { Button } from "@omit/component";
 import { Add } from "@omit/icons";
 
 export default function MyDesign(): React.ReactElement {
-  const navigate = useNavigate();
   const [currentOpenPaths, setCurrentOpenPaths] = useState<string[]>([]);
   const [currentFileList, setCurrentFileList] = useState<File[]>([...fileList]);
 
@@ -20,6 +18,7 @@ export default function MyDesign(): React.ReactElement {
       width: 1440,
       height: 900,
       url: "editor",
+      resizable: false,
     });
   };
 
@@ -51,7 +50,7 @@ export default function MyDesign(): React.ReactElement {
 
   return (
     <div className="relative flex-1 text-white">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-4">
         <div></div>
         <div className="flex space-x-2">
           <Button

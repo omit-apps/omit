@@ -16,7 +16,9 @@
     "@typescript-eslint/ban-ts-comment": "warn",
     "import/no-unresolved": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-empty-interface": "off"
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-types": "off",
+    "import/default": "off"
   },
   "parser": "@typescript-eslint/parser"
 }

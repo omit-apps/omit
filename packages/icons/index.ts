@@ -42,6 +42,14 @@ import Setting from "./assets/setting.svg";
 import Show from "./assets/show.svg";
 // @ts-ignore
 import UnLock from "./assets/unlock.svg";
+// @ts-ignore
+import Workbench from "./assets/workbench.svg";
+// @ts-ignore
+import OptionFile from "./assets/open-folder.svg";
+// @ts-ignore
+import Rename from "./assets/rename.svg";
+// @ts-ignore
+import Attribute from "./assets/attribute.svg";
 
 // export icon list for here.
 export {
@@ -67,4 +75,8 @@ export {
   Setting,
   Show,
   UnLock,
+  Workbench,
+  OptionFile,
+  Rename,
+  Attribute,
 };

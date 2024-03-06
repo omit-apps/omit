@@ -1,4 +1,4 @@
-import { getActiveCanvas } from "../../file/file-manager";
+import { getActiveCanvas } from "../../file";
 import { getState } from "../../../store";
 
 /**
@@ -12,9 +12,7 @@ export function functionalPreProcessor() {
   const canvas = getActiveCanvas();
   // 暂时禁用选区
   canvas.stage.useSelector = false;
-  const activeLayer = canvas.findLayerById(
-    file.editFile.activeLayerInfo.id
-  );
+  const activeLayer = canvas.findLayerById(file.editFile.activeLayerInfo.id);
 
   return {
     file,

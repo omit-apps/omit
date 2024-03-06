@@ -1,6 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { addOpenFile } from "../reducer/file-slice";
-import { SourceFile } from "../type/file";
+import { SourceFile, addOpenFile } from "client/module/file";
 
 export function useFileParser(path: string, dispatch: Dispatch): SourceFile {
   const file = new SourceFile();

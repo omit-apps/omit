@@ -4,9 +4,8 @@ import { PickResult } from "@omit/core/selector/types/picker-util";
 import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import { useDispatch } from "react-redux";
 import { makeLayerInfo } from "../../../info/layer-info";
-import { setActiveCanvas } from "../file-manager";
-import { setActiveLayerBySourceFileMD5 } from "../reducer/file-slice";
-import { SourceFile } from "../type/file";
+import { setActiveCanvas } from "..";
+import { SourceFile, setActiveLayerBySourceFileMD5 } from "client/module/file";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FileContainerProps {

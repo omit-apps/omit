@@ -9,6 +9,13 @@ declare type CreateWindowOptions = {
   resizable: boolean;
 };
 
+declare type DefinePropTypes<T> = {
+  [Key in keyof T]: T[Key];
+} & {
+  className?: string;
+  children?: React.ReactElement | string;
+};
+
 declare type APIOption = {
   window: {
     openModal: (options: Partial<CreateWindowOptions>) => void;
