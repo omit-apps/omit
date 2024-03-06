@@ -4,6 +4,7 @@ import {
   MyTeam,
   Message,
   AssetsRepository,
+  Workbench,
 } from "@omit/icons";
 
 import { MenuItem } from "@omit/component";
@@ -45,6 +46,12 @@ export const homeSidebarList: SideBar[] = [
     id: "plugin-bazaar",
     icon: ResourceLib,
     iconSize: 28,
+  },
+  {
+    title: "我的工作台",
+    id: "my-workbench",
+    icon: Workbench,
+    iconSize: 30,
   },
 ];
 
