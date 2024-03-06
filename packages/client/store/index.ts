@@ -4,6 +4,7 @@ import { enableMapSet } from "immer";
 import { reducer as file } from "../module/file/reducer/file-slice";
 import { reducer as command } from "../module/functional/reducer/command";
 import { reducer as menu } from "../module/menu";
+import { reducer as modal } from "client/module/modal";
 
 enableMapSet();
 
@@ -12,6 +13,7 @@ export const store = configureStore({
     file,
     command,
     menu,
+    modal,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({

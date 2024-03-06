@@ -1,5 +1,5 @@
 import FileItem from "client/components/file-item/file-item";
-import { useOpenModal } from "client/hooks/use-modal";
+import { useOpenModal } from "client/module/modal/hooks/use-modal";
 import { File } from "client/info/file-info";
 import CreateFile from "client/modal/create-file";
 import React, { useState } from "react";

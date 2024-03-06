@@ -9,7 +9,7 @@ import PluginBazaar from "./pages/plugin-bazaar/plugin-bazaar";
 
 // components
 import { Loading, Menu, MenuRefTypes, SearchBox } from "@omit/component";
-import { useOpenModal } from "client/hooks/use-modal";
+import { useOpenModal } from "client/module/modal/hooks/use-modal";
 import { SearchPanel } from "client/modal/search-panel";
 import LeftSiderbar from "./components/left-sidebar";
 import UserAvatar from "./components/user-avatar";

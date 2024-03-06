@@ -1,4 +1,4 @@
-import { useOpenModal } from "client/hooks/use-modal";
+import { useOpenModal } from "client/module/modal/hooks/use-modal";
 import EditStatus from "client/modal/edit-status";
 import React from "react";
 import UserAvatar from "./user-avatar";
