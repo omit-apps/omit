@@ -1,7 +1,8 @@
 import { Button } from "@omit/component";
+import { SideBar } from "client/components/sidebar/type/siderbar-types";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { SideBar, homeSidebarList } from "../home-data";
+import { homeSidebarList } from "../home-data";
 
 type LeftSiderbarPropTypes = DefinePropTypes<{
   onChange: (tabName: string, id: string) => void;
