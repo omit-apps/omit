@@ -1,12 +1,8 @@
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
-declare type CreateWindowOptions = {
-  title: string;
+declare type CreateWindowOptions = Electron.BrowserWindowConstructorOptions & {
   url: string;
-  width: number;
-  height: number;
-  resizable: boolean;
 };
 
 declare type DefinePropTypes<T> = {
