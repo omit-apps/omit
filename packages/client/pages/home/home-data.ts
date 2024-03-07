@@ -1,20 +1,14 @@
 import {
-  Brush,
-  ResourceLib,
-  MyTeam,
-  Message,
   AssetsRepository,
+  Brush,
+  Message,
+  MyTeam,
+  ResourceLib,
   Workbench,
 } from "@omit/icons";
 
 import { MenuItem } from "@omit/component";
-
-export interface SideBar {
-  title: string;
-  id: string;
-  icon: any;
-  iconSize: number;
-}
+import { SideBar } from "client/components/sidebar/type/siderbar-types";
 
 export const homeSidebarList: SideBar[] = [
   {
@@ -67,6 +61,15 @@ export const homeSettingItem: MenuItem[] = [
   {
     id: "general-setting",
     title: "通用设置",
+    action: () => {
+      electronAPI.window.openModal({
+        title: "通用设置",
+        resizable: false,
+        url: "general",
+        width: 800,
+        height: 520,
+      });
+    },
   },
   {
     id: "update",

@@ -50,6 +50,12 @@ import OptionFile from "./assets/open-folder.svg";
 import Rename from "./assets/rename.svg";
 // @ts-ignore
 import Attribute from "./assets/attribute.svg";
+// @ts-ignore
+import Keyboard from "./assets/keyboard.svg";
+// @ts-ignore
+import General from "./assets/general.svg";
+// @ts-ignore
+import Safely from "./assets/safely.svg";
 
 // export icon list for here.
 export {
@@ -79,4 +85,7 @@ export {
   OptionFile,
   Rename,
   Attribute,
+  Keyboard,
+  General,
+  Safely,
 };
