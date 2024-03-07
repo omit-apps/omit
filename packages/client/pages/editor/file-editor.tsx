@@ -13,7 +13,7 @@ import { Option, Panel, Tab, TabOption } from "@omit/component";
 import { CodePanel } from "client/components/panel/code-panel";
 import LayerPanel from "client/components/panel/layer-panel";
 import FileContainer from "client/module/file/components/file-container";
-import OptionFile from "../home/components/option-file";
+import OptionFile from "../views/home/components/option-file";
 
 export default function FileEditor(): React.ReactElement {
   const dispatch = useDispatch();
