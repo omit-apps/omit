@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Tray } from "electron";
 import path from "path";
 import "../../automation/index";
-import { init } from "../os/windows";
+import { init } from "../module/os/windows";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
