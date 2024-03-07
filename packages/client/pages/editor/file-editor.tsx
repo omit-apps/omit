@@ -1,5 +1,3 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   activeTabChangeEventProcess,
   gatherFileContaienr,
@@ -7,13 +5,15 @@ import {
 import { useFileParser } from "client/module/file/hook/use-file-parser";
 import { clearOpenFile } from "client/module/file/reducer/file-slice";
 import { RootState } from "client/store";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // components
 import { Option, Panel, Tab, TabOption } from "@omit/component";
 import { CodePanel } from "client/components/panel/code-panel";
 import LayerPanel from "client/components/panel/layer-panel";
 import FileContainer from "client/module/file/components/file-container";
-import OptionFile from "../views/home/components/option-file";
+import OptionFile from "../home/components/option-file";
 
 export default function FileEditor(): React.ReactElement {
   const dispatch = useDispatch();
