@@ -8,3 +8,4 @@ export * from "./components/panel";
 export * from "./components/loading";
 export * from "./components/menu";
 export * from "./components/search-box";
+export * from "./components/text-tab";

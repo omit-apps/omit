@@ -1,4 +1,6 @@
+import { useOpenModal } from "client/module/modal";
 import React from "react";
+import AvatarEditor from "./avatar-editor";
 
 type UserAvatarPropTypes = DefinePropTypes<{
   width?: number;
@@ -13,8 +15,13 @@ export default function UserAvatar(
     edit: false,
   }
 ): React.ReactElement {
+  const editAvatarEventHandler = () => {
+    if (!props.edit) return;
+    useOpenModal("编辑头像", <AvatarEditor />, { width: 540, height: 320 });
+  };
+
   return (
-    <div className={`relative`}>
+    <div className={`relative`} onClick={editAvatarEventHandler}>
       {props.edit ? (
         <div
           className="absolute w-full h-full opacity-0 bg-[#333]/40 hover:opacity-100 transition-all-300 rounded-full flex justify-center items-center"
