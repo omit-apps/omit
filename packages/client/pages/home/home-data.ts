@@ -56,7 +56,10 @@ export const homeSettingItem: MenuItem[] = [
     id: "user-profile",
     title: "用户简介",
     action: () => {
-      useOpenModal("用户简介", UserIntroduce, {});
+      useOpenModal("用户简介", UserIntroduce, {
+        width: 320,
+        height: 480,
+      });
     },
   },
   {

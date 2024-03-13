@@ -21,7 +21,10 @@ export default function UserAvatar(
   };
 
   return (
-    <div className={`relative`} onClick={editAvatarEventHandler}>
+    <div
+      className={`relative ${props.className}`}
+      onClick={editAvatarEventHandler}
+    >
       {props.edit ? (
         <div
           className="absolute w-full h-full opacity-0 bg-[#333]/40 hover:opacity-100 transition-all-300 rounded-full flex justify-center items-center"
@@ -34,6 +37,7 @@ export default function UserAvatar(
       <img
         width={props.width + "px"}
         height={props.height + "px"}
+        draggable={false}
         className="rounded-full"
         src="../../../assets/images/avatar.jpg"
         title="User Name"
