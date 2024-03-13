@@ -16,6 +16,14 @@ export function ModalContainer(): React.ReactElement {
     return modalState.title;
   };
 
+  const getActiveModal = () => {
+    if (modalState.activeModal instanceof Function) {
+      return <modalState.activeModal />;
+    }
+
+    return modalState.activeModal;
+  };
+
   return (
     <>
       {modalState.show ? (
@@ -43,9 +51,7 @@ export function ModalContainer(): React.ReactElement {
                 ×
               </p>
             </div>
-            <div className="flex-1 flex items-center">
-              {modalState.activeModal}
-            </div>
+            <div className="flex-1 flex items-center">{getActiveModal()}</div>
             <div className="flex justify-end space-x-2">
               <Button
                 action={() => {

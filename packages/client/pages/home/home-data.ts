@@ -9,6 +9,8 @@ import {
 
 import { MenuItem } from "@omit/component";
 import { SideBar } from "client/components/sidebar/type/siderbar-types";
+import { useOpenModal } from "client/module/modal";
+import { UserIntroduce } from "./components/user-introduce";
 
 export const homeSidebarList: SideBar[] = [
   {
@@ -53,6 +55,9 @@ export const homeSettingItem: MenuItem[] = [
   {
     id: "user-profile",
     title: "用户简介",
+    action: () => {
+      useOpenModal("用户简介", UserIntroduce, {});
+    },
   },
   {
     id: "my-organization",

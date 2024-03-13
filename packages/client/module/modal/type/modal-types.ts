@@ -1,3 +1,5 @@
+import React from "react";
+
 export type OpenModalOptions = {
   width?: number;
   height?: number;
@@ -14,7 +16,7 @@ export type ChangeModalContentCallback = (
 export type ModalInitialStateType = {
   show: boolean;
   title: ModalTitle;
-  activeModal: React.ReactElement | null;
+  activeModal: React.ReactElement | (() => React.ReactElement) | null;
   options: OpenModalOptions;
 };
 
